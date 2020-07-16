@@ -2,7 +2,6 @@ const express = require('express');
 
 const app = express();
 
-
 // Set port number for server to listen to
 const port = 3000
 
@@ -17,5 +16,5 @@ app.listen(port, (error) => {
 
 // Provide response to get request on '/'
 app.get('/', (request, response) => {
-    response.send("Hello World...........");
+    response.render()
 })
