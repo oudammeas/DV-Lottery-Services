@@ -1,11 +1,16 @@
-const { override, addLessLoader } = require('customize-cra');
+const { override, addLessLoader } = require("customize-cra");
 
+/**
+ * Override the theme value of the Rsuite library
+ */
 module.exports = override(
-    addLessLoader({
-        // If you are using less-loader@5 or older version, please spread the lessOptions to options directly.
-        lessOptions: {
-            javascriptEnabled: true,
-            modifyVars: { '@base-color': '#f44336' }
-        }
-    })
+  addLessLoader({
+    // If you are using less-loader@5 or older version, please spread the lessOptions to options directly.
+    lessOptions: {
+      javascriptEnabled: true,
+      modifyVars: {
+        "@base-color": "#03438c", // change base color to dark blue
+      },
+    },
+  })
 );

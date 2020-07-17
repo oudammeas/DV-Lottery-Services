@@ -1,9 +1,9 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import WelcomePage from './components/pages/WelcomePage';
-import 'rsuite/lib/styles/index.less';
-import './custom-style.less'
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import WelcomePage from "./components/pages/WelcomePage";
+import "rsuite/lib/styles/index.less";
+import "./App.less";
 
 function App() {
   return (
@@ -14,4 +14,3 @@ function App() {
 }
 
 export default App;
-
