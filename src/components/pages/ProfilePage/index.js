@@ -1,1 +1,1 @@
-export default ProfilePage;
+export { default } from './ProfilePage.jsx';

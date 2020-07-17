@@ -1,12 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Calender from './components/calender/Calender'
+import WelcomePage from './components/pages/WelcomePage';
+import 'rsuite/lib/styles/index.less';
+import './custom-style.less'
 
 function App() {
   return (
     <div className="App">
-      <Calender />
+      <WelcomePage />
     </div>
   );
 }

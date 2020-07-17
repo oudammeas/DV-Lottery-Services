@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar } from 'rsuite';
+import { Badge } from 'rsuite';
 
 const Calender = () => {
     return (
