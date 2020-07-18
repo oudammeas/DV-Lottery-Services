@@ -1,6 +1,5 @@
 import React from "react";
 import { Content } from "rsuite";
-import Header from "../../elements/navbar";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 
 const WelcomePage = () => {
