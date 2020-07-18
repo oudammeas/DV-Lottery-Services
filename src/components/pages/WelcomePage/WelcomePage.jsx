@@ -1,15 +1,25 @@
-import React, { Component } from 'react';
-import { Container, Header, Content, Footer, Sidebar, Navbar, Nav, Icon, Dropdown, Button, Table } from 'rsuite';
+import React, { Component } from "react";
+import {
+    Container,
+    Header,
+    Content,
+    Footer,
+    Sidebar,
+    Navbar,
+    Nav,
+    Icon,
+    Dropdown,
+    Button,
+    Table,
+} from "rsuite";
 
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
-
 const WelcomePage = () => {
-
     return (
         <Container>
             <Header>
-                <Navbar appearance='default'>
+                <Navbar appearance="inverse">
                     <Navbar.Header>
                         <a className="navbar-brand logo">BRAND</a>
                     </Navbar.Header>
@@ -20,9 +30,15 @@ const WelcomePage = () => {
                             <Nav.Item>Register</Nav.Item>
                             <Nav.Item>FAQs</Nav.Item>
                             <Nav.Item>Contact Us</Nav.Item>
-                            <Button appearance="primary" color="error-light-color">Login</Button>
-                            <Button appearance="ghost">
-                                <Icon icon="facebook-official" /> Book an Appointment</Button>
+                            <Nav.Item>
+                                <Button appearance="primary">Login</Button>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Button appearance="ghost" icon="facebook-official">
+                                    {" "}
+                  Book an Appointment{" "}
+                                </Button>
+                            </Nav.Item>
                         </Nav>
                         <Nav pullRight>
                             <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
@@ -31,15 +47,11 @@ const WelcomePage = () => {
                 </Navbar>
             </Header>
             <Content>Content</Content>
-            <Footer>
-                Footer
-            </Footer>
-        </Container >
+            <Footer>Footer</Footer>
+        </Container>
     );
 };
 
-WelcomePage.propTypes = {
-
-};
+WelcomePage.propTypes = {};
 
 export default WelcomePage;
