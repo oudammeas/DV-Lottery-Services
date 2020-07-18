@@ -1,16 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {
-    return (
-        <div>
+  const { t } = useTranslation();
 
-        </div>
-    );
+  return <div></div>;
 };
 
-ProfilePage.propTypes = {
-
-};
+ProfilePage.propTypes = {};
 
 export default ProfilePage;

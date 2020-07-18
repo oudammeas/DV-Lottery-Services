@@ -1,0 +1,10 @@
+{
+  "global": {},
+  "navigation": {
+    "home": "Home",
+    "register": "Register",
+    "process": "Procedure",
+    "faq": "FAQs",
+    "contact-us": "Contact Us"
+  }
+}
