@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Content, Footer } from "rsuite";
+import { Content } from "rsuite";
 import Header from "../../elements/navbar";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 
