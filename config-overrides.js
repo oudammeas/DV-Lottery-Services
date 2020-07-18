@@ -1,4 +1,8 @@
-const { override, addLessLoader } = require("customize-cra");
+const {
+  override,
+  addLessLoader,
+  addDecoratorsLegacy,
+} = require("customize-cra");
 
 /**
  * Override the theme value of the Rsuite library
@@ -12,5 +16,6 @@ module.exports = override(
         "@base-color": "#03438c", // change base color to dark blue
       },
     },
-  })
+  }),
+  addDecoratorsLegacy()
 );

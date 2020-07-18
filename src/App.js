@@ -11,8 +11,11 @@ import i18n from "./i18n.js";
 import { Provider } from "mobx-react";
 // Route
 import RouteHandler from "./routes/router";
-
-const stores = {};
+//import Stores
+import commonStore from "./stores/commonStore";
+const stores = {
+  commonStore,
+};
 
 function App() {
   return (
