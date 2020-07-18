@@ -4,7 +4,6 @@ import { Container, Header, Content, Footer, Sidebar, Navbar, Nav, Icon, Dropdow
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 
-
 const WelcomePage = () => {
 
     return (
