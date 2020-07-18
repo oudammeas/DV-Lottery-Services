@@ -1,12 +1,12 @@
 import React, { memo } from "react";
-import { Container, Footer } from "rsuite";
-import Header from "../../elements/navbar";
+import { Container } from "rsuite";
+import PageHeader from "../../elements/PageHeader";
 const MainLayout = memo((props) => {
   return (
     <Container>
-      <Header />
+      <PageHeader />
       {props.children}
-      <Footer />
+      {/* <PageFooter /> */}
     </Container>
   );
 });
