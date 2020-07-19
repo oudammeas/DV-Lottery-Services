@@ -6,6 +6,26 @@
     "process": "Procedure",
     "faq": "FAQs",
     "contact-us": "Contact Us",
-    "brand-name": "BRAND"
+    "brand-name": "DV Lottery Services"
+  },
+  "external-link": {
+    "us-embassy": "U.S. Embassy in Cambodia",
+    "usaid": "USAID",
+    "advanced-op": "Advanced OP",
+    "khmer-doctors": "Khmer Doctors",
+    "cwcc": "Cambodian Women's Crisis Center (CWCC)",
+    "us-dv-visa": "U.S. State Department Diversity Visa"
+  },
+  "contact-us": {
+    "name": "DV Lottery Services",
+    "street": "123 Street",
+    "commune": "Commune",
+    "city": "ABC",
+    "province": "BBBB",
+    "phone": "(855)-1234-5678",
+    "email": "dvlottoservices@gmail.com"
+  },
+  "disclaimer": {
+    "text": "We do not have any association with the DV Lottery Authority, the US Embassy or the US Government. We provide our private services based on our experience and expertise and with the intense to help needed candidates."
   }
 }

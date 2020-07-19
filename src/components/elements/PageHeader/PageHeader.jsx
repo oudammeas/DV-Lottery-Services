@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { observer, inject } from "mobx-react";
 
+
 const menu = [
   { title: "common.navigation.home", route: "/" },
   { title: "common.navigation.process", route: "/" },

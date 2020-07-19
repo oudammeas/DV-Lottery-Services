@@ -7,17 +7,17 @@
 // Import module
 import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-// import Pages
+// 1 . import Pages
 import WelcomePage from "../components/pages/WelcomePage";
 import RegisterPage from "../components/pages/RegisterPage";
 
 // history to move from page to page
 import { createBrowserHistory } from "history";
 
-// routes list
+// 2.  routes list
 export const route = [
   { path: "/", Component: WelcomePage, name: "Welcome Page" },
-  { path: "/register-page", Component: RegisterPage, name: "RegisterP Page" },
+  { path: "/register-page", Component: RegisterPage, name: "Register Page" },
 ];
 
 const history = createBrowserHistory();
