@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { FlexboxGrid } from "rsuite";
+import { Footer, FlexboxGrid, Button, IconButton, ButtonGroup, ButtonToolbar, Icon, Col } from "rsuite";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
@@ -8,11 +8,11 @@ import { observer, inject } from "mobx-react";
 
 
 const menu = [
-    { title: "common.navigation.home", route: "/" },
-    { title: "common.navigation.process", route: "/" },
+    { title: "common.navigation.home", route: "/home" },
+    { title: "common.navigation.process", route: "/process" },
     { title: "common.navigation.register", route: "/register-page" },
-    { title: "common.navigation.faq", route: "/" },
-    { title: "common.navigation.contact-us", route: "/" },
+    { title: "common.navigation.faqs", route: "/faqs" },
+    { title: "common.navigation.contact-us", route: "/contact-us" },
 ];
 
 const links = [
@@ -29,66 +29,81 @@ const PageFooter = ({ commonStore }) => {
     const { t } = useTranslation();
 
     const styles = {
-        navbar: {
-            root: {},
-            header: {
-                padding: "1em",
-                height: "5em",
-                width: "100%",
-                alignContent: "center",
-                padding: "2em",
-                backgroundColor: "inherite",
-                justifyContent: "left",
+        flexboxgrid: {
+            root: {
+                backgroundColor: "#003875",
+                color: "#E5E5E5",
+                padding: "1em"
             },
-            body: {
-                paddingLeft: "3em",
+            item: {
+                ul: {
+                    textAlign: "left",
+                    lh: {
+                        fontWeight: "bold",
+                    },
+                    li: {
+                        listStyleType: "none",
+
+                    },
+                }
             },
         },
+
+        a: {
+            color: "#E5E5E5",
+        }
+
     };
 
     return (
-        <div className="show-grid">
-            <FlexboxGrid>
-                <FlexboxGrid.Item colspan={6}>
-                    <ul>
-                        <lh>Menu</lh>
+        <Footer>
+            <FlexboxGrid style={styles.flexboxgrid.root}>
+                <FlexboxGrid.Item colspan={24} componentClass={Col} md={6} style={styles.flexboxgrid.item}>
+                    <ul style={styles.flexboxgrid.item.ul}>
+                        <lh style={styles.flexboxgrid.item.ul.lh}>Menu</lh>
                         {menu.map((m) => (
-                            <li>
-                                <a href={t(m.route)} >{t(m.title)}</a>
+                            <li style={styles.flexboxgrid.item.ul.li}>
+                                <a href={t(m.route)} style={styles.a}>{t(m.title)}</a>
                             </li>
                         ))}
                     </ul>
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item colspan={6}>
-                    <ul>
-                        <lh>External Links</lh>
+                <FlexboxGrid.Item colspan={24} componentClass={Col} md={6} style={styles.flexboxgrid.item}>
+                    <ul style={styles.flexboxgrid.item.ul}>
+                        <lh style={styles.flexboxgrid.item.ul.lh}>External Links</lh>
                         {links.map((l) => (
-                            <li>
-                                <a href={t(l.link)} >{t(l.name)}</a>
+                            <li style={styles.flexboxgrid.item.ul.li}>
+                                <a href={t(l.link)} style={styles.a}>{t(l.name)}</a>
                             </li>
                         ))}
                     </ul>
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item colspan={6}>
-                    <ul>
-                        <lh>Contact Us</lh>
-                        <li>{t("common.contact-us.name")}</li>
-                        <li>{t("common.contact-us.street")}</li>
-                        <li>{t("common.contact-us.city")}, {t("common.contact-us.province")}</li>
-                        <li>{t("common.contact-us.phone")}</li>
-                        <li>{t("common.contact-us.email")}</li>
+                <FlexboxGrid.Item colspan={24} componentClass={Col} md={6} style={styles.flexboxgrid.item}>
+                    <ul style={styles.flexboxgrid.item.ul}>
+                        <lh style={styles.flexboxgrid.item.ul.lh}>Contact Us</lh>
+                        <li style={styles.flexboxgrid.item.ul.li}>{t("common.contact-us.name")}</li>
+                        <li style={styles.flexboxgrid.item.ul.li}>{t("common.contact-us.street")}</li>
+                        <li style={styles.flexboxgrid.item.ul.li}>{t("common.contact-us.city")}, {t("common.contact-us.province")}</li>
+                        <li style={styles.flexboxgrid.item.ul.li}>{t("common.contact-us.phone")}</li>
+                        <li style={styles.flexboxgrid.item.ul.li}>{t("common.contact-us.email")}</li>
+                        <li style={styles.flexboxgrid.item.ul.li}>
+                            <ButtonToolbar>
+                                <IconButton icon={<Icon icon="facebook-official" />} color="blue" circle href={t("common.contact-us.facebook")} />
+                                <IconButton icon={<Icon icon="twitter" />} color="cyan" circle href={t("common.contact-us.twitter")} />
+                            </ButtonToolbar>
+                        </li>
+
                     </ul>
                 </FlexboxGrid.Item>
-                <FlexboxGrid.Item colspan={6}>
-                    <ul>
-                        <lh>Disclaimer</lh>
-                        <li>{t("common.disclaimer.text")}</li>
+                <FlexboxGrid.Item colspan={24} componentClass={Col} md={6} style={styles.flexboxgrid.item}>
+                    <ul style={styles.flexboxgrid.item.ul}>
+                        <lh style={styles.flexboxgrid.item.ul.lh}>Disclaimer</lh>
+                        <li style={styles.flexboxgrid.item.ul.li}>{t("common.disclaimer.text")}</li>
                     </ul>
                 </FlexboxGrid.Item>
             </FlexboxGrid>
-        </div>
+        </Footer>
     );
-
 }
 
 PageFooter.propTypes = {};

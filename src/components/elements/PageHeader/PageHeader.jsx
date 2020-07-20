@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Header, Navbar, Nav, Icon, Container } from "rsuite";
+import { Header, Navbar, Nav, Icon, Container, Button } from "rsuite";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,10 +9,10 @@ import { observer, inject } from "mobx-react";
 
 const menu = [
   { title: "common.navigation.home", route: "/" },
-  { title: "common.navigation.process", route: "/" },
+  { title: "common.navigation.process", route: "/process" },
   { title: "common.navigation.register", route: "/register-page" },
-  { title: "common.navigation.faq", route: "/" },
-  { title: "common.navigation.contact-us", route: "/" },
+  { title: "common.navigation.faqs", route: "/faqs" },
+  { title: "common.navigation.contact-us", route: "/contact-us" },
 ];
 
 const PageHeader = ({ commonStore }) => {
@@ -27,8 +27,9 @@ const PageHeader = ({ commonStore }) => {
         width: "100%",
         alignContent: "center",
         padding: "2em",
-        backgroundColor: "inherite",
+        backgroundColor: "#003875",
         justifyContent: "left",
+        color: "#E5E5E5",
       },
       body: {
         paddingLeft: "3em",
@@ -42,7 +43,7 @@ const PageHeader = ({ commonStore }) => {
 
   return (
     <Header>
-      <Navbar appearance="inverse" style={styles.navbar.root}>
+      <Navbar appearance="default" style={styles.navbar.root}>
         <Navbar.Header style={styles.navbar.header}>
           <Nav>
             <a className="navbar-brand logo">
@@ -63,7 +64,8 @@ const PageHeader = ({ commonStore }) => {
             ))}
           </Nav>
           <Nav pullRight>
-            <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
+            <Button appearance="primary" size="lg" href="/login" color="blue">{t("common.navigation.login")}</Button>
+            <Button appearance="ghost" size="lg" href="/appointment">{t("common.navigation.appointment")}</Button>
           </Nav>
         </Navbar.Body>
       </Navbar>

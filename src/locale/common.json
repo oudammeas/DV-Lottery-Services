@@ -4,9 +4,11 @@
     "home": "Home",
     "register": "Register",
     "process": "Procedure",
-    "faq": "FAQs",
+    "faqs": "FAQs",
     "contact-us": "Contact Us",
-    "brand-name": "DV Lottery Services"
+    "brand-name": "DV Lottery Services",
+    "login": "Login",
+    "appointment": "Book an Appointment"
   },
   "external-link": {
     "us-embassy": "U.S. Embassy in Cambodia",
@@ -23,9 +25,15 @@
     "city": "ABC",
     "province": "BBBB",
     "phone": "(855)-1234-5678",
-    "email": "dvlottoservices@gmail.com"
+    "email": "dvlottoservices@gmail.com",
+    "facebook": "https://www.facebook.com/dv-lotto-services",
+    "twitter": "https://twitter.com/oudammeas"
   },
   "disclaimer": {
     "text": "We do not have any association with the DV Lottery Authority, the US Embassy or the US Government. We provide our private services based on our experience and expertise and with the intense to help needed candidates."
+  },
+  "welcome-page": {
+    "main-text": "Welcome to the U.S. Diversity Lottery Services! We are a private service that provides quality assistances with the DV Lottery process to all needed candidates. We are assembled by a team of experts with experience and knowledge in the field from both the US and Cambodia.",
+    "sub-text": "We are poviding two kinds of convenient services to assist all DV Lottery candidates for competative costs."
   }
 }
