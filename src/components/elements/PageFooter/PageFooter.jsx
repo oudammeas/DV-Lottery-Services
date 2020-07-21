@@ -29,11 +29,13 @@ const PageFooter = ({ commonStore }) => {
     const { t } = useTranslation();
 
     const styles = {
+
         flexboxgrid: {
             root: {
+                minHeight: "200px",
                 backgroundColor: "#003875",
                 color: "#E5E5E5",
-                padding: "1em"
+                padding: "1em 1em 1em 1em"
             },
             item: {
                 ul: {

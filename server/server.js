@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 // Set port number for server to listen to
-const port = 3000
+const port = 80
 
 // Tell server to listen to the specified port
 app.listen(port, (error) => {

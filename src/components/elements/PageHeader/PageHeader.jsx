@@ -23,7 +23,7 @@ const PageHeader = ({ commonStore }) => {
       root: {},
       header: {
         padding: "1em",
-        height: "5em",
+        minHeight: "150px",
         width: "100%",
         alignContent: "center",
         padding: "2em",
@@ -32,6 +32,7 @@ const PageHeader = ({ commonStore }) => {
         color: "#E5E5E5",
       },
       body: {
+        minHeight: "50px",
         paddingLeft: "3em",
       },
     },
@@ -63,9 +64,9 @@ const PageHeader = ({ commonStore }) => {
               </Nav.Item>
             ))}
           </Nav>
-          <Nav pullRight>
-            <Button appearance="primary" size="lg" href="/login" color="blue">{t("common.navigation.login")}</Button>
-            <Button appearance="ghost" size="lg" href="/appointment">{t("common.navigation.appointment")}</Button>
+          <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
+            <Button appearance="primary" size="lg" href="/login" color="blue" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.login")}</Button>
+            <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
           </Nav>
         </Navbar.Body>
       </Navbar>

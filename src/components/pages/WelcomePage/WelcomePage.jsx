@@ -8,9 +8,10 @@ const WelcomePage = () => {
 
   const styles = {
     content: {
-      minHeight: "800px",
-      padding: "1em 5em 1em 5em",
-      height: "5em",
+      padding: "1em",
+      minHeight: "700px",
+      maxWidth: "1280px",
+      margin: "0 auto",
       textAlign: "center",
       justifyContent: "center",
       maintext: {
@@ -38,20 +39,18 @@ const WelcomePage = () => {
 
         <div style={styles.content.hero}>
           <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 588, height: 500 }}>
-            <img src="./front_page_image_1.jpg" height="340" />
+            <img src="https://c.wallhere.com/photos/74/7e/mer_france_marin_champs_terre_normandie_campagne_rocher-798292.jpg!d" height="340" />
             <Panel header="New DV Lottery Candidates">
               <Button appearance="primary" size="lg" href="/new-candidates" color="blue">Learn more</Button>
             </Panel>
           </Panel>
-
           <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 588, height: 500 }}>
-            <img src="../../../public/front_page_image_2.jpg" height="340" />
+            <img src="https://photoartinc.com/wp-content/uploads/2018/12/free-non-copyright-photos-4.jpg" height="340" />
             <Panel header="Selected DV Lottery Candidates">
               <Button appearance="primary" size="lg" href="/selected-candidates" color="blue">Learn more</Button>
             </Panel>
           </Panel>
         </div>
-
       </Content>
     </MainLayout>
   );
