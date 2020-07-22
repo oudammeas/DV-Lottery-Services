@@ -35,5 +35,8 @@
   "welcome-page": {
     "main-text": "Welcome to the U.S. Diversity Lottery Services! We are a private service that provides quality assistances with the DV Lottery process to all needed candidates. We are assembled by a team of experts with experience and knowledge in the field from both the US and Cambodia.",
     "sub-text": "We are poviding two kinds of convenient services to assist all DV Lottery candidates for competative costs."
+  },
+  "login-page": {
+    "form-title": "Login"
   }
 }

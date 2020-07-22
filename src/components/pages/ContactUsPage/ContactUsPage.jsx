@@ -2,14 +2,14 @@ import React from "react";
 import { Container, Content, Footer } from "rsuite";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 
-const NewCandidatesPage = () => {
+const ContactUsPage = () => {
     return (
         <MainLayout>
-            <Content>New Candidates Page</Content>
+            <Content>Contact Us Page</Content>
         </MainLayout>
     );
 };
 
-NewCandidatesPage.propTypes = {};
+ContactUsPage.propTypes = {};
 
-export default NewCandidatesPage;
+export default ContactUsPage;
