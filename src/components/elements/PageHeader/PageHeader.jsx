@@ -19,12 +19,12 @@ const PageHeader = ({ commonStore }) => {
   const styles = {
     navbar: {
       header: {
-        padding: "1em",
-        minHeight: "150px",
+        padding: "2em",
+        minHeight: "2em",
         width: "100%",
         alignContent: "center",
         padding: "2em",
-        backgroundColor: "#003875",
+        backgroundColor: "base-color",
         justifyContent: "left",
         color: "#E5E5E5",
       },

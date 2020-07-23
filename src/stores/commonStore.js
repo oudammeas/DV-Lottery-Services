@@ -7,4 +7,4 @@ class CommonStore {
     this.activeNavMenu = menu;
   }
 }
-export default new CommonStore();
+export default new CommonStore(); // The 'new' keyword ised here to export ONLY one instace of CommonStore to be used for every import statement.

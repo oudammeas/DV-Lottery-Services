@@ -13,7 +13,7 @@ module.exports = override(
     lessOptions: {
       javascriptEnabled: true,
       modifyVars: {
-        "@base-color": "#03438c", // change base color to dark blue
+        // change base color to dark blue
       },
     },
   }),
