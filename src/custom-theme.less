@@ -1,6 +1,7 @@
 /*
 Add Custom Style here in this file using "Less" format
 */
+@base-color: #03438c;
 
 @info-color: #2196f3;
 @info-light-color: #e9f5fe;
@@ -18,3 +19,11 @@ Add Custom Style here in this file using "Less" format
   Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", STXihei,
   sans-serif;
 @font-size-base: 16px;
+
+@divider-default-horizontal-margin: 0.5em;
+
+//** Inverse
+/* stylelint-disable-next-line */ // calcFontColor is hack function
+@nav-bar-inverse-hover-bg: @H800;
+@nav-bar-inverse-active-bg: @H900;
+@footer-bar-bg: @base-color; 

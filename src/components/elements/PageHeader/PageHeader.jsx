@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { observer, inject } from "mobx-react";
-
-
+import { Affix } from "rsuite";
 const menu = [
   { title: "common.navigation.home", route: "/" },
   { title: "common.navigation.register", route: "/register" },
@@ -19,14 +18,13 @@ const PageHeader = ({ commonStore }) => {
 
   const styles = {
     navbar: {
-      root: {},
       header: {
-        padding: "1em",
-        minHeight: "150px",
+        padding: "2em",
+        minHeight: "2em",
         width: "100%",
         alignContent: "center",
         padding: "2em",
-        backgroundColor: "#003875",
+        backgroundColor: "base-color",
         justifyContent: "left",
         color: "#E5E5E5",
       },
@@ -43,32 +41,33 @@ const PageHeader = ({ commonStore }) => {
 
   return (
     <Header>
-      <Navbar appearance="default" style={styles.navbar.root}>
-        <Navbar.Header style={styles.navbar.header}>
-          <Nav>
-            <a className="navbar-brand logo">
-              {t("common.navigation.brand-name")}
-            </a>
-          </Nav>
-        </Navbar.Header>
-        <Navbar.Body style={styles.navbar.body}>
-          <Nav activeKey={commonStore.activeNavMenu} onSelect={handleSelect}>
-            {menu.map((m) => (
-              <Nav.Item
-                eventKey={t(m.title)}
-                componentClass={Link}
-                to={t(m.route)}
-              >
-                {t(m.title)}
-              </Nav.Item>
-            ))}
-          </Nav>
-          <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
-            <Button appearance="primary" size="lg" href="/login" color="blue" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.login")}</Button>
-            <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
-          </Nav>
-        </Navbar.Body>
-      </Navbar>
+      <Affix>
+        <Navbar appearance="inverse">
+          <Navbar.Header style={styles.navbar.header}>
+            <Nav>
+              <a className="navbar-brand logo">
+                {t("common.navigation.brand-name")}
+              </a>
+            </Nav>
+          </Navbar.Header>
+          <Navbar.Body style={styles.navbar.body}>
+            <Nav activeKey={commonStore.activeNavMenu} onSelect={handleSelect}>
+              {menu.map((m) => (
+                <Nav.Item
+                  eventKey={t(m.title)}
+                  componentClass={Link}
+                  to={t(m.route)}
+                >
+                  {t(m.title)}
+                </Nav.Item>
+              ))}
+            </Nav>
+            <Nav pullRight>
+              <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
+            </Nav>
+          </Navbar.Body>
+        </Navbar>
+      </Affix>
     </Header>
   );
 };
