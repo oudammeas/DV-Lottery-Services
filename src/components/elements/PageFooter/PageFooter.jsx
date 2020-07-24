@@ -8,9 +8,8 @@ import { observer, inject } from "mobx-react";
 
 
 const menu = [
-    { title: "common.navigation.home", route: "/home" },
-    { title: "common.navigation.process", route: "/process" },
-    { title: "common.navigation.register", route: "/register-page" },
+    { title: "common.navigation.home", route: "/" },
+    { title: "common.navigation.register", route: "/register" },
     { title: "common.navigation.faqs", route: "/faqs" },
     { title: "common.navigation.contact-us", route: "/contact-us" },
 ];

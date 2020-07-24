@@ -38,5 +38,8 @@
   },
   "login-page": {
     "form-title": "Login"
+  },
+  "register-page": {
+    "form-title": "Sign up for a free account with us"
   }
 }

@@ -24,7 +24,8 @@ const LoginPage = () => {
     formtitle: {
       fontSize: "24px",
       fontWeight: "bold",
-    }
+      marginBottom: "1em",
+    },
 
   };
 
@@ -33,18 +34,18 @@ const LoginPage = () => {
       <Content style={styles.content}>
         <div style={styles.formwrapper}>
           <div style={styles.formtitle}>{t("common.login-page.form-title")}</div>
-          <Form layout="horizontal">
+          <Form layout="horizontal" style={styles.form}>
             <FormGroup>
-              <ControlLabel>Email: </ControlLabel>
-              <FormControl name="email" type="email" />
+              <FormControl name="email" placeholder="Email" type="email" />
+              <HelpBlock tooltip>This field is required</HelpBlock>
             </FormGroup>
             <FormGroup>
-              <ControlLabel>Password: </ControlLabel>
-              <FormControl name="password" type="password" />
+              <FormControl name="password" placeholder="Create Password" type="password" />
+              <HelpBlock tooltip>This field is required</HelpBlock>
             </FormGroup>
             <FormGroup>
               <ButtonToolbar>
-                <Button appearance="primary">Submit</Button>
+                <Button appearance="primary">Login</Button>
                 <Button appearance="default">Cancel</Button>
               </ButtonToolbar>
             </FormGroup>
