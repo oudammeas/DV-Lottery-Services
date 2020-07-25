@@ -41,5 +41,8 @@
   },
   "register-page": {
     "form-title": "Sign up for a free account with us"
+  },
+  "profile-page": {
+    "form-title": "My Profile"
   }
 }
