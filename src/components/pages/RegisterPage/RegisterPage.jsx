@@ -33,7 +33,7 @@ const RegisterPage = () => {
       <Content style={styles.content}>
         <div style={styles.formwrapper}>
           <div style={styles.formtitle}>{t("common.register-page.form-title")}</div>
-          <Form layout="horizontal">
+          <Form layout="horizontal" action="/profile">
             <FormGroup>
               <FormControl name="firstname" placeholder="Firstname" />
               <HelpBlock tooltip>This field is required</HelpBlock>

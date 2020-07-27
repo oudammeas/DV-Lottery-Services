@@ -32,7 +32,7 @@ export const route = [
   { path: "/selected-candidates", Component: SelectedCandidatesPage, name: "Selected Candidates Page" },
   { path: "/login", Component: LoginPage, name: "Login Page" },
   { path: "/profile", Component: ProfilePage, name: "Profile Page" },
-  { path: "/appointement", Component: AppointmentPage, name: "Appointment Page" }
+  { path: "/appointment", Component: AppointmentPage, name: "Appointment Page" }
 
 ];
 

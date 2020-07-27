@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock } from "rsuite";
+import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid } from "rsuite";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 import { useTranslation } from "react-i18next";
-
+import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
+import $ from "jquery";
 
 
 export const form_groups = [
@@ -13,13 +14,13 @@ export const form_groups = [
     "fields": [
       { "name": "firstname_kh", "label": "First Name (Khmer)", "type": "input" },
       { "name": "lastname_kh", "label": "Last Name (Khmer)", "type": "input" },
-      { "name": "firstname", "label": "First Name", "type": "input" },
-      { "name": "lastname", "label": "Last Name", "type": "input" },
+      { "name": "firstname", "label": "First Name (English)", "type": "input" },
+      { "name": "lastname", "label": "Last Name (English)", "type": "input" },
       { "name": "date_of_birth", "label": "Date of Birth", "type": "date" },
-      { "name": "gender", "label": "Gender", "type": "input" },
+      { "name": "gender", "label": "Gender", "type": "radio", "select": [{ "value": "male", "label": "Male" }, { "value": "female", "label": "Female" }] },
       { "name": "marital_status", "label": "Marital Status", "type": "input" },
       { "name": "number_of_dependent", "label": "Number of Dependent", "type": "number" },
-      { "name": "portrait", "label": "Photo Portrait", "type": "image" },
+      { "name": "portrait", "label": "Photo Portrait", "type": "image", "prop": "width=48px height=48px" },
       { "name": "upload_portrait", "label": "Upload Photo Portrait", "type": "file" },
       { "name": "passport_id", "label": "Passport No.", "type": "input" },
       { "name": "upload_passport", "label": "Upload Passport", "type": "file" },
@@ -37,16 +38,18 @@ export const form_groups = [
   {
     "group_name": "Contact Information", "fields": [
       { "name": "email", "label": "Email", "type": "email" },
-      { "name": "phone_id", "label": "Phone No.", "type": "tel" }
-    ]
-  },
+      { "name": "phone_id", "label": "Phone No.", "type": "tel" },
+      { "name": "portrait", "label": "Photo Portrait", "type": "image" },
 
-  {
+    ]
+  }
+
+  , {
     "group_name": "Spouse Information", "fields": [
       { "name": "firstname_spouse_kh", "label": "First Name (Khmer)", "type": "input" },
       { "name": "lastname_spouse_kh", "label": "Last Name (Khmer)", "type": "input" },
-      { "name": "firstname_spouse", "label": "First Name", "type": "input" },
-      { "name": "lastname_spouse", "label": "Last Name", "type": "input" },
+      { "name": "firstname_spouse", "label": "First Name (English)", "type": "input" },
+      { "name": "lastname_spouse", "label": "Last Name (English)", "type": "input" },
       { "name": "national_id_spouse", "label": "National ID No.", "type": "input" }
     ]
   },
@@ -54,8 +57,8 @@ export const form_groups = [
     "group_name": "Dependent Information", "fields": [
       { "name": "firstname_depend_kh", "label": "First Name (Khmer)", "type": "input" },
       { "name": "lastname_depend_kh", "label": "Last Name (Khmer)", "type": "input" },
-      { "name": "firstname_depend", "label": "First Name", "type": "input" },
-      { "name": "lastname_depend", "label": "Last Name", "type": "input" },
+      { "name": "firstname_depend", "label": "First Name (English)", "type": "input" },
+      { "name": "lastname_depend", "label": "Last Name (English)", "type": "input" },
       { "name": "national_id_depend", "label": "National ID No.", "type": "input" }
     ]
   },
@@ -97,6 +100,18 @@ export const form_groups = [
   }
 ];
 
+const readOnly = true;
+
+const fieldEditHandler = (form_id, field_key) => {
+  const x = $('#' + form_id + ' input[key=' + field_key + ']').val();
+  const readOnly = false;
+
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+}
+
 const ProfilePage = () => {
   const { t } = useTranslation();
 
@@ -112,50 +127,78 @@ const ProfilePage = () => {
     },
 
     formwrapper: {
-      justifyContent: "center"
     },
 
     formtitle: {
       fontSize: "24px",
       fontWeight: "bold",
       marginBottom: "1em",
-    }
+    },
 
+    flexboxgrid: {
+      root: {
+        padding: "1em 1em 1em 1em",
+      },
+
+      item: {
+
+      },
+    },
   };
+
+
+
+
   return (
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.formwrapper}>
           <div style={styles.formtitle}>{t("common.profile-page.form-title")}</div>
-          <Form layout="horizontal">
-            {form_groups.map((group, i) => {
-              return (
-                <div>
-                  <h4 key={i}>{group.group_name}</h4>
-                  {group.fields && group.fields.map((field, j) => {
-                    return (
-                      <FormGroup>
-                        <ControlLabel>{field.label}</ControlLabel>
-                        <FormControl type={field.type} name={field.name} key={j} />
-                        {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
-                        <div>Edit</div>
-                      </FormGroup>
-                    )
-                  })}
-                </div>
-              )
-            })}
 
-            <FormGroup>
-              <ButtonToolbar>
-                <Button appearance="primary">Submit</Button>
-                <Button appearance="default">Cancel</Button>
-              </ButtonToolbar>
-            </FormGroup>
-          </Form>
+          {form_groups.map((group, i) => {
+
+            return (
+
+              <FlexboxGrid style={styles.flexboxgrid.root}>
+                <FlexboxGrid.Item colspan={24} style={styles.flexboxgrid.item}>
+                  <Form layout="horizontal" id={i} onSubmit={handleSubmit}>
+                    <h4 key={i}>{group.group_name}</h4>
+                    {group.fields && group.fields.map((field, j) => {
+
+                      return (
+                        field.type == 'radio' ?
+                          <div><ControlLabel>{field.label}</ControlLabel>
+                            <RadioGroup inline>
+                              {field.select && field.select.map((s, k) => {
+
+                                return (
+                                  <Radio value={s.value} id={j} readOnly={readOnly}>{s.label}</Radio>
+                                )
+                              })}
+                            </RadioGroup>
+                            <ControlLabel><a onClick={fieldEditHandler(i, j)}> Edit</a></ControlLabel></div> :
+                          < FormGroup >
+                            <ControlLabel>{field.label} </ControlLabel>
+                            <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly} />
+                            {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
+                            <ControlLabel><a onClick={fieldEditHandler(i, j)}>Edit</a></ControlLabel>
+                          </FormGroup>
+                      )
+                    })}
+                    <FormGroup>
+                      <ButtonToolbar>
+                        <Button appearance="primary" size="md" href="#" color="blue">Save Changes</Button>
+                        <Button appearance="ghost" size="md" href="#">Cancel Changes</Button>
+                      </ButtonToolbar>
+                    </FormGroup>
+                  </Form>
+                </FlexboxGrid.Item>
+              </FlexboxGrid>
+            )
+          })}
         </div>
       </Content>
-    </MainLayout>
+    </MainLayout >
   );
 };
 

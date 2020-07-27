@@ -20,11 +20,11 @@ const PageHeader = ({ commonStore }) => {
     navbar: {
       header: {
         padding: "2em",
-        minHeight: "2em",
+        minHeight: "150px",
         width: "100%",
         alignContent: "center",
         padding: "2em",
-        backgroundColor: "base-color",
+        backgroundColor: "#003875",
         justifyContent: "left",
         color: "#E5E5E5",
       },
@@ -42,7 +42,7 @@ const PageHeader = ({ commonStore }) => {
   return (
     <Header>
       <Affix>
-        <Navbar appearance="inverse">
+        <Navbar appearance="default">
           <Navbar.Header style={styles.navbar.header}>
             <Nav>
               <a className="navbar-brand logo">
@@ -62,8 +62,9 @@ const PageHeader = ({ commonStore }) => {
                 </Nav.Item>
               ))}
             </Nav>
-            <Nav pullRight>
-              <Nav.Item icon={<Icon icon="cog" />}>Settings</Nav.Item>
+            <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
+              <Button appearance="primary" size="lg" href="/login" color="blue" style={{ marginRight: "0.5em", minWidth: "130px" }} > {t("common.navigation.login")}</Button>
+              <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
             </Nav>
           </Navbar.Body>
         </Navbar>
