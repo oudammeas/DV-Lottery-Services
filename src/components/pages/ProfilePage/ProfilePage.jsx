@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid } from "rsuite";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
@@ -7,7 +7,7 @@ import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
 import $ from "jquery";
 
 
-export const form_groups = [
+const form_groups = [
 
   {
     "group_name": "Biological Information",
@@ -100,18 +100,6 @@ export const form_groups = [
   }
 ];
 
-const readOnly = true;
-
-const fieldEditHandler = (form_id, field_key) => {
-  const x = $('#' + form_id + ' input[key=' + field_key + ']').val();
-  const readOnly = false;
-
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-}
-
 const ProfilePage = () => {
   const { t } = useTranslation();
 
@@ -146,14 +134,23 @@ const ProfilePage = () => {
     },
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
+
+  const fieldEditHandler = (form_id, field_id) => {
+    setReadOnly([...readOnly, `${form_id}${field_id}`]);
+  };
+
+  const [readOnly, setReadOnly] = useState([]);
 
 
   return (
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.formwrapper}>
-          <div style={styles.formtitle}>{t("common.profile-page.form-title")}</div>
+          <div style={styles.formtitle}>{t("common.profile-page.page-title")}</div>
 
           {form_groups.map((group, i) => {
 
@@ -179,9 +176,9 @@ const ProfilePage = () => {
                             <ControlLabel><a onClick={fieldEditHandler(i, j)}> Edit</a></ControlLabel></div> :
                           < FormGroup >
                             <ControlLabel>{field.label} </ControlLabel>
-                            <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly} />
+                            <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly.includes(`${i}${j}`)} />
                             {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
-                            <ControlLabel><a onClick={fieldEditHandler(i, j)}>Edit</a></ControlLabel>
+                            <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}>Edit</a></ControlLabel>
                           </FormGroup>
                       )
                     })}

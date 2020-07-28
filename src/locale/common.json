@@ -19,6 +19,7 @@
     "us-dv-visa": "U.S. State Department Diversity Visa"
   },
   "contact-us": {
+    "page-title": "Contact Us",
     "name": "DV Lottery Services",
     "street": "123 Street",
     "commune": "Commune",
@@ -40,9 +41,18 @@
     "form-title": "Login"
   },
   "register-page": {
+    "page-title": "Register",
     "form-title": "Sign up for a free account with us"
   },
   "profile-page": {
-    "form-title": "My Profile"
+    "page-title": "My Profile"
+  },
+  "selectedCandidates-page": {
+    "page-title": "Selected DV Lottery Candidates",
+    "main-text": "If you are a newly selected candidate for the DV Lottery for a chance to migrate to live and work in the United States of America for the fiscal year 2020 and would like an assistance with the next stage of the process (interview with the US Embassy), we can provide the needed assistance including providing consultation, collecting and assembling the necessary information for the paperworks, completing and submitting the required paperworks, and assisting with all formal communications between the DV authority."
+  },
+  "newCandidates-page": {
+    "page-title": "New DV Lottery Candidates",
+    "main-text": "If you are interested in applying as a new candidate for the DV Lottery for a chance to migrate to live and work in the United States of America, we can provide assistance from the start of the application to the final stage of migrating into the US. Note that DV Lottery application is provided by the US Government free of charge and our assistance is purely based out of the notion that some candidates might need assistance out of convenience based on their available time and efforts."
   }
 }
