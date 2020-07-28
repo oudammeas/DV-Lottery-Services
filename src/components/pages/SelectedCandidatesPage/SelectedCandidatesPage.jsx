@@ -37,8 +37,8 @@ const SelectedCandidatesPage = () => {
                 </div>
 
                 <div style={styles.content.hero}>
-                    <Panel bordered style={{ display: 'inline-block', width: "588px", height: "500px", margin: "1em", padding: "1em" }}>
-                        <img src="https://c.wallhere.com/photos/74/7e/mer_france_marin_champs_terre_normandie_campagne_rocher-798292.jpg!d" width="500px" />
+                    <Panel style={{ display: 'inline-block', width: "588px", height: "500px", margin: "1em", padding: "1em" }}>
+                        <img src="https://photoartinc.com/wp-content/uploads/2018/12/free-non-copyright-photos-4.jpg" width="500px" />
                         <Button appearance="primary" size="lg" href="/new-candidates" color="blue" style={{ margin: "2em 0em 2em 0em" }}>For new candidates click here</Button>
                     </Panel>
                     <Panel style={{ display: 'inline-block', width: 588, height: 500, margin: "1em" }}>

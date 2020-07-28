@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid } from "rsuite";
+import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid, Divider } from "rsuite";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 import { useTranslation } from "react-i18next";
 import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
@@ -140,7 +140,7 @@ const ProfilePage = () => {
 
 
   const fieldEditHandler = (form_id, field_id) => {
-    setReadOnly([...readOnly, `${form_id}${field_id}`]);
+    // setReadOnly([...readOnly, `${form_id}${field_id}`]);
   };
 
   const [readOnly, setReadOnly] = useState([]);
@@ -173,12 +173,13 @@ const ProfilePage = () => {
                                 )
                               })}
                             </RadioGroup>
-                            <ControlLabel><a onClick={fieldEditHandler(i, j)}> Edit</a></ControlLabel></div> :
+                            <ControlLabel><a onClick={fieldEditHandler(i, j)}> Edit</a></ControlLabel> <Divider vertical /> <a onClick={fieldEditHandler(i, j)}>Save</a></div> :
                           < FormGroup >
                             <ControlLabel>{field.label} </ControlLabel>
                             <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly.includes(`${i}${j}`)} />
                             {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
                             <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}>Edit</a></ControlLabel>
+                            <ControlLabel><a onClick={fieldEditHandler(i, j)}>Save</a></ControlLabel>
                           </FormGroup>
                       )
                     })}
