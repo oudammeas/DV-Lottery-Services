@@ -9,11 +9,11 @@ const RegisterPage = () => {
   const styles = {
     content: {
       padding: "1em",
-      minHeight: "700px",
-      maxWidth: "1280px",
+      minHeight: "40em",
+      maxWidth: "100%",
       margin: "0 auto",
       textAlign: "start",
-      justifyContent: "center",
+      // justifyContent: "center",
 
     },
 
