@@ -1,8 +1,19 @@
 import React from "react";
 import { Container, Content, Footer, Panel, PanelGroup } from "rsuite";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
+import { useTranslation } from "react-i18next";
+
+const faqs_data = [
+    { "question": "What is the Diversity Lottery or DV Lottery program?", "answer": "What is the Diversity Lottery or DV Lottery program?" },
+    { "question": "Who is eligible for the DV Lottery program?", "answer": "Who is eligible for the DV Lottery program?" },
+    { "question": "What is the cost for participating in the DV Lottery program?", "answer": "What is the cost for participating in the DV Lottery program?" }
+
+];
+
 
 const FaqsPage = () => {
+
+    const { t } = useTranslation();
 
     const styles = {
         content: {
@@ -14,9 +25,15 @@ const FaqsPage = () => {
 
         },
 
+        pagetitle: {
+            fontSize: "24px",
+            fontWeight: "bold",
+            marginBottom: "1em",
+        },
+
         panelGroup: {
             root: {
-                minWidth: "10em",
+                width: "40em",
 
             }
 
@@ -26,16 +43,18 @@ const FaqsPage = () => {
     return (
         <MainLayout>
             <Content style={styles.content}>
+                <div style={styles.pagetitle}>{t("common.faqs-page.page-title")}</div>
                 <PanelGroup accordion bordered style={styles.panelGroup.root}>
-                    <Panel header="Q: What is the Diversity Lottery or DV Lottery program?">
-                        <p>A: What is the Diversity Lottery or DV Lottery program?</p>
-                    </Panel>
-                    <Panel header="Q: Who is eligible for the DV Lottery program?" >
-                        <p>A: Who is eligible for the DV Lottery program? Who is eligible for the DV Lottery program? Who is eligible for the DV Lottery program?</p>
-                    </Panel>
-                    <Panel header="Q: What is the cost for participating in the DV Lottery program?">
-                        <p>A: What is the cost for participating in the DV Lottery program?</p>
-                    </Panel>
+
+                    {faqs_data.map((d) => {
+
+                        return (
+                            <Panel header={d.question}>
+                                <p>A: {d.answer}</p>
+                            </Panel>
+                        )
+
+                    })};
                 </PanelGroup>
             </Content>
         </MainLayout>

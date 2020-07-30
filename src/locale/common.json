@@ -47,12 +47,20 @@
   "profile-page": {
     "page-title": "My Profile"
   },
+  "status-page": {
+    "page-title": "My Status"
+  },
   "selectedCandidates-page": {
     "page-title": "Selected DV Lottery Candidates",
     "main-text": "If you are a newly selected candidate for the DV Lottery for a chance to migrate to live and work in the United States of America for the fiscal year 2020 and would like an assistance with the next stage of the process (interview with the US Embassy), we can provide the needed assistance including providing consultation, collecting and assembling the necessary information for the paperworks, completing and submitting the required paperworks, and assisting with all formal communications between the DV authority."
   },
   "newCandidates-page": {
     "page-title": "New DV Lottery Candidates",
-    "main-text": "If you are interested in applying as a new candidate for the DV Lottery for a chance to migrate to live and work in the United States of America, we can provide assistance from the start of the application to the final stage of migrating into the US. Note that DV Lottery application is provided by the US Government free of charge and our assistance is purely based out of the notion that some candidates might need assistance out of convenience based on their available time and efforts."
+    "introduction-text": "If you are interested in applying as a new candidate for the DV Lottery for a chance to migrate to live and work in the United States of America, we can provide assistance from the start of the application to the final stage of migrating into the US. Note that DV Lottery application is provided by the US Government free of charge and our assistance is purely based out of the notion that some candidates might need assistance out of convenience based on their available time and efforts. Check the requirements for new candiate below.",
+    "requirements-text-1": "1.) Individuals born in countries whose natives qualify may be eligible to enter.",
+    "requirements-text-2": "2.) Each DV applicant must meet the education/work experience requirement of the DV program by having either at least a high school education or its equivalent, defined as successful completion of a 12-year course of formal elementary and secondary education OR two years of work experience within the past five years in an occupation that requires at least two years of training or experience to perform."
+  },
+  "faqs-page": {
+    "page-title": "Frequently Asked Questions"
   }
 }

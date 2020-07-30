@@ -16,6 +16,7 @@ import NewCandidatesPage from "../components/pages/NewCandidatesPage";
 import SelectedCandidatesPage from "../components/pages/SelectedCandidatesPage";
 import LoginPage from "../components/pages/LoginPage";
 import ProfilePage from "../components/pages/ProfilePage";
+import StatusPage from "../components/pages/StatusPage";
 import AppointmentPage from "../components/pages/AppointmentPage";
 
 
@@ -32,6 +33,7 @@ export const route = [
   { path: "/selected-candidates", Component: SelectedCandidatesPage, name: "Selected Candidates Page" },
   { path: "/login", Component: LoginPage, name: "Login Page" },
   { path: "/profile", Component: ProfilePage, name: "Profile Page" },
+  { path: "/status", Component: StatusPage, name: "Status Page" },
   { path: "/appointment", Component: AppointmentPage, name: "Appointment Page" }
 
 ];

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid, Divider } from "rsuite";
+import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid, Col, Divider, Icon, Timeline } from "rsuite";
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 import { useTranslation } from "react-i18next";
 import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
@@ -106,18 +106,14 @@ const ProfilePage = () => {
   const styles = {
     content: {
       padding: "1em",
-      minHeight: "700px",
-      maxWidth: "1280px",
+      minHeight: "40em",
       margin: "0 auto",
       textAlign: "start",
       justifyContent: "center",
 
     },
 
-    formwrapper: {
-    },
-
-    formtitle: {
+    pagetitle: {
       fontSize: "24px",
       fontWeight: "bold",
       marginBottom: "1em",
@@ -149,52 +145,51 @@ const ProfilePage = () => {
   return (
     <MainLayout>
       <Content style={styles.content}>
-        <div style={styles.formwrapper}>
-          <div style={styles.formtitle}>{t("common.profile-page.page-title")}</div>
+
+        <div style={styles.pagetitle}>{t("common.profile-page.page-title")}</div>
+
+        <FlexboxGrid style={styles.flexboxgrid.root}>
 
           {form_groups.map((group, i) => {
 
             return (
 
-              <FlexboxGrid style={styles.flexboxgrid.root}>
-                <FlexboxGrid.Item colspan={24} style={styles.flexboxgrid.item}>
-                  <Form layout="horizontal" id={i} onSubmit={handleSubmit}>
-                    <h4 key={i}>{group.group_name}</h4>
-                    {group.fields && group.fields.map((field, j) => {
+              <FlexboxGrid.Item colspan={24} style={styles.flexboxgrid.item}>
+                <Form layout="horizontal" id={i} onSubmit={handleSubmit}>
+                  <h4 key={i}>{group.group_name}</h4>
+                  {group.fields && group.fields.map((field, j) => {
 
-                      return (
-                        field.type == 'radio' ?
-                          <div><ControlLabel>{field.label}</ControlLabel>
-                            <RadioGroup inline>
-                              {field.select && field.select.map((s, k) => {
+                    return (
+                      field.type == 'radio' ?
+                        <div><ControlLabel>{field.label}</ControlLabel>
+                          <RadioGroup inline>
+                            {field.select && field.select.map((s, k) => {
 
-                                return (
-                                  <Radio value={s.value} id={j} readOnly={readOnly}>{s.label}</Radio>
-                                )
-                              })}
-                            </RadioGroup>
-                            <ControlLabel><a onClick={fieldEditHandler(i, j)}> Edit</a></ControlLabel> <Divider vertical /> <a onClick={fieldEditHandler(i, j)}>Save</a></div> :
-                          < FormGroup >
-                            <ControlLabel>{field.label} </ControlLabel>
-                            <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly.includes(`${i}${j}`)} />
-                            {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
-                            <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}>Edit</a></ControlLabel>
-                            <ControlLabel><a onClick={fieldEditHandler(i, j)}>Save</a></ControlLabel>
-                          </FormGroup>
-                      )
-                    })}
-                    <FormGroup>
-                      <ButtonToolbar>
-                        <Button appearance="primary" size="md" href="#" color="blue">Save Changes</Button>
-                        <Button appearance="ghost" size="md" href="#">Cancel Changes</Button>
-                      </ButtonToolbar>
-                    </FormGroup>
-                  </Form>
-                </FlexboxGrid.Item>
-              </FlexboxGrid>
+                              return (
+                                <Radio value={s.value} id={j} readOnly={readOnly.includes(`${i}${j}`)}>{s.label}</Radio>
+                              )
+                            })}
+                          </RadioGroup>
+                          <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}> Edit</a></ControlLabel> <Divider vertical /> <a onClick={fieldEditHandler(i, j)}>Save</a></div> :
+                        < FormGroup >
+                          <ControlLabel>{field.label} </ControlLabel>
+                          <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly.includes(`${i}${j}`)} />
+                          {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
+                          <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}>Edit</a></ControlLabel>
+                        </FormGroup>
+                    )
+                  })}
+                  <FormGroup>
+                    <ButtonToolbar>
+                      <Button appearance="primary" size="md" href="#" color="blue">Save Changes</Button>
+                      <Button appearance="ghost" size="md" href="#">Cancel Changes</Button>
+                    </ButtonToolbar>
+                  </FormGroup>
+                </Form>
+              </FlexboxGrid.Item>
             )
-          })}
-        </div>
+          })};
+          </FlexboxGrid>
       </Content>
     </MainLayout >
   );

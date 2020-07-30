@@ -17,11 +17,16 @@ const SelectedCandidatesPage = () => {
 
             pagetitle: {
                 fontSize: "24px",
-                fondWeight: "bold"
+                fontWeight: "bold"
+            },
+
+            maintext_heading: {
+                paddingBottom: "1em",
+                fontSize: "24px",
+                fontWeight: "bold"
             },
 
             maintext: {
-                padding: "1em",
                 paddingBottom: "1em",
                 fontSize: "14px"
             }
@@ -42,6 +47,7 @@ const SelectedCandidatesPage = () => {
                         <Button appearance="primary" size="lg" href="/new-candidates" color="blue" style={{ margin: "2em 0em 2em 0em" }}>For new candidates click here</Button>
                     </Panel>
                     <Panel style={{ display: 'inline-block', width: 588, height: 500, margin: "1em" }}>
+                        <div style={styles.content.maintext_heading}>Introduction</div>
                         <div style={styles.content.maintext}>
                             {t("common.selectedCandidates-page.main-text")}
                         </div>
