@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 import { useTranslation } from "react-i18next";
 import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
 import $ from "jquery";
-
+import './CustomStyle.css';
 
 const StatusPage = () => {
     const { t } = useTranslation();
@@ -53,10 +53,14 @@ const StatusPage = () => {
                 marginLeft: "-13px"
             }
 
+        },
+
+        currentStage: {
+            fontWeight: "bold",
+            color: "blue"
         }
 
     };
-
 
     return (
         <MainLayout>
@@ -64,54 +68,70 @@ const StatusPage = () => {
 
                 <div style={styles.pagetitle}>{t("common.status-page.page-title")}</div>
 
-                <Timeline className="custom-timeline" style={styles.customTimeline}>
-                    <Timeline.Item dot={<Icon icon="credit-card" size="2x" style={styles.customTimeline.dot} />}>
-                        <p>March 1, 10:20</p>
-                        <p>Your order starts processing</p>
+                <Timeline className="custom-timeline">
+                    <Timeline.Item dot={<Icon icon="play" size="2x" />}>
+                        <p>Lottery Entrance Stage: Initiation.</p>
+                        <p>October 1, 2020</p>
                     </Timeline.Item>
-                    <Timeline.Item>
-                        <p>March 1, 11:34</p>
-                        <p>The package really waits for the company to pick up the goods</p>
+                    <Timeline.Item dot={<Icon icon="paperclip" size="2x" />}>
+                        <p>Lottery Entrance Stage: Information Collection.</p>
+                        <p>October 7, 2020</p>
                     </Timeline.Item>
-                    <Timeline.Item>
-                        <p>March 1, 16:20</p>
-                        <p>[Packed]</p>
-                        <p>Beijing company has received the shipment</p>
+                    <Timeline.Item dot={<Icon icon="balance-scale" size="2x" />} style={styles.currentStage}>
+                        <p>Lottery Entrance Stage: Eligibility Evaluation.</p>
+                        <p>October 14, 2020</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="file" size="2x" />}>
+                        <p>Lottery Entrance Stage: Application Submission.</p>
+                        <p>October 30, 2020</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="hourglass-o" size="2x" />}>
+                        <p>Lottery Stage: Drawing Period.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="hourglass" size="2x" />}>
+                        <p>Lottery Stage: Drawing Result.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="paperclip" size="2x" />}>
+                        <p>Immigration Application Stage: Information Collection.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="file" size="2x" />}>
+                        <p>Immigration Application Stage: Information Submission.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="calendar" size="2x" />}>
+                        <p>Interview Stage: Interview Date Booking.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="paperclip" size="2x" />}>
+                        <p>Interview Stage: Interview Preparation.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="wechat" size="2x" />}>
+                        <p>Interview Stage: Interview Result.</p>
+                        <p>March 2, 06:12</p>
+                    </Timeline.Item>
+                    <Timeline.Item dot={<Icon icon="file" size="2x" />}>
+                        <p>Final Stage: Immigration Paperwork.</p>
+                        <p>March 2, 06:12</p>
                     </Timeline.Item>
                     <Timeline.Item dot={<Icon icon="plane" size="2x" />}>
+                        <p>Final Stage: Travel Plan.</p>
                         <p>March 2, 06:12</p>
-                        <p>[In transit]</p>
-                        <p>Order has been shipped from Beijing to Shanghai</p>
                     </Timeline.Item>
-                    <Timeline.Item dot={<Icon icon="truck" size="2x" />}>
-                        <p>March 2, 09:20</p>
-                        <p>[In transit]</p>
-                        <p>
-                            Sended from the Shanghai Container Center to the distribution center</p>
-                    </Timeline.Item>
-                    <Timeline.Item dot={<Icon icon="user" size="2x" />}>
-                        <p>March 3, 14:20</p>
-                        <p>[Delivery]</p>
-                        <p>
-                            Shanghai Hongkou District Company Deliverer: Mr. Li, currently sending
-                            you a shipment
-                        </p>
-                    </Timeline.Item>
-                    <Timeline.Item
-                        dot={
-                            <Icon
-                                icon="check"
-                                size="2x"
-                                style={{ background: '#15b215', color: '#fff' }}
-                            />
-                        }
-                    >
-                        <p>March 3, 17:50</p>
-                        <p>[Received]]</p>
-                        <p>Your courier has arrived and the signer is the front desk</p>
+                    <Timeline.Item dot={
+                        <Icon
+                            icon="check"
+                            size="2x"
+                            style={{ background: '#15b215', color: '#fff' }}
+                        />
+                    }>
+                        <p>Contratulation!!!</p>
+                        <p>March 2, 06:12</p>
                     </Timeline.Item>
                 </Timeline>
-
             </Content>
         </MainLayout >
     );

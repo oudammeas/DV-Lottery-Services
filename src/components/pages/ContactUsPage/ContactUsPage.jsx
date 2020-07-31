@@ -8,13 +8,18 @@ const ContactUsPage = () => {
 
     const styles = {
         content: {
-            padding: "1em",
-            minHeight: "700px",
-            // maxWidth: "1280px",
-            // margin: "0 auto",
-            // textAlign: "center",
-            // justifyContent: "center"
+            padding: "5em",
+            minHeight: "40em",
+            maxWidth: "100%",
+            margin: "0 auto",
+            textAlign: "start",
 
+        },
+
+        pagetitle: {
+            fontSize: "24px",
+            fontWeight: "bold",
+            marginBottom: "1em",
         },
 
         panel: {
@@ -22,8 +27,6 @@ const ContactUsPage = () => {
                 display: 'inline-block',
                 width: "auto",
                 height: "auto",
-                margin: "1em",
-                padding: "1em"
             },
 
 
@@ -47,14 +50,14 @@ const ContactUsPage = () => {
     return (
         <MainLayout>
             <Content style={styles.content}>
+                <div style={styles.pagetitle}>{t("common.contact-us-page.page-title")}</div>
                 <Panel bordered style={styles.panel.root}>
                     <ul style={styles.panel.ul}>
-                        <lh style={styles.panel.ul.lh}>Contact Us</lh>
-                        <li style={styles.panel.ul.li}>{t("common.contact-us.name")}</li>
-                        <li style={styles.panel.ul.li}>{t("common.contact-us.street")}</li>
-                        <li style={styles.panel.ul.li}>{t("common.contact-us.city")}, {t("common.contact-us.province")}</li>
-                        <li style={styles.panel.ul.li}>{t("common.contact-us.phone")}</li>
-                        <li style={styles.panel.ul.li}>{t("common.contact-us.email")}</li>
+                        <li style={styles.panel.ul.li}>{t("common.contact-us-page.name")}</li>
+                        <li style={styles.panel.ul.li}>{t("common.contact-us-page.street")}</li>
+                        <li style={styles.panel.ul.li}>{t("common.contact-us-page.city")}, {t("common.contact-us-page.province")}</li>
+                        <li style={styles.panel.ul.li}>{t("common.contact-us-page.phone")}</li>
+                        <li style={styles.panel.ul.li}>{t("common.contact-us-page.email")}</li>
                         <li style={styles.panel.ul.li}>
                             <ButtonToolbar>
                                 <IconButton icon={<Icon icon="facebook-official" />} color="blue" circle href={t("common.contact-us.facebook")} />

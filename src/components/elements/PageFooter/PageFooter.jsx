@@ -125,19 +125,19 @@ const PageFooter = () => {
                         <lh style={styles.flexboxgrid.item.ul.lh}>Contact Us</lh>
                         <Divider />
                         <li style={styles.flexboxgrid.item.ul.li}>
-                            {t("common.contact-us.name")}
+                            {t("common.contact-us-page.name")}
                         </li>
                         <li style={styles.flexboxgrid.item.ul.li}>
-                            {t("common.contact-us.street")}
+                            {t("common.contact-us-page.street")}
                         </li>
                         <li style={styles.flexboxgrid.item.ul.li}>
-                            {t("common.contact-us.city")}, {t("common.contact-us.province")}
+                            {t("common.contact-us-page.city")}, {t("common.contact-us-page.province")}
                         </li>
                         <li style={styles.flexboxgrid.item.ul.li}>
-                            {t("common.contact-us.phone")}
+                            {t("common.contact-us-page.phone")}
                         </li>
                         <li style={styles.flexboxgrid.item.ul.li}>
-                            {t("common.contact-us.email")}
+                            {t("common.contact-us-page.email")}
                         </li>
                         <li style={styles.flexboxgrid.item.ul.li}>
                             <ButtonToolbar>
@@ -145,13 +145,13 @@ const PageFooter = () => {
                                     icon={<Icon icon="facebook-official" />}
                                     color="blue"
                                     circle
-                                    href={t("common.contact-us.facebook")}
+                                    href={t("common.contact-us-page.facebook")}
                                 />
                                 <IconButton
                                     icon={<Icon icon="twitter" />}
                                     color="cyan"
                                     circle
-                                    href={t("common.contact-us.twitter")}
+                                    href={t("common.contact-us-page.twitter")}
                                 />
                             </ButtonToolbar>
                         </li>
