@@ -66,3 +66,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+#  Services Used
+---
+
+- [AWS](https://aws.amazon.com/)  - Hosts the website front-end.
+- [Auth0](https://auth0.com/) - Used for all authentication and authorization.
+- [MySQL](https://www.mysql.com/) - Used as the database management. 
+
+#  Libraries Used
+---
+
+- [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) - Used for front-end and back-end interface development. 
+- [Express.js](https://expressjs.com/) - Used for server development. 
+- [RSUITEJS](https://rsuitejs.com/guide/introduction/) - Used as a React components library for middle platform and back-end products. 
+- [Mobx-react.js](https://mobx-react.js.org/) - Used for handling reactivity to the components and whole application state. 

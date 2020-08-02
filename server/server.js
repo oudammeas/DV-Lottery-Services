@@ -1,9 +1,11 @@
 const express = require('express');
 
+const path = require('path');
+
 const app = express();
 
 // Set port number for server to listen to
-const port = 80
+const port = 3000
 
 // Tell server to listen to the specified port
 app.listen(port, (error) => {
@@ -14,7 +16,11 @@ app.listen(port, (error) => {
     }
 })
 
-// Provide response to get request on '/'
-app.get('/', (request, response) => {
-    response.render()
-})
+// Use middleware to serve static files (images/css)
+
+app.use(express.static(path.join(__dirname, '../public')));
+
+// // Provide response to get request on '/'
+// app.get('/', (request, response) => {
+//     response.sendFile(path.join(__dirname, '../public/index.html'))
+// })

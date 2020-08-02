@@ -39,7 +39,6 @@ const LoginPage = () => {
 
   });
 
-
   customerModel.checkAsync({
     email: 'oudam.meas@gmail.com',
     password: 'abc'
@@ -57,6 +56,16 @@ const LoginPage = () => {
 
   const [formError, setFormError] = useState({});
 
+  const handleSubmit = () => {
+    // const { formValue } = useState();
+    // if (!form.check()) {
+    //   console.error('Form Error');
+    //   return;
+    // }
+    // console.log(formValue, 'Form Value');
+  };
+
+
   return (
     <MainLayout>
       <Content style={styles.content}>
@@ -66,7 +75,7 @@ const LoginPage = () => {
             layout="horizontal"
             style={styles.form}
 
-            ref={ref => (form = ref)}
+            // ref={ref => (form = ref)}
             onChange={formValue => {
               setFormValue({ formValue });
             }}
@@ -94,7 +103,7 @@ const LoginPage = () => {
             </FormGroup>
             <FormGroup>
               <ButtonToolbar>
-                <Button appearance="primary" type="submit">Login</Button>
+                <Button appearance="primary" type="submit" onClick={handleSubmit}>Login</Button>
                 <Button appearance="default">Cancel</Button>
               </ButtonToolbar>
             </FormGroup>
@@ -105,8 +114,6 @@ const LoginPage = () => {
     </MainLayout>
   );
 };
-
-
 
 LoginPage.propTypes = {};
 
