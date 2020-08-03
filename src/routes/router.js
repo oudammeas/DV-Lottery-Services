@@ -9,12 +9,12 @@ import React from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 // 1 . import Pages
 import WelcomePage from "../components/pages/WelcomePage";
-import RegisterPage from "../components/pages/RegisterPage";
+import RegisterPage from "../components/elements/Auth/RegisterButton";
 import FaqsPage from "../components/pages/FaqsPage";
 import ContactUsPage from "../components/pages/ContactUsPage";
 import NewCandidatesPage from "../components/pages/NewCandidatesPage";
 import SelectedCandidatesPage from "../components/pages/SelectedCandidatesPage";
-import LoginPage from "../components/pages/LoginPage";
+import LoginPage from "../components/elements/Auth/LoginButton";
 import ProfilePage from "../components/pages/ProfilePage";
 import StatusPage from "../components/pages/StatusPage";
 import AppointmentPage from "../components/pages/AppointmentPage";

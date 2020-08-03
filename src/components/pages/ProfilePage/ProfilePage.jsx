@@ -5,7 +5,7 @@ import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 import { useTranslation } from "react-i18next";
 import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
 import $ from "jquery";
-
+import { Schema } from 'rsuite';
 
 const form_groups = [
 
@@ -141,6 +141,39 @@ const ProfilePage = () => {
 
   const [readOnly, setReadOnly] = useState([]);
 
+  // const { StringType, NumberType, ArrayType, DateType, ObjectType, BooleanType } = Schema.Types;
+
+  // const customerModel = Schema.Model({
+  //   email: StringType().isEmail('Please enter a valid email address.'),
+  //   password: StringType().isRequired('Please enter the correct password')
+
+  // });
+
+  // customerModel.checkAsync({
+  //   email: 'oudam.meas@gmail.com',
+  //   password: 'abc'
+  // }).then(result => {
+  //   console.log(result);
+  // });
+
+  // const [formValue, setFormValue] = useState({
+  //   name: '',
+  //   email: '',
+  //   age: '',
+  //   password: '',
+  //   verifyPassword: ''
+  // });
+
+  // const [formError, setFormError] = useState({});
+
+  // const handleSubmit = () => {
+  //   // const { formValue } = useState();
+  //   // if (!form.check()) {
+  //   //   console.error('Form Error');
+  //   //   return;
+  //   // }
+  //   // console.log(formValue, 'Form Value');
+  // };
 
   return (
     <MainLayout>
@@ -155,7 +188,24 @@ const ProfilePage = () => {
             return (
 
               <FlexboxGrid.Item colspan={24} style={styles.flexboxgrid.item}>
-                <Form layout="horizontal" id={i} onSubmit={handleSubmit}>
+                <Form
+                  layout="horizontal"
+                  id={i}
+                  onSubmit={handleSubmit}
+
+                  layout="horizontal"
+                  style={styles.form}
+
+                // ref={ref => (form = ref)}
+                // onChange={formValue => {
+                //   setFormValue({ formValue });
+                // }}
+                // onCheck={formError => {
+                //   setFormError({ formError });
+                // }}
+                // formValue={formValue}
+                // model={customerModel}
+                >
                   <h4 key={i}>{group.group_name}</h4>
                   {group.fields && group.fields.map((field, j) => {
 
@@ -181,7 +231,7 @@ const ProfilePage = () => {
                   })}
                   <FormGroup>
                     <ButtonToolbar>
-                      <Button appearance="primary" size="md" href="#" color="blue">Save Changes</Button>
+                      <Button appearance="primary" size="md" href="#" color="blue" onClick={handleSubmit}>Save Changes</Button>
                       <Button appearance="ghost" size="md" href="#">Cancel Changes</Button>
                     </ButtonToolbar>
                   </FormGroup>

@@ -6,6 +6,14 @@ import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { observer, inject } from "mobx-react";
 import { Affix } from "rsuite";
+import { useAuth0 } from "@auth0/auth0-react";
+
+const LoginButton = () => {
+  const { loginWithPopup } = useAuth0();
+
+  return <button onClick={() => loginWithPopup()}>Log In</button>;
+};
+
 const menu = [
   { title: "common.navigation.home", route: "/" },
   { title: "common.navigation.register", route: "/register" },
@@ -63,7 +71,7 @@ const PageHeader = ({ commonStore }) => {
               ))}
             </Nav>
             <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
-              <Button appearance="primary" size="lg" href="/login" color="blue" style={{ marginRight: "0.5em", minWidth: "130px" }} > {t("common.navigation.login")}</Button>
+              <LoginButton appearance="primary" size="lg" href="/login" color="blue" style={{ marginRight: "0.5em", minWidth: "130px" }} > {t("common.navigation.login")}</LoginButton>
               <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
             </Nav>
           </Navbar.Body>

@@ -11,20 +11,30 @@ import i18n from "./i18n.js";
 import { Provider } from "mobx-react";
 // Route
 import RouteHandler from "./routes/router";
-//import Stores
+// Import Stores
 import commonStore from "./stores/commonStore";
+
+// Import Auth0 
+import Auth0ProviderWithHistory from "./components/elements/Auth/Auth0ProviderWithHistory";
+
+
 const stores = {
   commonStore,
 };
 
+
 function App() {
   return (
-    <div className="App">
-      <Provider {...stores}>
-        <RouteHandler />
-      </Provider>
-    </div>
+    <Auth0ProviderWithHistory>
+      <div className="App">
+        <Provider {...stores}>
+          <RouteHandler />
+        </Provider>
+      </div>
+    </Auth0ProviderWithHistory>
   );
 }
+
+
 
 export default App;
