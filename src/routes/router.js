@@ -6,7 +6,8 @@
 
 // Import module
 import React from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, BrowserRouter, StaticRouter } from "react-router-dom";
+
 // 1 . import Pages
 import WelcomePage from "../components/pages/WelcomePage";
 import RegisterPage from "../components/elements/Auth/RegisterButton";
@@ -19,9 +20,8 @@ import ProfilePage from "../components/pages/ProfilePage";
 import StatusPage from "../components/pages/StatusPage";
 import AppointmentPage from "../components/pages/AppointmentPage";
 
-
-// history to move from page to page
-import { createBrowserHistory } from "history";
+// // history to move from page to page
+// import { createBrowserHistory } from "history";
 
 // 2.  routes list
 export const route = [
@@ -38,21 +38,19 @@ export const route = [
 
 ];
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 /**
  * generate a switch with all routes to be used in App.js
  */
-const RouteHandler = () => {
+const Routes = () => {
   return (
-    <BrowserRouter history={history}>
-      <Switch>
-        {route.map((page) => (
-          <Route path={page.path} exact component={page.Component} />
-        ))}
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      {route.map((page) => (
+        <Route path={page.path} exact component={page.Component} />
+      ))}
+    </Switch>
   );
 };
 
-export default RouteHandler;
+export default Routes;

@@ -3,7 +3,10 @@ import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, Co
 import { useTranslation } from "react-i18next";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const LoginButton = () => {
+
+const LoginButton = ({ commonStore }) => {
+
+  const { t } = useTranslation();
 
   const { loginWithPopup } = useAuth0();
   return (
@@ -11,8 +14,12 @@ const LoginButton = () => {
       onClick={() => loginWithPopup()}
       variant="primary"
       className="btn-margin"
+      appearance="primary"
+      size="lg"
+      color="blue"
+      style={{ marginRight: "0.5em", minWidth: "130px" }}
     >
-      Log In
+      {t("common.navigation.logout")}
     </Button>
   );
 };

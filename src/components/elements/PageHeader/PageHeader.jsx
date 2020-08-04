@@ -7,12 +7,9 @@ import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { observer, inject } from "mobx-react";
 import { Affix } from "rsuite";
 import { useAuth0 } from "@auth0/auth0-react";
-
-const LoginButton = () => {
-  const { loginWithPopup } = useAuth0();
-
-  return <button onClick={() => loginWithPopup()}>Log In</button>;
-};
+import LoginButton from "../Auth/LoginButton";
+import LogoutButton from "../Auth/LoginButton";
+import RegisterButton from "../Auth/RegisterButton";
 
 const menu = [
   { title: "common.navigation.home", route: "/" },
@@ -47,6 +44,18 @@ const PageHeader = ({ commonStore }) => {
     commonStore.setActiveNavMenu(active);
   };
 
+  const AuthNav = () => {
+    const { isAuthenticated } = useAuth0();
+
+    return (
+      <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
+        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+        <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
+      </Nav>
+
+    );
+  };
+
   return (
     <Header>
       <Affix>
@@ -70,10 +79,7 @@ const PageHeader = ({ commonStore }) => {
                 </Nav.Item>
               ))}
             </Nav>
-            <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
-              <LoginButton appearance="primary" size="lg" href="/login" color="blue" style={{ marginRight: "0.5em", minWidth: "130px" }} > {t("common.navigation.login")}</LoginButton>
-              <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
-            </Nav>
+            <AuthNav />
           </Navbar.Body>
         </Navbar>
       </Affix>
