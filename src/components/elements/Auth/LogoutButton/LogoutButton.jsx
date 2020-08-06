@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 const LogoutButton = ({ commonStore }) => {
+  const { t } = useTranslation();
   const { logout } = useAuth0();
   return (
     <Button
@@ -20,7 +21,7 @@ const LogoutButton = ({ commonStore }) => {
       color="red"
       style={{ marginRight: "0.5em", minWidth: "130px" }}
     >
-      {t("common.navigation.login")}
+      {t("common.navigation.logout")}
     </Button>
   );
 };

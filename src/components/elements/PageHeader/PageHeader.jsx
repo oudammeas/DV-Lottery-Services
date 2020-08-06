@@ -8,7 +8,7 @@ import { observer, inject } from "mobx-react";
 import { Affix } from "rsuite";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../Auth/LoginButton";
-import LogoutButton from "../Auth/LoginButton";
+import LogoutButton from "../Auth/LogoutButton";
 import RegisterButton from "../Auth/RegisterButton";
 
 const menu = [
@@ -49,7 +49,9 @@ const PageHeader = ({ commonStore }) => {
 
     return (
       <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+        {/* {isAuthenticated ? <LogoutButton /> : <LoginButton />} */}
+        <LoginButton />
+        <LogoutButton /> 
         <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
       </Nav>
 

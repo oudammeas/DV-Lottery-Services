@@ -4,8 +4,9 @@ import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, Co
 import MainLayout from "../../layouts/MainLayout.js/MainLayout";
 import { useTranslation } from "react-i18next";
 import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
-import $ from "jquery";
 import { Schema } from 'rsuite';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const form_groups = [
 
@@ -100,7 +101,7 @@ const form_groups = [
   }
 ];
 
-const ProfilePage = () => {
+const ProfilePage = ({ commonStore }) => {
   const { t } = useTranslation();
 
   const styles = {
@@ -130,8 +131,16 @@ const ProfilePage = () => {
     },
   };
 
+  // Auth0 Profile:
+
+  const { user } = useAuth0();
+  
+  console.log(user);
+
+  // const { name, picture, email } = user;
+
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
   }
 
 
@@ -175,9 +184,39 @@ const ProfilePage = () => {
   //   // console.log(formValue, 'Form Value');
   // };
 
+  const AuthNav = () => {
+    const { isAuthenticated } = useAuth0();
+
+    return (
+      <div>
+        {isAuthenticated ? <p>Logout</p> : <p>Not Login</p>}
+
+      </div>
+
+    );
+  };
+
+
   return (
     <MainLayout>
       <Content style={styles.content}>
+        <AuthNav />
+        {/* <div className="align-items-center profile-header mb-5 text-center text-md-left">
+          <div md={2}>
+            <img
+              src={picture}
+              alt="Profile"
+              className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+            />
+          </div>
+          <div md>
+            <h2>{name}</h2>
+            <p className="lead text-muted">{email}</p>
+          </div>
+        </div>
+        <div>
+          <p>{JSON.stringify(user, null, 2)}</p>
+        </div> */}
 
         <div style={styles.pagetitle}>{t("common.profile-page.page-title")}</div>
 

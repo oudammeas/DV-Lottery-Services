@@ -24,10 +24,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Loading from "./components/elements/Loading";
 
-// history to move from page to page
-import { createBrowserHistory } from "history";
+// // history to move from page to page
+// import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 const stores = {
   commonStore,
@@ -35,7 +35,7 @@ const stores = {
 
 function App() {
 
-  // const { isLoading } = useAuth0();
+  const { isLoading } = useAuth0();
 
   // if (isLoading) {
   //   return <Loading />;
@@ -43,7 +43,8 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter history={history}>
+      {/* <BrowserRouter history={history}> */}
+      <BrowserRouter>
         <Auth0ProviderWithHistory>
           <Provider {...stores}>
             <Routes />

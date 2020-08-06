@@ -19,7 +19,7 @@ const LoginButton = ({ commonStore }) => {
       color="blue"
       style={{ marginRight: "0.5em", minWidth: "130px" }}
     >
-      {t("common.navigation.logout")}
+      {t("common.navigation.login")}
     </Button>
   );
 };
