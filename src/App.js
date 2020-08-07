@@ -24,6 +24,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import Loading from "./components/elements/Loading";
 
+
 // // history to move from page to page
 // import { createBrowserHistory } from "history";
 

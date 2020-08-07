@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "../Auth/LoginButton";
 import LogoutButton from "../Auth/LogoutButton";
 import RegisterButton from "../Auth/RegisterButton";
+import {ReactComponent as Logo} from './logo.svg';
 
 const menu = [
   { title: "common.navigation.home", route: "/" },
@@ -17,6 +18,7 @@ const menu = [
   { title: "common.navigation.faqs", route: "/faqs" },
   { title: "common.navigation.contact-us", route: "/contact-us" },
 ];
+
 
 const PageHeader = ({ commonStore }) => {
   const { t } = useTranslation();
@@ -37,6 +39,15 @@ const PageHeader = ({ commonStore }) => {
         minHeight: "50px",
         paddingLeft: "3em",
       },
+
+      logo: {
+        
+        color: "white",
+        fontSize: "24px",
+        fontWeight : "bold",
+        alignContent: "center",
+        textAlign: "center",
+      }
     },
   };
   const handleSelect = (active) => {
@@ -49,9 +60,9 @@ const PageHeader = ({ commonStore }) => {
 
     return (
       <Nav pullRight style={{ minHeight: "50px", padding: "0.5em" }}>
-        {/* {isAuthenticated ? <LogoutButton /> : <LoginButton />} */}
-        <LoginButton />
-        <LogoutButton /> 
+
+        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+
         <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: "0.5em", minWidth: "130px" }}>{t("common.navigation.appointment")}</Button>
       </Nav>
 
@@ -64,8 +75,8 @@ const PageHeader = ({ commonStore }) => {
         <Navbar appearance="default">
           <Navbar.Header style={styles.navbar.header}>
             <Nav>
-              <a className="navbar-brand logo">
-                {t("common.navigation.brand-name")}
+              <a className="navbar-brand logo" href='/' style={styles.navbar.logo}>
+                <Logo /> {t('common.navigation.brand-name')}
               </a>
             </Nav>
           </Navbar.Header>

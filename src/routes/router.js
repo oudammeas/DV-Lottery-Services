@@ -7,6 +7,7 @@
 // Import module
 import React from "react";
 import { Route, Switch, BrowserRouter, StaticRouter } from "react-router-dom";
+import PrivateRoute from "../components/elements/PrivateRoute";
 
 // 1 . import Pages
 import WelcomePage from "../components/pages/WelcomePage";
@@ -20,23 +21,25 @@ import ProfilePage from "../components/pages/ProfilePage";
 import StatusPage from "../components/pages/StatusPage";
 import AppointmentPage from "../components/pages/AppointmentPage";
 
+
 // // history to move from page to page
 // import { createBrowserHistory } from "history";
 
 // 2.  routes list
 export const route = [
-  { path: "/", Component: WelcomePage, name: "Welcome Page" },
-  { path: "/register", Component: RegisterPage, name: "Register Page" },
-  { path: "/faqs", Component: FaqsPage, name: "FAQs Page" },
-  { path: "/contact-us", Component: ContactUsPage, name: "Contact Us Page" },
-  { path: "/new-candidates", Component: NewCandidatesPage, name: "New Candidates Page" },
-  { path: "/selected-candidates", Component: SelectedCandidatesPage, name: "Selected Candidates Page" },
-  { path: "/login", Component: LoginPage, name: "Login Page" },
-  { path: "/profile", Component: ProfilePage, name: "Profile Page" },
-  { path: "/status", Component: StatusPage, name: "Status Page" },
-  { path: "/appointment", Component: AppointmentPage, name: "Appointment Page" }
+  { path: "/", Component: WelcomePage, name: "Welcome Page", public: 1 },
+  { path: "/register", Component: RegisterPage, name: "Register Page", public: 1 },
+  { path: "/faqs", Component: FaqsPage, name: "FAQs Page", public: 1  },
+  { path: "/contact-us", Component: ContactUsPage, name: "Contact Us Page", public: 1 },
+  { path: "/new-candidates", Component: NewCandidatesPage, name: "New Candidates Page", public: 1 },
+  { path: "/selected-candidates", Component: SelectedCandidatesPage, name: "Selected Candidates Page", public: 1 },
+  { path: "/login", Component: LoginPage, name: "Login Page", public: 1 },
+  { path: "/profile", Component: ProfilePage, name: "Profile Page", public: 0 },
+  { path: "/status", Component: StatusPage, name: "Status Page", public: 0 },
+  { path: "/appointment", Component: AppointmentPage, name: "Appointment Page", public: 1 }
 
 ];
+
 
 // const history = createBrowserHistory();
 
@@ -47,7 +50,10 @@ const Routes = () => {
   return (
     <Switch>
       {route.map((page) => (
-        <Route path={page.path} exact component={page.Component} />
+      
+     page.public ? <Route path={page.path} exact component={page.Component} /> 
+                 : <PrivateRoute path={page.path} exact component={page.Component} />
+
       ))}
     </Switch>
   );

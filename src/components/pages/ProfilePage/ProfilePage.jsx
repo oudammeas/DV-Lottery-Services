@@ -196,7 +196,6 @@ const ProfilePage = ({ commonStore }) => {
     );
   };
 
-
   return (
     <MainLayout>
       <Content style={styles.content}>
