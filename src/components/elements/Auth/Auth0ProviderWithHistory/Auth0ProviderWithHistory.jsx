@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock } from "rsuite";
-import { useTranslation } from "react-i18next";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 

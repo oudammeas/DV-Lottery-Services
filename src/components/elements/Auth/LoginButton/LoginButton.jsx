@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock } from "rsuite";
+import React from "react";
+import { Button } from "rsuite";
 import { useTranslation } from "react-i18next";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
-const LoginButton = ({ commonStore }) => {
-
+const LoginButton = () => {
   const { t } = useTranslation();
 
-  const { loginWithPopup } = useAuth0();
+  const { loginWithPopup, isLoading } = useAuth0();
   return (
     <Button
       onClick={() => loginWithPopup()}
@@ -16,6 +14,7 @@ const LoginButton = ({ commonStore }) => {
       className="btn-margin"
       appearance="primary"
       size="lg"
+      loading={isLoading}
       color="blue"
       style={{ marginRight: "0.5em", minWidth: "130px" }}
     >
@@ -23,8 +22,5 @@ const LoginButton = ({ commonStore }) => {
     </Button>
   );
 };
-
-
-LoginButton.propTypes = {};
 
 export default LoginButton;

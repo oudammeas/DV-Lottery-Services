@@ -6,7 +6,7 @@
 
 // Import module
 import React from "react";
-import { Route, Switch, BrowserRouter, StaticRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 // 1 . import Pages
 import WelcomePage from "../components/pages/WelcomePage";
@@ -29,13 +29,24 @@ export const route = [
   { path: "/register", Component: RegisterPage, name: "Register Page" },
   { path: "/faqs", Component: FaqsPage, name: "FAQs Page" },
   { path: "/contact-us", Component: ContactUsPage, name: "Contact Us Page" },
-  { path: "/new-candidates", Component: NewCandidatesPage, name: "New Candidates Page" },
-  { path: "/selected-candidates", Component: SelectedCandidatesPage, name: "Selected Candidates Page" },
+  {
+    path: "/new-candidates",
+    Component: NewCandidatesPage,
+    name: "New Candidates Page",
+  },
+  {
+    path: "/selected-candidates",
+    Component: SelectedCandidatesPage,
+    name: "Selected Candidates Page",
+  },
   { path: "/login", Component: LoginPage, name: "Login Page" },
   { path: "/profile", Component: ProfilePage, name: "Profile Page" },
   { path: "/status", Component: StatusPage, name: "Status Page" },
-  { path: "/appointment", Component: AppointmentPage, name: "Appointment Page" }
-
+  {
+    path: "/appointment",
+    Component: AppointmentPage,
+    name: "Appointment Page",
+  },
 ];
 
 // const history = createBrowserHistory();
