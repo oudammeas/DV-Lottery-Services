@@ -1,28 +1,28 @@
-import React from "react";
+import React from 'react';
 // Style
-import "./App.css";
-import "rsuite/lib/styles/index.less";
-import "./App.less";
+import './App.css';
+import 'rsuite/lib/styles/index.less';
+import './App.less';
 // Translation
-import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n.js";
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n.js';
 
 // Provider inject into all child component
-import { Provider } from "mobx-react";
+import { Provider } from 'mobx-react';
 
 // Route
-import Routes from "./routes/router";
-import { BrowserRouter as VichySugarDaddyProvider } from "react-router-dom";
+import Routes from './routes/router';
+import { BrowserRouter as VichySugarDaddyProvider } from 'react-router-dom';
 
 // Import Stores
-import commonStore from "./stores/commonStore";
+import commonStore from './stores/commonStore';
 
 // Import Auth0
-import Auth0ProviderWithHistory from "./components/elements/Auth/Auth0ProviderWithHistory";
+import Auth0ProviderWithHistory from './components/elements/Auth/Auth0ProviderWithHistory';
 
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from '@auth0/auth0-react';
 
-import Loading from "./components/elements/Loading";
+import Loading from './components/elements/Loading';
 
 const stores = {
   commonStore,
