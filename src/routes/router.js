@@ -26,21 +26,16 @@ import AppointmentPage from '../components/pages/AppointmentPage';
 
 // 2.  routes list
 export const route = [
-  { path: '/', Component: WelcomePage, name: 'Welcome Page', public: 1 },
-  { path: '/register', Component: RegisterPage, name: 'Register Page', public: 1 },
-  { path: '/faqs', Component: FaqsPage, name: 'FAQs Page', public: 1 },
-  { path: '/contact-us', Component: ContactUsPage, name: 'Contact Us Page', public: 1 },
-  { path: '/new-candidates', Component: NewCandidatesPage, name: 'New Candidates Page', public: 1 },
-  {
-    path: '/selected-candidates',
-    Component: SelectedCandidatesPage,
-    name: 'Selected Candidates Page',
-    public: 1,
-  },
-  { path: '/login', Component: LoginPage, name: 'Login Page', public: 1 },
-  { path: '/profile', Component: ProfilePage, name: 'Profile Page', public: 0 },
-  { path: '/status', Component: StatusPage, name: 'Status Page', public: 0 },
-  { path: '/appointment', Component: AppointmentPage, name: 'Appointment Page', public: 1 },
+  { path: '/', Component: WelcomePage, name: 'Welcome Page', private: 0 },
+  { path: '/register', Component: RegisterPage, name: 'Register Page', private: 0 },
+  { path: '/faqs', Component: FaqsPage, name: 'FAQs Page', private: 0 },
+  { path: '/contact-us', Component: ContactUsPage, name: 'Contact Us Page', private: 0},
+  { path: '/new-candidates', Component: NewCandidatesPage, name: 'New Candidates Page', private: 0 },
+  { path: '/selected-candidates', Component: SelectedCandidatesPage, name: 'Selected Candidates Page', private: 0 },
+  { path: '/login', Component: LoginPage, name: 'Login Page', private: 0 },
+  { path: '/profile', Component: ProfilePage, name: 'Profile Page', private: 1 },
+  { path: '/status', Component: StatusPage, name: 'Status Page', private: 1 },
+  { path: '/appointment', Component: AppointmentPage, name: 'Appointment Page', private: 0 }
 ];
 
 // const history = createBrowserHistory();
@@ -52,10 +47,10 @@ const Routes = () => {
   return (
     <Switch>
       {route.map((page) =>
-        page.public ? (
-          <Route path={page.path} exact component={page.Component} />
-        ) : (
+        page.private ? (
           <PrivateRoute path={page.path} exact component={page.Component} />
+        ) : (
+          <Route path={page.path} exact component={page.Component} />
         ),
       )}
     </Switch>
