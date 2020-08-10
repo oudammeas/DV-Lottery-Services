@@ -137,7 +137,7 @@ const ProfilePage = ({ commonStore }) => {
   
   console.log(user);
 
-  // const { name, picture, email } = user;
+  const { name, picture, email } = user;
 
   const handleSubmit = (e) => {
     // e.preventDefault();
@@ -184,28 +184,13 @@ const ProfilePage = ({ commonStore }) => {
   //   // console.log(formValue, 'Form Value');
   // };
 
-  const AuthNav = () => {
-    const { isAuthenticated } = useAuth0();
-
-    return (
-      <div>
-        {isAuthenticated ? <p>Logout</p> : <p>Not Login</p>}
-
-      </div>
-
-    );
-  };
 
   return (
     <MainLayout>
       <Content style={styles.content}>
-        <AuthNav />
-        {/* <div className="align-items-center profile-header mb-5 text-center text-md-left">
+        <div className="align-items-center profile-header mb-5 text-center text-md-left">
           <div md={2}>
-            <img
-              src={picture}
-              alt="Profile"
-              className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+            <img src={picture} alt="Profile" className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
             />
           </div>
           <div md>
@@ -215,7 +200,7 @@ const ProfilePage = ({ commonStore }) => {
         </div>
         <div>
           <p>{JSON.stringify(user, null, 2)}</p>
-        </div> */}
+        </div>
 
         <div style={styles.pagetitle}>{t("common.profile-page.page-title")}</div>
 

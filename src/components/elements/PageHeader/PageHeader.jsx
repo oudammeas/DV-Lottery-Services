@@ -14,7 +14,6 @@ import { ReactComponent as Logo } from './logo.svg';
 
 const menu = [
   { title: 'common.navigation.home', route: '/' },
-  { title: 'common.navigation.register', route: '/register' },
   { title: 'common.navigation.faqs', route: '/faqs' },
   { title: 'common.navigation.contact-us', route: '/contact-us' },
 ];
@@ -45,6 +44,7 @@ const PageHeader = ({ commonStore }) => {
         fontWeight: 'bold',
         alignContent: 'center',
         textAlign: 'center',
+        textDecoration: "none",
       },
     },
   };
@@ -56,17 +56,7 @@ const PageHeader = ({ commonStore }) => {
     const { isAuthenticated } = useAuth0();
 
     return (
-      <Nav pullRight style={{ minHeight: '50px', padding: '0.5em' }}>
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-
-        <Button
-          appearance="ghost"
-          size="lg"
-          href="/appointment"
-          style={{ marginRight: '0.5em', minWidth: '130px' }}>
-          {t('common.navigation.appointment')}
-        </Button>
-      </Nav>
+        isAuthenticated ? <LogoutButton /> : <LoginButton />
     );
   };
 
@@ -89,7 +79,16 @@ const PageHeader = ({ commonStore }) => {
                 </Nav.Item>
               ))}
             </Nav>
-            <AuthNav />
+            <Nav pullRight style={{ minHeight: '50px', padding: '0.5em' }}>
+              <AuthNav />
+              <Button
+                appearance="ghost"
+                size="lg"
+                href="/appointment"
+                style={{ marginRight: '0.5em', minWidth: '130px' }}>
+                {t('common.navigation.appointment')}
+              </Button>
+            </Nav>
           </Navbar.Body>
         </Navbar>
       </Affix>
