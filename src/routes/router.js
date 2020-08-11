@@ -29,7 +29,7 @@ export const route = [
   { path: '/', Component: WelcomePage, name: 'Welcome Page', private: 0 },
   { path: '/register', Component: RegisterPage, name: 'Register Page', private: 0 },
   { path: '/faqs', Component: FaqsPage, name: 'FAQs Page', private: 0 },
-  { path: '/contact-us', Component: ContactUsPage, name: 'Contact Us Page', private: 0},
+  { path: '/contact-us', Component: ContactUsPage, name: 'Contact Us Page', private: 0 },
   { path: '/new-candidates', Component: NewCandidatesPage, name: 'New Candidates Page', private: 0 },
   { path: '/selected-candidates', Component: SelectedCandidatesPage, name: 'Selected Candidates Page', private: 0 },
   { path: '/login', Component: LoginPage, name: 'Login Page', private: 0 },
@@ -50,8 +50,8 @@ const Routes = () => {
         page.private ? (
           <PrivateRoute path={page.path} exact component={page.Component} />
         ) : (
-          <Route path={page.path} exact component={page.Component} />
-        ),
+            <Route path={page.path} exact component={page.Component} />
+          ),
       )}
     </Switch>
   );
