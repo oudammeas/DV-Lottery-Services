@@ -56,21 +56,9 @@ const PageHeader = ({ commonStore }) => {
     const { isAuthenticated } = useAuth0()
 
     return (
-<<<<<<< HEAD
         isAuthenticated ? <LogoutButton /> : <LoginButton />
     );
   };
-=======
-      <Nav pullRight style={{ minHeight: '50px', padding: '0.5em' }}>
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-
-        <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: '0.5em', minWidth: '130px' }}>
-          {t('common.navigation.appointment')}
-        </Button>
-      </Nav>
-    )
-  }
->>>>>>> e7733f39627594b34303778ebae727cb92a74fa7
 
   return (
     <Header>
