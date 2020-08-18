@@ -1,5 +1,41 @@
 {
-	"function": {},
-	"auth": {},
+	"function": {
+		"dvlotteryservices64acc3ebCustomMessage": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		},
+		"dvlotteryservices64acc3ebPostConfirmation": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda"
+		}
+	},
+	"auth": {
+		"dvlotteryservices64acc3eb": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "dvlotteryservices64acc3ebCustomMessage",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				},
+				{
+					"category": "function",
+					"resourceName": "dvlotteryservices64acc3ebPostConfirmation",
+					"triggerProvider": "Cognito",
+					"attributes": [
+						"Arn",
+						"Name"
+					]
+				}
+			]
+		}
+	},
 	"api": {}
 }
