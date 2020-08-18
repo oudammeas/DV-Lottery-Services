@@ -17,6 +17,10 @@ import { BrowserRouter as VichySugarDaddyProvider } from 'react-router-dom';
 // Import Stores
 import commonStore from './stores/commonStore';
 
+// Set up frontend
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 
 const stores = {
   commonStore,
