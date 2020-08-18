@@ -6,23 +6,7 @@
 			"service": "Lambda"
 		}
 	},
-	"auth": {
-		"dvlotteryservicese4b195ab": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "dvlotteryservicese4b195abCustomMessage",
-					"triggerProvider": "Cognito",
-					"attributes": [
-						"Arn",
-						"Name"
-					]
-				}
-			]
-		}
-	},
+	"auth": {},
 	"api": {
 		"dvlotteryservices": {
 			"service": "AppSync",

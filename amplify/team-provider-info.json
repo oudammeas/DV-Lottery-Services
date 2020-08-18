@@ -18,9 +18,6 @@
                     "EMAILSUBJECT": "Account signup confirmation",
                     "EMAILMESSAGE": "Please confirm your registration by clicking on the following link"
                 }
-            },
-            "auth": {
-                "dvlotteryservicese4b195ab": {}
             }
         }
     }
