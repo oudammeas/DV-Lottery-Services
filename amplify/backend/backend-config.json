@@ -37,5 +37,21 @@
 			]
 		}
 	},
-	"api": {}
+	"api": {
+		"dvlotteryservices": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authdvlotteryservices64acc3eb"
+						}
+					},
+					"additionalAuthenticationProviders": []
+				}
+			}
+		}
+	}
 }
