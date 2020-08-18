@@ -10,15 +10,6 @@
             "StackName": "amplify-dvlotteryservices-dev-03534",
             "StackId": "arn:aws:cloudformation:us-east-1:476536920151:stack/amplify-dvlotteryservices-dev-03534/986e49d0-dde7-11ea-9d2c-1208f0f76cbf",
             "AmplifyAppId": "daorjjc60ldct"
-        },
-        "categories": {
-            "function": {
-                "dvlotteryservicese4b195abCustomMessage": {
-                    "REDIRECTURL": "local:3000/",
-                    "EMAILSUBJECT": "Account signup confirmation",
-                    "EMAILMESSAGE": "Please confirm your registration by clicking on the following link"
-                }
-            }
         }
     }
 }
