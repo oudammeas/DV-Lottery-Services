@@ -11,6 +11,12 @@ import LoginButton from '../Auth/LoginButton'
 import LogoutButton from '../Auth/LogoutButton'
 import RegisterButton from '../Auth/RegisterButton'
 import { ReactComponent as Logo } from './logo.svg'
+// import Amplify from 'aws-amplify';
+// import awsconfig from '../../../aws-exports';
+// import {AmplifySignOut, withAuthenticator} from '@aws-amplify/ui-react';
+
+// Amplify.configure(awsconfig);
+
 
 const menu = [
   { title: 'common.navigation.home', route: '/' },

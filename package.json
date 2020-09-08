@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.0.0",
+    "@aws-amplify/ui-react": "^0.2.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "aws-amplify": "^3.1.1",
     "customize-cra": "^1.0.0",
     "date-fns": "^2.15.0",
     "express": "^4.17.1",
