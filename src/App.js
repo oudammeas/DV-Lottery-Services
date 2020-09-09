@@ -18,7 +18,7 @@ import { BrowserRouter as VichySugarDaddyProvider } from 'react-router-dom';
 import commonStore from './stores/commonStore';
 
 // Set up frontend
-import Amplify, { Auth, Hub} from 'aws-amplify';
+import Amplify, { Auth, Hub, Logger} from 'aws-amplify';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
@@ -34,7 +34,53 @@ const initialFormState = {
 function App() {
 
   const [formState, updateFormState] = useState(initialFormState);
+  const [user, updateUser] = useState(null);
+
+  useEffect(()=> {
+    checkUser();
+    setAuthListener();
+  }, []);
+
+  async function checkUser() {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log('user: ', user);
+      updateUser(user);
+      updateFormState(() => ({ ...formState, formType: "signedIn"}));
+    } catch (err){
+      // updateUser(null);
+    }
+  }
+
+  async function setAuthListener(){
+    
+    const logger = new Logger('My-Logger');
+
+    const listener = (data) => {
+
+      switch (data.payload.event) {
   
+          case 'signIn':
+              updateFormState(() => ({ ...formState, formType: "signedIn"}));
+              logger.error('user signed in'); //[ERROR] My-Logger - user signed in
+              break;
+          case 'signUp':
+              updateFormState(() => ({ ...formState, formType: "confirmSignUp"}));
+              logger.error('user signed up');
+              break;
+          case 'signOut':
+              updateFormState(() => ({ ...formState, formType: "signUp"}));
+              logger.error('user signed out');
+              break;
+  
+      }
+    }
+    
+    Hub.listen('auth', listener);
+
+
+  }
+
   function onChange(e) {
     e.persist();
     updateFormState(()=> ({ ...formState, [e.target.name]: e.target.value}));
@@ -56,7 +102,7 @@ function App() {
             }
         });
 
-        updateFormState(() => ({ ...formState, formType: "confirmSignUp"}));
+        // updateFormState(() => ({ ...formState, formType: "confirmSignUp"}));
 
         console.log(user);
     } catch (error) {
@@ -71,7 +117,7 @@ function App() {
 
       await Auth.confirmSignUp(username, authCode);
       
-      updateFormState(() => ({ ...formState, formType: "SignIn"}));
+      // updateFormState(() => ({ ...formState, formType: "signIn"}));
 
     } catch (error) {
         console.log('error confirming sign up', error);
@@ -85,13 +131,21 @@ function App() {
     
       const user = await Auth.signIn(username, password);
     
-      updateFormState(() => ({ ...formState, formType: "SignedIn"}));
+      // updateFormState(() => ({ ...formState, formType: "signedIn"}));
 
     } catch (error) {
         console.log('error signing in', error);
     }
   };
 
+  async function signOut() {
+    try {
+        await Auth.signOut();
+      // updateFormState(() => ({ ...formState, formType: "signUp"}));
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+  }
 
   return (
     <div className="App">
@@ -105,7 +159,9 @@ function App() {
                   <input name="password" type="passowrd" onChange={onChange} placeholder="password" />
                   <input name="email" type="email" onChange={onChange} placeholder="email" />
                   <button onClick={signUp}>Sing Up</button>
-
+                  <button onClick={() => updateFormState (()=> ({
+                    ...formState, formType: "signIn"
+                  }))}>Sing In</button>
                 </div>
               )
             }
@@ -115,7 +171,6 @@ function App() {
                 <div>
                   <input name="username" onChange={onChange} placeholder="username" />
                   <input name="password" type="passowrd" onChange={onChange} placeholder="password" />
-                  <input name="email" type="email" onChange={onChange} placeholder="email" />
                   <button onClick={signIn}>Sing In</button>
 
                 </div>
@@ -135,6 +190,7 @@ function App() {
               formType === 'signedIn' && (
                 <div>
                   <h1>Hello world, welcome user.</h1>
+                  <button onClick={signOut}>Sign Out</button>
                 </div>
               )
             }
