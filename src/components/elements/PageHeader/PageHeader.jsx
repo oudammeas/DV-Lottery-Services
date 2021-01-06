@@ -10,16 +10,13 @@ import LoginButton from '../Auth/LoginButton'
 import LogoutButton from '../Auth/LogoutButton'
 import RegisterButton from '../Auth/RegisterButton'
 import { ReactComponent as Logo } from './logo.svg'
-import { Auth, Hub, Logger } from 'aws-amplify';
-
-// Amplify.configure(awsconfig);
-
+import { Auth, Hub, Logger } from 'aws-amplify'
 
 // Import authentication ui and components
-import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
+import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 
-
+// list of menu options
 const menu = [
   { title: 'common.navigation.home', route: '/' },
   { title: 'common.navigation.faqs', route: '/faqs' },
@@ -28,7 +25,6 @@ const menu = [
 
 const PageHeader = ({ commonStore }) => {
   const { t } = useTranslation()
-
   const styles = {
     navbar: {
       header: {
@@ -52,7 +48,7 @@ const PageHeader = ({ commonStore }) => {
         fontWeight: 'bold',
         alignContent: 'center',
         textAlign: 'center',
-        textDecoration: "none",
+        textDecoration: 'none',
       },
     },
   }
@@ -106,29 +102,27 @@ const PageHeader = ({ commonStore }) => {
   // }
 
   // Set up authentication
-  const [authState, setAuthState] = useState();
-  const [user, setUser] = useState();
+  const [authState, setAuthState] = useState()
+  const [user, setUser] = useState()
 
   useEffect(() => {
-      return onAuthUIStateChange((nextAuthState, authData) => {
-          setAuthState(nextAuthState);
-          setUser(authData)
-      });
-  }, []);
+    return onAuthUIStateChange((nextAuthState, authData) => {
+      setAuthState(nextAuthState)
+      setUser(authData)
+    })
+  }, [])
 
   console.log(user)
 
   // Toggle authentication buttons
 
   useEffect(() => {
-    AuthNav();
-  }, [authState]);
+    AuthNav()
+  }, [authState])
 
   const AuthNav = () => {
-    return  authState === AuthState.SignIn && user ? (
-    <LogoutButton /> ) :( <LoginButton />
-    );
-  };
+    return authState === AuthState.SignIn && user ? <LogoutButton /> : <LoginButton />
+  }
 
   return (
     <Header>
@@ -151,11 +145,7 @@ const PageHeader = ({ commonStore }) => {
             </Nav>
             <Nav pullRight style={{ minHeight: '50px', padding: '0.5em' }}>
               <AuthNav />
-              <Button
-                appearance="ghost"
-                size="lg"
-                href="/appointment"
-                style={{ marginRight: '0.5em', minWidth: '130px' }}>
+              <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: '0.5em', minWidth: '130px' }}>
                 {t('common.navigation.appointment')}
               </Button>
             </Nav>

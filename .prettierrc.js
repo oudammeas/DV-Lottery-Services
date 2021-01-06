@@ -8,5 +8,5 @@ module.exports = {
   quoteProps: 'consistent',
   semi: false,
   bracketSpacing: true,
-  arrowParens: 'avoid'
+  arrowParens: 'avoid',
 };
