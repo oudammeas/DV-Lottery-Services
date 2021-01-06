@@ -16,7 +16,7 @@ import FaqsPage from '../components/pages/FaqsPage';
 import ContactUsPage from '../components/pages/ContactUsPage';
 import NewCandidatesPage from '../components/pages/NewCandidatesPage';
 import SelectedCandidatesPage from '../components/pages/SelectedCandidatesPage';
-import LoginPage from '../components/elements/Auth/LoginButton';
+import AuthenticatorPage from '../components/pages/AuthenticatorPage';
 import ProfilePage from '../components/pages/ProfilePage';
 import StatusPage from '../components/pages/StatusPage';
 import AppointmentPage from '../components/pages/AppointmentPage';
@@ -32,7 +32,7 @@ export const route = [
   { path: '/contact-us', Component: ContactUsPage, name: 'Contact Us Page', private: 0 },
   { path: '/new-candidates', Component: NewCandidatesPage, name: 'New Candidates Page', private: 0 },
   { path: '/selected-candidates', Component: SelectedCandidatesPage, name: 'Selected Candidates Page', private: 0 },
-  { path: '/login', Component: LoginPage, name: 'Login Page', private: 0 },
+  { path: '/authenticator', Component: AuthenticatorPage, name: 'Authenticator Page', private: 0 },
   { path: '/profile', Component: ProfilePage, name: 'Profile Page', private: 1 },
   { path: '/status', Component: StatusPage, name: 'Status Page', private: 1 },
   { path: '/appointment', Component: AppointmentPage, name: 'Appointment Page', private: 0 }

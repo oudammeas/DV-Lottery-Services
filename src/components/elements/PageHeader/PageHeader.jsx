@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Navbar, Nav, Icon, Container, Button } from 'rsuite'
 import { useTranslation } from 'react-i18next'
@@ -6,16 +6,18 @@ import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom/cjs/react-router-dom.min'
 import { observer, inject } from 'mobx-react'
 import { Affix } from 'rsuite'
-import { useAuth0 } from '@auth0/auth0-react'
 import LoginButton from '../Auth/LoginButton'
 import LogoutButton from '../Auth/LogoutButton'
 import RegisterButton from '../Auth/RegisterButton'
 import { ReactComponent as Logo } from './logo.svg'
-// import Amplify from 'aws-amplify';
-// import awsconfig from '../../../aws-exports';
-// import {AmplifySignOut, withAuthenticator} from '@aws-amplify/ui-react';
+import { Auth, Hub, Logger } from 'aws-amplify';
 
 // Amplify.configure(awsconfig);
+
+
+// Import authentication ui and components
+import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 
 
 const menu = [
@@ -54,15 +56,77 @@ const PageHeader = ({ commonStore }) => {
       },
     },
   }
+
+  // Set button active
   const handleSelect = active => {
     commonStore.setActiveNavMenu(active)
   }
 
-  const AuthNav = () => {
-    const { isAuthenticated } = useAuth0()
+  // // Set up authentication
+  // const [user, updateUser] = useState(null);
 
-    return (
-        isAuthenticated ? <LogoutButton /> : <LoginButton />
+  // useEffect(() => {
+  //   checkUser();
+  //   setAuthListener();
+  // }, []);
+
+  // async function checkUser() {
+  //   try {
+  //     const user = await Auth.currentAuthenticatedUser();
+  //     console.log('user: ', user);
+  //     updateUser(user);
+  //   } catch (err) {
+  //     updateUser(null);
+  //   }
+  // }
+
+  // async function setAuthListener() {
+
+  //   const logger = new Logger('My-Logger');
+
+  //   const listener = (data) => {
+
+  //     switch (data.payload.event) {
+
+  //       case 'signIn':
+  //         logger.error('user signed in'); //[ERROR] My-Logger - user signed in
+  //         break;
+  //       case 'signUp':
+  //         logger.error('user signed up');
+  //         break;
+  //       case 'signOut':
+  //         logger.error('user signed out');
+  //         break;
+
+  //     }
+  //   }
+
+  //   Hub.listen('auth', listener);
+
+  // }
+
+  // Set up authentication
+  const [authState, setAuthState] = useState();
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+      return onAuthUIStateChange((nextAuthState, authData) => {
+          setAuthState(nextAuthState);
+          setUser(authData)
+      });
+  }, []);
+
+  console.log(user)
+
+  // Toggle authentication buttons
+
+  useEffect(() => {
+    AuthNav();
+  }, [authState]);
+
+  const AuthNav = () => {
+    return  authState === AuthState.SignIn && user ? (
+    <LogoutButton /> ) :( <LoginButton />
     );
   };
 

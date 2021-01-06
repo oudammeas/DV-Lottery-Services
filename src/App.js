@@ -27,9 +27,7 @@ const stores = {
 };
 
 
-
 function App() {
-
 
   return (
     <div className="App">
