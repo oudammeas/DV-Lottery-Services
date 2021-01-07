@@ -34,10 +34,21 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "dev": "nodemon --ignore feedback.json server.js"
+    "dev": "nodemon --ignore feedback.json server.js",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && pretty-quick --staged"
+    }
   },
   "browserslist": {
     "production": [
@@ -54,6 +65,9 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-decorators": "^7.10.5",
-    "nodemon": "^2.0.4"
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.2.1"
   }
 }
