@@ -11,7 +11,7 @@ import LogoutButton from '../Auth/LogoutButton'
 import RegisterButton from '../Auth/RegisterButton'
 import { ReactComponent as Logo } from './logo.svg'
 import { Auth, Hub, Logger } from 'aws-amplify'
-
+import { v4 as uuidv4 } from 'uuid'
 // Import authentication ui and components
 import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
@@ -109,10 +109,9 @@ const PageHeader = ({ commonStore }) => {
     return onAuthUIStateChange((nextAuthState, authData) => {
       setAuthState(nextAuthState)
       setUser(authData)
+      console.log(authData)
     })
   }, [])
-
-  console.log(user)
 
   // Toggle authentication buttons
 
@@ -138,7 +137,7 @@ const PageHeader = ({ commonStore }) => {
           <Navbar.Body style={styles.navbar.body}>
             <Nav activeKey={commonStore.activeNavMenu} onSelect={handleSelect}>
               {menu.map(m => (
-                <Nav.Item eventKey={t(m.title)} componentClass={Link} to={t(m.route)}>
+                <Nav.Item eventKey={t(m.title)} key={uuidv4()} componentClass={Link} to={t(m.route)}>
                   {t(m.title)}
                 </Nav.Item>
               ))}
