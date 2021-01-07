@@ -23,7 +23,7 @@ const menu = [
   { title: 'common.navigation.contact-us', route: '/contact-us' },
 ]
 
-const PageHeader = ({ commonStore }) => {
+const PageHeader = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
   const styles = {
     navbar: {
@@ -102,25 +102,25 @@ const PageHeader = ({ commonStore }) => {
   // }
 
   // Set up authentication
-  const [authState, setAuthState] = useState()
-  const [user, setUser] = useState()
+  // const [authState, setAuthState] = useState()
+  // const [user, setUser] = useState()
 
-  useEffect(() => {
-    return onAuthUIStateChange((nextAuthState, authData) => {
-      setAuthState(nextAuthState)
-      setUser(authData)
-      console.log(authData)
-    })
-  }, [])
+  // useEffect(() => {
+  //   onAuthUIStateChange((nextAuthState, authData) => {
+  //     setAuthState(nextAuthState)
+  //     setUser(authData)
+  //     console.log(authData)
+  //   })
+  // }, [])
 
-  // Toggle authentication buttons
+  // Handle authentication buttons
 
   useEffect(() => {
     AuthNav()
-  }, [authState])
+  }, [authStore.authState])
 
   const AuthNav = () => {
-    return authState === AuthState.SignIn && user ? <LogoutButton /> : <LoginButton />
+    return authStore.authState === AuthState.SignIn ? <LogoutButton /> : <LoginButton />
   }
 
   return (
@@ -157,4 +157,4 @@ const PageHeader = ({ commonStore }) => {
 
 PageHeader.propTypes = {}
 
-export default withRouter(inject('commonStore')(observer(PageHeader)))
+export default withRouter(inject('commonStore','authStore')(observer(PageHeader)))

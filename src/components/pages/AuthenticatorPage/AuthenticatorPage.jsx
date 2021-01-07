@@ -6,8 +6,11 @@ import { Authenticator } from 'aws-amplify-react'
 import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min'
+import { observer, inject } from 'mobx-react'
+import { autorun } from 'mobx'
 
-const AuthenticatorPage = () => {
+const AuthenticatorPage = ({ authStore }) => {
   const styles = {
     content: {
       padding: '5em',
@@ -21,19 +24,19 @@ const AuthenticatorPage = () => {
     },
   }
 
-  // Set up authentication
-  const [authState, setAuthState] = useState()
-  const [user, setUser] = useState()
+  onAuthUIStateChange((nextAuthState, authData) => {
+    authStore.setAuthState(nextAuthState)
+    authStore.setAuthUser(authData)
+  })
 
-  useEffect(() => {
-    return onAuthUIStateChange((nextAuthState, authData) => {
-      setAuthState(nextAuthState)
-      setUser(authData)
-    })
-  }, [])
-  useEffect(() => console.log(user), [user])
+  autorun(()=>
+    {
+      console.log("user Change",authStore.authUser,authStore.authState)
+      console.info('Condition', authStore.authState === AuthState.SignedIn && authStore.authUser )
+    }
+  ) 
 
-  return authState === AuthState.SignedIn && user ? (
+  return authStore.authState === AuthState.SignedIn && authStore.authUser ? (
     <Redirect to="/" />
   ) : (
     // <MainLayout>
@@ -48,4 +51,4 @@ const AuthenticatorPage = () => {
 
 AuthenticatorPage.propTypes = {}
 
-export default AuthenticatorPage
+export default withRouter(inject('authStore')(observer(AuthenticatorPage)))

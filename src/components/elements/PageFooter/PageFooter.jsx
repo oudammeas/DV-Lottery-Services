@@ -5,7 +5,7 @@ import { Footer, FlexboxGrid, Button, IconButton, ButtonGroup, ButtonToolbar, Ic
 import { useTranslation } from 'react-i18next'
 import { withRouter } from 'react-router-dom/cjs/react-router-dom.min'
 import { external_link } from '../../../constant'
-
+import {v4 as uuidv4} from 'uuid'
 const menu = [
   { title: 'common.navigation.home', route: '/' },
   { title: 'common.navigation.register', route: '/register' },
@@ -75,7 +75,7 @@ const PageFooter = () => {
             <lh style={styles.flexboxgrid.item.ul.lh}>Menu</lh>
             <Divider />
             {menu.map(m => (
-              <li style={styles.flexboxgrid.item.ul.li}>
+              <li style={styles.flexboxgrid.item.ul.li} key = {uuidv4()}>
                 <a href={t(m.route)} style={styles.a}>
                   {t(m.title)}
                 </a>
@@ -88,7 +88,7 @@ const PageFooter = () => {
             <lh style={styles.flexboxgrid.item.ul.lh}>External Links</lh>
             <Divider />
             {links.map(l => (
-              <li style={styles.flexboxgrid.item.ul.li}>
+              <li style={styles.flexboxgrid.item.ul.li} key={uuidv4()}>
                 <a href={t(l.link)} style={styles.a}>
                   {t(l.name)}
                 </a>
@@ -100,14 +100,14 @@ const PageFooter = () => {
           <ul style={styles.flexboxgrid.item.ul}>
             <lh style={styles.flexboxgrid.item.ul.lh}>Contact Us</lh>
             <Divider />
-            <li style={styles.flexboxgrid.item.ul.li}>{t('common.contact-us-page.name')}</li>
-            <li style={styles.flexboxgrid.item.ul.li}>{t('common.contact-us-page.street')}</li>
-            <li style={styles.flexboxgrid.item.ul.li}>
+            <li style={styles.flexboxgrid.item.ul.li} key={uuidv4()}>{t('common.contact-us-page.name')}</li>
+            <li style={styles.flexboxgrid.item.ul.li}key={uuidv4()}>{t('common.contact-us-page.street')}</li>
+            <li style={styles.flexboxgrid.item.ul.li}key={uuidv4()}>
               {t('common.contact-us-page.city')}, {t('common.contact-us-page.province')}
             </li>
-            <li style={styles.flexboxgrid.item.ul.li}>{t('common.contact-us-page.phone')}</li>
-            <li style={styles.flexboxgrid.item.ul.li}>{t('common.contact-us-page.email')}</li>
-            <li style={styles.flexboxgrid.item.ul.li}>
+            <li style={styles.flexboxgrid.item.ul.li}key={uuidv4()}>{t('common.contact-us-page.phone')}</li>
+            <li style={styles.flexboxgrid.item.ul.li}key={uuidv4()}>{t('common.contact-us-page.email')}</li>
+            <li style={styles.flexboxgrid.item.ul.li}key={uuidv4()}>
               <ButtonToolbar>
                 <IconButton
                   icon={<Icon icon="facebook-official" />}
@@ -124,7 +124,7 @@ const PageFooter = () => {
           <ul style={styles.flexboxgrid.item.ul}>
             <lh style={styles.flexboxgrid.item.ul.lh}>Disclaimer</lh>
             <Divider />
-            <li style={styles.flexboxgrid.item.ul.li}>{t('common.disclaimer.text')}</li>
+            <li style={styles.flexboxgrid.item.ul.li} key={uuidv4()}>{t('common.disclaimer.text')}</li>
           </ul>
         </FlexboxGrid.Item>
       </FlexboxGrid>

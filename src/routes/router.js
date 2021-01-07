@@ -8,7 +8,7 @@
 import React from 'react'
 import { Route, Switch, BrowserRouter, StaticRouter } from 'react-router-dom'
 import PrivateRoute from '../components/elements/PrivateRoute'
-
+import {v4 as uuidv4} from 'uuid'
 // 1 . import Pages
 import WelcomePage from '../components/pages/WelcomePage'
 import RegisterPage from '../components/elements/Auth/RegisterButton'
@@ -48,7 +48,7 @@ const Routes = () => {
     <Switch>
       {route.map(page =>
         page.private ? (
-          <PrivateRoute path={page.path} exact component={page.Component} />
+          <PrivateRoute path={page.path} exact component={page.Component} key= {uuidv4()}/>
         ) : (
           <Route path={page.path} exact component={page.Component} />
         ),
