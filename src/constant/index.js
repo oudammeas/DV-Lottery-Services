@@ -1,2 +1,2 @@
-export * from "./url";
-export const constants = {};
+export * from './url'
+export const constants = {}

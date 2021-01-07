@@ -1,1 +1,1 @@
-export { default } from './SelectedCandidatesPage.jsx';
+export { default } from './SelectedCandidatesPage.jsx'

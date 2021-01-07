@@ -1,1 +1,1 @@
-export { default } from './RegisterButton.jsx';
+export { default } from './RegisterButton.jsx'

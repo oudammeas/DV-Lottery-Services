@@ -1,8 +1,4 @@
-const {
-  override,
-  addLessLoader,
-  addDecoratorsLegacy,
-} = require("customize-cra");
+const { override, addLessLoader, addDecoratorsLegacy } = require('customize-cra')
 
 /**
  * Override the theme value of the Rsuite library
@@ -17,5 +13,5 @@ module.exports = override(
       },
     },
   }),
-  addDecoratorsLegacy()
-);
+  addDecoratorsLegacy(),
+)

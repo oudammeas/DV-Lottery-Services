@@ -1,11 +1,11 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Button, Content } from 'rsuite';
-import MainLayout from '../../../layouts/MainLayout.js/MainLayout';
-import { useTranslation } from 'react-i18next';
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { Fragment, useState, useEffect } from 'react'
+import { Button, Content } from 'rsuite'
+import MainLayout from '../../../layouts/MainLayout.js/MainLayout'
+import { useTranslation } from 'react-i18next'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const RegisterButton = () => {
-  const { loginWithPopup, user } = useAuth0();
+  const { loginWithPopup, user } = useAuth0()
 
   return (
     <Fragment>
@@ -20,9 +20,9 @@ const RegisterButton = () => {
         Sign Up
       </Button>
     </Fragment>
-  );
-};
+  )
+}
 
-RegisterButton.propTypes = {};
+RegisterButton.propTypes = {}
 
-export default RegisterButton;
+export default RegisterButton

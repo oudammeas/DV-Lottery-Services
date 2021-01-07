@@ -5,21 +5,21 @@
  */
 
 // Import module
-import React from 'react';
-import { Route, Switch, BrowserRouter, StaticRouter } from 'react-router-dom';
-import PrivateRoute from '../components/elements/PrivateRoute';
+import React from 'react'
+import { Route, Switch, BrowserRouter, StaticRouter } from 'react-router-dom'
+import PrivateRoute from '../components/elements/PrivateRoute'
 
 // 1 . import Pages
-import WelcomePage from '../components/pages/WelcomePage';
-import RegisterPage from '../components/elements/Auth/RegisterButton';
-import FaqsPage from '../components/pages/FaqsPage';
-import ContactUsPage from '../components/pages/ContactUsPage';
-import NewCandidatesPage from '../components/pages/NewCandidatesPage';
-import SelectedCandidatesPage from '../components/pages/SelectedCandidatesPage';
-import AuthenticatorPage from '../components/pages/AuthenticatorPage';
-import ProfilePage from '../components/pages/ProfilePage';
-import StatusPage from '../components/pages/StatusPage';
-import AppointmentPage from '../components/pages/AppointmentPage';
+import WelcomePage from '../components/pages/WelcomePage'
+import RegisterPage from '../components/elements/Auth/RegisterButton'
+import FaqsPage from '../components/pages/FaqsPage'
+import ContactUsPage from '../components/pages/ContactUsPage'
+import NewCandidatesPage from '../components/pages/NewCandidatesPage'
+import SelectedCandidatesPage from '../components/pages/SelectedCandidatesPage'
+import AuthenticatorPage from '../components/pages/AuthenticatorPage'
+import ProfilePage from '../components/pages/ProfilePage'
+import StatusPage from '../components/pages/StatusPage'
+import AppointmentPage from '../components/pages/AppointmentPage'
 
 // // history to move from page to page
 // import { createBrowserHistory } from "history";
@@ -35,8 +35,8 @@ export const route = [
   { path: '/authenticator', Component: AuthenticatorPage, name: 'Authenticator Page', private: 0 },
   { path: '/profile', Component: ProfilePage, name: 'Profile Page', private: 1 },
   { path: '/status', Component: StatusPage, name: 'Status Page', private: 1 },
-  { path: '/appointment', Component: AppointmentPage, name: 'Appointment Page', private: 0 }
-];
+  { path: '/appointment', Component: AppointmentPage, name: 'Appointment Page', private: 0 },
+]
 
 // const history = createBrowserHistory();
 
@@ -46,15 +46,15 @@ export const route = [
 const Routes = () => {
   return (
     <Switch>
-      {route.map((page) =>
+      {route.map(page =>
         page.private ? (
           <PrivateRoute path={page.path} exact component={page.Component} />
         ) : (
-            <Route path={page.path} exact component={page.Component} />
-          ),
+          <Route path={page.path} exact component={page.Component} />
+        ),
       )}
     </Switch>
-  );
-};
+  )
+}
 
-export default Routes;
+export default Routes
