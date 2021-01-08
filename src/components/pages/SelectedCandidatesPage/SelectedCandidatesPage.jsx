@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Content, Footer, Panel, Button } from 'rsuite'
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 const SelectedCandidatesPage = () => {
   const { t } = useTranslation()
@@ -41,9 +42,11 @@ const SelectedCandidatesPage = () => {
         <div style={styles.content.hero}>
           <Panel style={{ display: 'inline-block', width: '588px', height: '500px', margin: '1em', padding: '1em' }}>
             <img src="https://photoartinc.com/wp-content/uploads/2018/12/free-non-copyright-photos-4.jpg" width="500px" />
-            <Button appearance="primary" size="lg" href="/new-candidates" color="blue" style={{ margin: '2em 0em 2em 0em' }}>
-              For new candidates click here
-            </Button>
+            <Link to="/new-candidates">
+              <Button appearance="primary" size="lg" color="blue" style={{ margin: '2em 0em 2em 0em' }}>
+                For new candidates click here
+              </Button>
+            </Link>
           </Panel>
           <Panel style={{ display: 'inline-block', width: 588, height: 500, margin: '1em' }}>
             <div style={styles.content.maintext_heading}>Introduction</div>

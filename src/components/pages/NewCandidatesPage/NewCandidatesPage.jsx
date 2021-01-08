@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Content, Footer, Panel, Button } from 'rsuite'
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
 import { useTranslation } from 'react-i18next'
-
+import { Link } from 'react-router-dom'
 const NewCandidatesPage = () => {
   const { t } = useTranslation()
 
@@ -44,10 +44,13 @@ const NewCandidatesPage = () => {
               src="https://c.wallhere.com/photos/74/7e/mer_france_marin_champs_terre_normandie_campagne_rocher-798292.jpg!d"
               width="500px"
             />
-            <Button appearance="primary" size="lg" href="/selected-candidates" color="blue" style={{ margin: '2em 0em 2em 0em' }}>
-              For selected candidates click here
-            </Button>
+            <Link to="/selected-candidates">
+              <Button appearance="primary" size="lg" color="blue" style={{ margin: '2em 0em 2em 0em' }}>
+                {'For selected candidates click here'}
+              </Button>
+            </Link>
           </Panel>
+
           <Panel style={{ display: 'inline-block', width: 588, height: 500, margin: '1em' }}>
             <div style={styles.content.maintext_heading}>Introduction</div>
             <div style={styles.content.maintext}>{t('common.newCandidates-page.introduction-text')}</div>

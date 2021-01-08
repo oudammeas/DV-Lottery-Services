@@ -1,12 +1,13 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { withAuthenticationRequired } from '@auth0/auth0-react'
-import Loading from '../Loading'
+// import { withAuthenticationRequired } from '@auth0/auth0-react'
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import WelcomePage from '../../pages/WelcomePage'
 
 const PrivateRoute = ({ component, ...args }) => (
   <Route
-    component={withAuthenticationRequired(component, {
-      onRedirecting: () => <Loading />,
+    component={withAuthenticator(component, {
+      onRedirecting: () => <WelcomePage />,
     })}
     {...args}
   />

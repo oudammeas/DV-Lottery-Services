@@ -61,9 +61,10 @@ const PageHeader = ({ commonStore, authStore }) => {
         <Navbar appearance="default">
           <Navbar.Header style={styles.navbar.header}>
             <Nav>
-              <a className="navbar-brand logo" href="/" style={styles.navbar.logo}>
-                <Logo /> {t('common.navigation.brand-name')}
-              </a>
+              <Link to="/">
+                <Logo />
+                <span style={styles.navbar.logo}>{t('common.navigation.brand-name')}</span>
+              </Link>
             </Nav>
           </Navbar.Header>
           <Navbar.Body style={styles.navbar.body}>

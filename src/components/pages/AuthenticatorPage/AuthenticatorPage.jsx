@@ -24,7 +24,7 @@ const AuthenticatorPage = ({ authStore, history }) => {
     authStore.setAuth(nextAuthState, authData)
   })
 
-  return authStore.authState === AuthState.SignedIn && authStore.authUser ? (
+  return localStorage.AuthState. === AuthState.SignedIn && authStore.authUser ? (
     <Redirect to={history.goBack()} />
   ) : (
     <AmplifyAuthenticator />

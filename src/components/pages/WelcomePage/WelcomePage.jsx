@@ -2,6 +2,7 @@ import React from 'react'
 import { Content, Panel, Button } from 'rsuite'
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
 const WelcomePage = () => {
   const { t } = useTranslation()
@@ -40,17 +41,21 @@ const WelcomePage = () => {
               height="340"
             />
             <Panel header="New DV Lottery Candidates">
-              <Button appearance="primary" size="lg" href="/new-candidates" color="blue">
-                Learn more
-              </Button>
+              <Link to="/new-candidates">
+                <Button appearance="primary" size="lg" color="blue">
+                  Learn more
+                </Button>
+              </Link>
             </Panel>
           </Panel>
           <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 588, height: 500, margin: '1em' }}>
             <img src="https://photoartinc.com/wp-content/uploads/2018/12/free-non-copyright-photos-4.jpg" height="340" />
             <Panel header="Selected DV Lottery Candidates">
-              <Button appearance="primary" size="lg" href="/selected-candidates" color="blue">
-                Learn more
-              </Button>
+              <Link to="/selected-candidates">
+                <Button appearance="primary" size="lg" color="blue">
+                  Learn more
+                </Button>
+              </Link>
             </Panel>
           </Panel>
         </div>
