@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'rsuite'
 import { useTranslation } from 'react-i18next'
 import { Auth } from 'aws-amplify'
-
+import { inject } from 'mobx-react'
 const LogoutButton = ({ authStore }) => {
   const { t } = useTranslation()
 
