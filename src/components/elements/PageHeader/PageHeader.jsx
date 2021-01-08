@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Header, Navbar, Nav, Icon, Container, Button } from 'rsuite'
+import { Header, Navbar, Nav, Button } from 'rsuite'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom/cjs/react-router-dom.min'
@@ -8,13 +8,10 @@ import { observer, inject } from 'mobx-react'
 import { Affix } from 'rsuite'
 import LoginButton from '../Auth/LoginButton'
 import LogoutButton from '../Auth/LogoutButton'
-import RegisterButton from '../Auth/RegisterButton'
 import { ReactComponent as Logo } from './logo.svg'
-import { Auth, Hub, Logger } from 'aws-amplify'
 import { v4 as uuidv4 } from 'uuid'
 // Import authentication ui and components
-import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
+import { AuthState } from '@aws-amplify/ui-components'
 
 // list of menu options
 const menu = [
@@ -58,71 +55,6 @@ const PageHeader = ({ commonStore, authStore }) => {
     commonStore.setActiveNavMenu(active)
   }
 
-  // // Set up authentication
-  // const [user, updateUser] = useState(null);
-
-  // useEffect(() => {
-  //   checkUser();
-  //   setAuthListener();
-  // }, []);
-
-  // async function checkUser() {
-  //   try {
-  //     const user = await Auth.currentAuthenticatedUser();
-  //     console.log('user: ', user);
-  //     updateUser(user);
-  //   } catch (err) {
-  //     updateUser(null);
-  //   }
-  // }
-
-  // async function setAuthListener() {
-
-  //   const logger = new Logger('My-Logger');
-
-  //   const listener = (data) => {
-
-  //     switch (data.payload.event) {
-
-  //       case 'signIn':
-  //         logger.error('user signed in'); //[ERROR] My-Logger - user signed in
-  //         break;
-  //       case 'signUp':
-  //         logger.error('user signed up');
-  //         break;
-  //       case 'signOut':
-  //         logger.error('user signed out');
-  //         break;
-
-  //     }
-  //   }
-
-  //   Hub.listen('auth', listener);
-
-  // }
-
-  // Set up authentication
-  // const [authState, setAuthState] = useState()
-  // const [user, setUser] = useState()
-
-  // useEffect(() => {
-  //   onAuthUIStateChange((nextAuthState, authData) => {
-  //     setAuthState(nextAuthState)
-  //     setUser(authData)
-  //     console.log(authData)
-  //   })
-  // }, [])
-
-  // Handle authentication buttons
-
-  useEffect(() => {
-    AuthNav()
-  }, [authStore.authState])
-
-  const AuthNav = () => {
-    return authStore.authState === AuthState.SignIn ? <LogoutButton /> : <LoginButton />
-  }
-
   return (
     <Header>
       <Affix>
@@ -143,10 +75,12 @@ const PageHeader = ({ commonStore, authStore }) => {
               ))}
             </Nav>
             <Nav pullRight style={{ minHeight: '50px', padding: '0.5em' }}>
-              <AuthNav />
-              <Button appearance="ghost" size="lg" href="/appointment" style={{ marginRight: '0.5em', minWidth: '130px' }}>
-                {t('common.navigation.appointment')}
-              </Button>
+              {authStore.authState === AuthState.SignedIn ? <LogoutButton /> : <LoginButton />}
+              <Link to="/appointment">
+                <Button appearance="ghost" size="lg" style={{ marginRight: '0.5em', minWidth: '130px' }}>
+                  {t('common.navigation.appointment')}
+                </Button>
+              </Link>
             </Nav>
           </Navbar.Body>
         </Navbar>
@@ -157,4 +91,4 @@ const PageHeader = ({ commonStore, authStore }) => {
 
 PageHeader.propTypes = {}
 
-export default withRouter(inject('commonStore','authStore')(observer(PageHeader)))
+export default withRouter(inject('commonStore', 'authStore')(observer(PageHeader)))
