@@ -10,6 +10,7 @@ const LogoutButton = ({ authStore }) => {
     try {
       await Auth.signOut()
       authStore.setAuth(Auth.signedOut, null)
+      authStore.setIsAuthenticated(false)
     } catch (error) {
       console.log('error signing out: ', error)
     }
@@ -24,7 +25,7 @@ const LogoutButton = ({ authStore }) => {
       size="lg"
       color="red"
       style={{ marginRight: '0.5em', minWidth: '130px' }}>
-      {t('common.navigation.logout')}
+      {t('common.routes.logout')}
     </Button>
   )
 }

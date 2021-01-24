@@ -23,6 +23,7 @@ const AuthenticatorPage = ({ authStore, history }) => {
 
   onAuthUIStateChange((nextAuthState, authData) => {
     authStore.setAuth(nextAuthState, authData)
+    authStore.setIsAuthenticated(true)
     console.log(nextAuthState)
     console.log(authData)
   })

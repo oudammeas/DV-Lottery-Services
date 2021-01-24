@@ -6,12 +6,14 @@ import { useTranslation } from 'react-i18next'
 import { Link, withRouter } from 'react-router-dom/cjs/react-router-dom.min'
 import { external_link } from '../../../constant'
 import { v4 as uuidv4 } from 'uuid'
-const menu = [
-  { title: 'common.navigation.home', route: '/' },
-  { title: 'common.navigation.register', route: '/register' },
-  { title: 'common.navigation.faqs', route: '/faqs' },
-  { title: 'common.navigation.contact-us', route: '/contact-us' },
-]
+import { menu } from '../../../routes/router'
+
+// const menu = [
+//   { title: 'common.routes.home', route: '/' },
+//   { title: 'common.routes.register', route: '/register' },
+//   { title: 'common.routes.faqs', route: '/faqs' },
+//   { title: 'common.routes.contact-us', route: '/contact-us' },
+// ]
 
 const links = [
   {
@@ -80,9 +82,9 @@ const PageFooter = () => {
             <Divider />
             {menu.map(m => (
               <li style={styles.flexboxgrid.item.ul.li} key={uuidv4()}>
-                <Link to={t(m.route)}>
-                  <span href={t(m.route)} style={styles.span}>
-                    {t(m.title)}
+                <Link to={t(m.path)}>
+                  <span href={t(m.path)} style={styles.span}>
+                    {t(m.name)}
                   </span>
                 </Link>
               </li>

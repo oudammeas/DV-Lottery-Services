@@ -42,6 +42,7 @@ function App() {
       let user = await Auth.currentAuthenticatedUser()
       console.log(user)
       authStore.setAuth(AuthState.SignedIn, user)
+      authStore.setIsAuthenticated(true)
     } catch (e) {
       if (e !== 'No current user') {
         alert(e)

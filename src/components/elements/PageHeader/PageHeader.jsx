@@ -12,13 +12,15 @@ import { ReactComponent as Logo } from './logo.svg'
 import { v4 as uuidv4 } from 'uuid'
 // Import authentication ui and components
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
+import { menu } from '../../../routes/router'
 
-// list of menu options
-const menu = [
-  { title: 'common.navigation.home', route: '/' },
-  { title: 'common.navigation.faqs', route: '/faqs' },
-  { title: 'common.navigation.contact-us', route: '/contact-us' },
-]
+// // list of menu options
+// const menu = [
+//   { title: 'common.routes.home', route: '/' },
+//   { title: 'common.routes.faqs', route: '/faqs' },
+//   { title: 'common.routes.contact-us', route: '/contact-us' },
+//   { title: 'common.routes.profile', route: '/profile' },
+// ]
 
 const PageHeader = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
@@ -50,6 +52,10 @@ const PageHeader = ({ commonStore, authStore }) => {
     },
   }
 
+  const isAuthenticated = authStore.isAuthenticated
+
+  console.log(isAuthenticated)
+
   // Set button active
   const handleSelect = active => {
     commonStore.setActiveNavMenu(active)
@@ -63,23 +69,31 @@ const PageHeader = ({ commonStore, authStore }) => {
             <Nav>
               <Link to="/">
                 <Logo />
-                <span style={styles.navbar.logo}>{t('common.navigation.brand-name')}</span>
+                <span style={styles.navbar.logo}>{t('common.routes.brand-name')}</span>
               </Link>
             </Nav>
           </Navbar.Header>
           <Navbar.Body style={styles.navbar.body}>
             <Nav activeKey={commonStore.activeNavMenu} onSelect={handleSelect}>
-              {menu.map(m => (
-                <Nav.Item eventKey={t(m.title)} key={uuidv4()} componentClass={Link} to={t(m.route)}>
-                  {t(m.title)}
-                </Nav.Item>
-              ))}
+              {menu.map(m =>
+                m.private ? (
+                  isAuthenticated && (
+                    <Nav.Item eventKey={t(m.name)} key={uuidv4()} componentClass={Link} to={t(m.path)}>
+                      {t(m.name)}
+                    </Nav.Item>
+                  )
+                ) : (
+                  <Nav.Item eventKey={t(m.name)} key={uuidv4()} componentClass={Link} to={t(m.path)}>
+                    {t(m.name)}
+                  </Nav.Item>
+                ),
+              )}
             </Nav>
             <Nav pullRight style={{ minHeight: '50px', padding: '0.5em' }}>
-              {authStore.authState === AuthState.SignedIn ? <LogoutButton /> : <LoginButton />}
+              {isAuthenticated ? <LogoutButton /> : <LoginButton />}
               <Link to="/appointment">
                 <Button appearance="ghost" size="lg" style={{ marginRight: '0.5em', minWidth: '130px' }}>
-                  {t('common.navigation.appointment')}
+                  {t('common.routes.appointment')}
                 </Button>
               </Link>
             </Nav>

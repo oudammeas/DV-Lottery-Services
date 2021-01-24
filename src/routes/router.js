@@ -26,16 +26,26 @@ import AppointmentPage from '../components/pages/AppointmentPage'
 
 // 2.  routes list
 export const route = [
-  { path: '/', Component: WelcomePage, name: 'Welcome Page', private: 0 },
-  { path: '/register', Component: RegisterPage, name: 'Register Page', private: 0 },
-  { path: '/faqs', Component: FaqsPage, name: 'FAQs Page', private: 0 },
-  { path: '/contact-us', Component: ContactUsPage, name: 'Contact Us Page', private: 0 },
-  { path: '/new-candidates', Component: NewCandidatesPage, name: 'New Candidates Page', private: 0 },
-  { path: '/selected-candidates', Component: SelectedCandidatesPage, name: 'Selected Candidates Page', private: 0 },
-  { path: '/authenticator', Component: AuthenticatorPage, name: 'Authenticator Page', private: 0 },
-  { path: '/profile', Component: ProfilePage, name: 'Profile Page', private: 1 },
-  { path: '/status', Component: StatusPage, name: 'Status Page', private: 1 },
-  { path: '/appointment', Component: AppointmentPage, name: 'Appointment Page', private: 0 },
+  { path: '/', Component: WelcomePage, name: 'common.routes.home', private: 0 },
+  { path: '/register', Component: RegisterPage, name: 'common.routes.register', private: 0 },
+  { path: '/faqs', Component: FaqsPage, name: 'common.routes.faqs', private: 0 },
+  { path: '/contact-us', Component: ContactUsPage, name: 'common.routes.contact-us', private: 0 },
+  { path: '/new-candidates', Component: NewCandidatesPage, name: 'common.routes.new-candidates', private: 0 },
+  { path: '/selected-candidates', Component: SelectedCandidatesPage, name: 'common.routes.selected-candidates', private: 0 },
+  { path: '/authenticator', Component: AuthenticatorPage, name: 'common.routes.authenticator', private: 0 },
+  { path: '/profile', Component: ProfilePage, name: 'common.routes.profile', private: 1 },
+  { path: '/status', Component: StatusPage, name: 'common.routes.status', private: 1 },
+  { path: '/appointment', Component: AppointmentPage, name: 'common.routes.appointment', private: 0 },
+]
+
+// menu routes list
+
+export const menu = [
+  { path: '/', Component: WelcomePage, name: 'common.routes.home', private: 0 },
+  { path: '/faqs', Component: FaqsPage, name: 'common.routes.faqs', private: 0 },
+  { path: '/contact-us', Component: ContactUsPage, name: 'common.routes.contact-us', private: 0 },
+  { path: '/profile', Component: ProfilePage, name: 'common.routes.profile', private: 1 },
+  { path: '/status', Component: StatusPage, name: 'common.routes.status', private: 1 },
 ]
 
 // const history = createBrowserHistory();

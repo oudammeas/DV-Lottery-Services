@@ -1,6 +1,6 @@
 {
   "global": {},
-  "navigation": {
+  "routes": {
     "home": "Home",
     "register": "Register",
     "process": "Procedure",
@@ -9,7 +9,11 @@
     "brand-name": "U.S. Diversity Lottery Services",
     "login": "Login | Signup",
     "logout": "Logout",
-    "appointment": "Book an Appointment"
+    "appointment": "Book an Appointment",
+    "profile": "Profile",
+    "new-candidates": "Selected Candidates",
+    "selected-candidates": "Selected Candidates",
+    "status": "Status"
   },
   "external-link": {
     "us-embassy": "U.S. Embassy in Cambodia",

@@ -13,7 +13,7 @@ const LoginButton = () => {
         size="lg"
         color="blue"
         style={{ marginRight: '0.5em', minWidth: '130px' }}>
-        {t('common.navigation.login')}
+        {t('common.routes.login')}
       </Button>
     </Link>
   )
