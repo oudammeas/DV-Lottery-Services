@@ -38,6 +38,8 @@ const ContactUsPage = () => {
       root: {
         display: 'inline-block',
         width: 'auto',
+        paddingRight: '50px',
+        paddingLeft: '50px',
         height: 'auto',
       },
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Amplify, Auth } from 'aws-amplify'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 import { Redirect } from 'react-router-dom'
@@ -22,9 +23,11 @@ const AuthenticatorPage = ({ authStore, history }) => {
 
   onAuthUIStateChange((nextAuthState, authData) => {
     authStore.setAuth(nextAuthState, authData)
+    console.log(nextAuthState)
+    console.log(authData)
   })
 
-  return localStorage.AuthState. === AuthState.SignedIn && authStore.authUser ? (
+  return authStore.authState === AuthState.SignedIn && authStore.authUser ? (
     <Redirect to={history.goBack()} />
   ) : (
     <AmplifyAuthenticator />

@@ -52,7 +52,6 @@ const FaqsPage = () => {
               </Panel>
             )
           })}
-          ;
         </PanelGroup>
       </Content>
     </MainLayout>

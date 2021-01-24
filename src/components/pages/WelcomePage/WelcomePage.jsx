@@ -17,13 +17,13 @@ const WelcomePage = () => {
       justifyContent: 'center',
 
       maintext: {
-        fontSize: '36px',
+        fontSize: '32px',
       },
 
       subtext: {
         paddingTop: '1em',
         paddingBottom: '1em',
-        fontSize: '36px',
+        fontSize: '32px',
       },
     },
   }

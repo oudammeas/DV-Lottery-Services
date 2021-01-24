@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Navbar, Nav, Button } from 'rsuite'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import LogoutButton from '../Auth/LogoutButton'
 import { ReactComponent as Logo } from './logo.svg'
 import { v4 as uuidv4 } from 'uuid'
 // Import authentication ui and components
-import { AuthState } from '@aws-amplify/ui-components'
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 
 // list of menu options
 const menu = [
