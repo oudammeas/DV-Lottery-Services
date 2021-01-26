@@ -60,7 +60,7 @@ const Routes = () => {
         page.private ? (
           <PrivateRoute path={page.path} exact component={page.Component} key={uuidv4()} />
         ) : (
-          <Route path={page.path} exact component={page.Component} />
+          <Route path={page.path} exact component={page.Component} key={uuidv4()} />
         ),
       )}
     </Switch>

@@ -22,7 +22,9 @@ import MainLayout from '../../layouts/MainLayout.js/MainLayout'
 import { useTranslation } from 'react-i18next'
 import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import { Schema } from 'rsuite'
-import { useAuth0 } from '@auth0/auth0-react'
+// import { useAuth0 } from '@auth0/auth0-react'
+import { withRouter } from 'react-router'
+import { observer, inject } from 'mobx-react'
 
 const form_groups = [
   {
@@ -130,7 +132,7 @@ const form_groups = [
   },
 ]
 
-const ProfilePage = ({ commonStore }) => {
+const ProfilePage = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
 
   const styles = {
@@ -157,13 +159,15 @@ const ProfilePage = ({ commonStore }) => {
     },
   }
 
-  // Auth0 Profile:
+  // Auth Profile:
 
-  const { user } = useAuth0()
-
+  const user = authStore.authUser
   console.log(user)
 
-  const { name, picture, email } = user
+  const { name, picture, email } = user.attributes
+
+  console.log(name)
+  console.log(email)
 
   const handleSubmit = e => {
     // e.preventDefault();
@@ -212,21 +216,21 @@ const ProfilePage = ({ commonStore }) => {
   return (
     <MainLayout>
       <Content style={styles.content}>
+        <div style={styles.pagetitle}>{t('common.profile-page.page-title')}</div>
         <div className="align-items-center profile-header mb-5 text-center text-md-left">
           <div md={2}>
-            <img src={picture} alt="Profile" className="rounded-circle img-fluid profile-picture mb-3 mb-md-0" />
+            <img
+              src={picture ? picture : './favicon.ico'}
+              alt="Profile"
+              className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+            />
           </div>
           <div md>
-            <h2>{name}</h2>
+            <h4>{name ? name : 'Firstname Lastname'}</h4>
             <p className="lead text-muted">{email}</p>
           </div>
         </div>
-        <div>
-          <p>{JSON.stringify(user, null, 2)}</p>
-        </div>
-
-        <div style={styles.pagetitle}>{t('common.profile-page.page-title')}</div>
-
+        <div>{/* <p>{JSON.stringify(user, null, 2)}</p> */}</div>
         <FlexboxGrid style={styles.flexboxgrid.root}>
           {form_groups.map((group, i) => {
             return (
@@ -303,4 +307,4 @@ const ProfilePage = ({ commonStore }) => {
 
 ProfilePage.propTypes = {}
 
-export default ProfilePage
+export default withRouter(inject('authStore')(observer(ProfilePage)))
