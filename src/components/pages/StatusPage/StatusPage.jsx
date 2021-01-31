@@ -21,10 +21,12 @@ import {
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
 import { useTranslation } from 'react-i18next'
 import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
-import $ from 'jquery'
 import './CustomStyle.css'
+import { Redirect, withRouter } from 'react-router'
+import { observer, inject } from 'mobx-react'
+import AuthenticatorPage from '../AuthenticatorPage'
 
-const StatusPage = () => {
+const StatusPage = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
 
   const styles = {
@@ -74,7 +76,16 @@ const StatusPage = () => {
     },
   }
 
-  return (
+  // Auth Status:
+  const isAuthenticated = authStore.isAuthenticated
+  const user = authStore.authUser
+  console.log(authStore)
+
+  const username = user ? user.username : null
+  const picture = './favicon.ico'
+  const email = user ? user.attributes.email : null
+
+  return isAuthenticated ? (
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.pagetitle}>{t('common.status-page.page-title')}</div>
@@ -139,9 +150,11 @@ const StatusPage = () => {
         </Timeline>
       </Content>
     </MainLayout>
+  ) : (
+    <Redirect to={<AuthenticatorPage />} />
   )
 }
 
 StatusPage.propTypes = {}
 
-export default StatusPage
+export default withRouter(inject('authStore')(observer(StatusPage)))

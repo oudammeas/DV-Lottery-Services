@@ -1,16 +1,20 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import { Button } from 'rsuite'
 import { useTranslation } from 'react-i18next'
 import { Auth } from 'aws-amplify'
-import { inject } from 'mobx-react'
+import { withRouter } from 'react-router'
+import { observer, inject } from 'mobx-react'
+import { useHistory } from 'react-router-dom'
 const LogoutButton = ({ authStore }) => {
   const { t } = useTranslation()
-
+  const history = useHistory()
   async function signOut() {
     try {
       await Auth.signOut()
       authStore.setAuth(Auth.signedOut, null)
       authStore.setIsAuthenticated(false)
+      history.push('/authenticator')
     } catch (error) {
       console.log('error signing out: ', error)
     }
@@ -30,4 +34,4 @@ const LogoutButton = ({ authStore }) => {
   )
 }
 
-export default inject('authStore')(LogoutButton)
+export default withRouter(inject('authStore')(observer(LogoutButton)))

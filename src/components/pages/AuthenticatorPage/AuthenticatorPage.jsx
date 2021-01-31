@@ -6,8 +6,11 @@ import { Redirect } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import { autorun } from 'mobx'
+import { useTranslation } from 'react-i18next'
 
 const AuthenticatorPage = ({ authStore, history }) => {
+  const { t } = useTranslation()
+
   const styles = {
     content: {
       padding: '5em',
@@ -23,7 +26,9 @@ const AuthenticatorPage = ({ authStore, history }) => {
 
   onAuthUIStateChange((nextAuthState, authData) => {
     authStore.setAuth(nextAuthState, authData)
-    authStore.setIsAuthenticated(true)
+    {
+      nextAuthState === AuthState.SignedIn && authStore.setIsAuthenticated(true)
+    }
     console.log(nextAuthState)
     console.log(authData)
   })

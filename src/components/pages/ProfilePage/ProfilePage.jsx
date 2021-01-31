@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   Content,
@@ -23,8 +23,9 @@ import { useTranslation } from 'react-i18next'
 import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import { Schema } from 'rsuite'
 // import { useAuth0 } from '@auth0/auth0-react'
-import { withRouter } from 'react-router'
+import { Redirect, withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
+import AuthenticatorPage from '../AuthenticatorPage'
 
 const form_groups = [
   {
@@ -159,15 +160,14 @@ const ProfilePage = ({ commonStore, authStore }) => {
     },
   }
 
-  // Auth Profile:
-
+  // // Auth Profile:
+  const isAuthenticated = authStore.isAuthenticated
   const user = authStore.authUser
-  console.log(user)
+  console.log(authStore)
 
-  const { name, picture, email } = user.attributes
-
-  console.log(name)
-  console.log(email)
+  const username = user ? user.username : null
+  const picture = './favicon.ico'
+  const email = user ? user.attributes.email : null
 
   const handleSubmit = e => {
     // e.preventDefault();
@@ -179,54 +179,16 @@ const ProfilePage = ({ commonStore, authStore }) => {
 
   const [readOnly, setReadOnly] = useState([])
 
-  // const { StringType, NumberType, ArrayType, DateType, ObjectType, BooleanType } = Schema.Types;
-
-  // const customerModel = Schema.Model({
-  //   email: StringType().isEmail('Please enter a valid email address.'),
-  //   password: StringType().isRequired('Please enter the correct password')
-
-  // });
-
-  // customerModel.checkAsync({
-  //   email: 'oudam.meas@gmail.com',
-  //   password: 'abc'
-  // }).then(result => {
-  //   console.log(result);
-  // });
-
-  // const [formValue, setFormValue] = useState({
-  //   name: '',
-  //   email: '',
-  //   age: '',
-  //   password: '',
-  //   verifyPassword: ''
-  // });
-
-  // const [formError, setFormError] = useState({});
-
-  // const handleSubmit = () => {
-  //   // const { formValue } = useState();
-  //   // if (!form.check()) {
-  //   //   console.error('Form Error');
-  //   //   return;
-  //   // }
-  //   // console.log(formValue, 'Form Value');
-  // };
-
-  return (
+  return isAuthenticated ? (
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.pagetitle}>{t('common.profile-page.page-title')}</div>
         <div className="align-items-center profile-header mb-5 text-center text-md-left">
           <div md={2}>
-            <img
-              src={picture ? picture : './favicon.ico'}
-              alt="Profile"
-              className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-            />
+            <img src={picture} alt="Profile" className="rounded-circle img-fluid profile-picture mb-3 mb-md-0" />
           </div>
           <div md>
-            <h4>{name ? name : 'Firstname Lastname'}</h4>
+            <h4>{username}</h4>
             <p className="lead text-muted">{email}</p>
           </div>
         </div>
@@ -302,6 +264,8 @@ const ProfilePage = ({ commonStore, authStore }) => {
         </FlexboxGrid>
       </Content>
     </MainLayout>
+  ) : (
+    <Redirect to={<AuthenticatorPage />} />
   )
 }
 

@@ -38,8 +38,8 @@ function App() {
 
   async function onLoad() {
     try {
-      await Auth.currentSession()
-      let user = await Auth.currentAuthenticatedUser()
+      const session = await Auth.currentSession()
+      const user = await Auth.currentAuthenticatedUser()
       console.log(user)
       authStore.setAuth(AuthState.SignedIn, user)
       authStore.setIsAuthenticated(true)
@@ -48,20 +48,7 @@ function App() {
         alert(e)
       }
     }
-
-    // Auth.currentSession()
-    //   .then(data => console.log(data))
-    //   .catch(err => console.log(err))
-
-    // Auth.currentAuthenticatedUser({
-    //   bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    // })
-    //   .then(user => console.log(user))
-    //   .catch(err => console.log(err))
-
     setIsAuthenticating(false)
-    // authStore.setIsAuthenticating(false)
-    // console.log(authStore.isAuthenticating)
   }
 
   console.log(authStore)

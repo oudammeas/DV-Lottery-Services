@@ -12,6 +12,8 @@ import { v4 as uuidv4 } from 'uuid'
 // 1 . import Pages
 import WelcomePage from '../components/pages/WelcomePage'
 import RegisterPage from '../components/elements/Auth/RegisterButton'
+import LogoutPage from '../components/elements/Auth/LogoutButton'
+import LoginPage from '../components/elements/Auth/LogoutButton'
 import FaqsPage from '../components/pages/FaqsPage'
 import ContactUsPage from '../components/pages/ContactUsPage'
 import NewCandidatesPage from '../components/pages/NewCandidatesPage'
@@ -21,8 +23,8 @@ import ProfilePage from '../components/pages/ProfilePage'
 import StatusPage from '../components/pages/StatusPage'
 import AppointmentPage from '../components/pages/AppointmentPage'
 
-// // history to move from page to page
-// import { createBrowserHistory } from "history";
+// history to move from page to page
+// import { createBrowserHistory } from 'history'
 
 // 2.  routes list
 export const route = [
@@ -36,6 +38,7 @@ export const route = [
   { path: '/profile', Component: ProfilePage, name: 'common.routes.profile', private: 1 },
   { path: '/status', Component: StatusPage, name: 'common.routes.status', private: 1 },
   { path: '/appointment', Component: AppointmentPage, name: 'common.routes.appointment', private: 0 },
+  // { path: '/logout', Component: LogoutPage, name: 'common.routes.logout', private: 0 },
 ]
 
 // menu routes list
@@ -48,7 +51,7 @@ export const menu = [
   { path: '/status', Component: StatusPage, name: 'common.routes.status', private: 1 },
 ]
 
-// const history = createBrowserHistory();
+// const history = createBrowserHistory()
 
 /**
  * generate a switch with all routes to be used in App.js
