@@ -1,6 +1,8 @@
 {
   "trigger": true,
-  "modules": ["add-to-group"],
+  "modules": [
+    "add-to-group"
+  ],
   "parentResource": "dvlotteryservices64acc3eb",
   "functionName": "dvlotteryservices64acc3ebPostConfirmation",
   "resourceName": "dvlotteryservices64acc3ebPostConfirmation",

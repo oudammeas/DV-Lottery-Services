@@ -1,6 +1,8 @@
 {
   "trigger": true,
-  "modules": ["verification-link"],
+  "modules": [
+    "verification-link"
+  ],
   "parentResource": "dvlotteryservices64acc3eb",
   "functionName": "dvlotteryservices64acc3ebCustomMessage",
   "resourceName": "dvlotteryservices64acc3ebCustomMessage",
