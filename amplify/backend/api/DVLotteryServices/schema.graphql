@@ -1,0 +1,117 @@
+type Payment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  payment_amount: Float
+  payment_date: AWSDateTime
+  customerID: ID!
+  Case: Case @connection
+}
+
+type Billing @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  current_balance: Float
+  current_due_date: AWSDate
+  current_overdraft_date: AWSDate
+}
+
+type Service @model @auth(rules: [{allow: private}]) @key(name: "byCase", fields: ["caseID"]) {
+  id: ID!
+  name: String
+  price: Float
+  description: String
+  caseID: ID!
+}
+
+type Case @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  type: String
+  status: String
+  customerID: ID!
+  Services: [Service] @connection(keyName: "byCase", fields: ["id"])
+}
+
+type PastEmployment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  title: String
+  employer: String
+  date_start: AWSDate
+  date_end: AWSDate
+  customerID: ID!
+}
+
+type CurrentEmployment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  title: String
+  employer: String
+  date_start: AWSDate
+  customerID: ID!
+}
+
+type Education @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  degree: String
+  degree_file: String
+  institution: String
+  date_start: AWSDate
+  date_finish: AWSDate
+  customerID: ID!
+}
+
+type Address @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  street_1: String
+  street_2: String
+  commune: String
+  city: String
+  province: String
+  postal_code: String
+  country: String
+  customerID: ID!
+}
+
+type Dependent @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+  id: ID!
+  type: String
+  dependent_id: ID
+  customerID: ID!
+}
+
+type Contact @model @auth(rules: [{allow: owner, operations: [read, create, update]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  email: AWSEmail
+  password: String
+  phone_num: AWSPhone
+  website: String
+}
+
+type Customer @model @auth(rules: [{allow: owner, operations: [read, create, update]}, {allow: groups, groups: ["admin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  firstname_kh: String
+  lastname_kh: String
+  firstname: String
+  lastname: String
+  date_of_birth: AWSDate
+  gender: String
+  portrait_file: String
+  driver_license_num: String
+  driver_license_file: String
+  number_of_dependent: String
+  national_identification_num: String
+  national_identification_file: String
+  passport_issue_date: AWSDate
+  passport_expiration_date: AWSDate
+  passport_file: String
+  marital_status: String
+  marriage_certificate_num: String
+  marriage_certificate_file: String
+  passport_num: String
+  Contact: Contact @connection
+  Dependents: [Dependent] @connection(keyName: "byCustomer", fields: ["id"])
+  Addresses: [Address] @connection(keyName: "byCustomer", fields: ["id"])
+  Educations: [Education] @connection(keyName: "byCustomer", fields: ["id"])
+  CurrentEmployments: [CurrentEmployment] @connection(keyName: "byCustomer", fields: ["id"])
+  PastEmployments: [PastEmployment] @connection(keyName: "byCustomer", fields: ["id"])
+  Cases: [Case] @connection(keyName: "byCustomer", fields: ["id"])
+  Billing: Billing @connection
+  Payments: [Payment] @connection(keyName: "byCustomer", fields: ["id"])
+}
+ 
