@@ -194,6 +194,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
         </div>
         <div>{/* <p>{JSON.stringify(user, null, 2)}</p> */}</div>
         <FlexboxGrid style={styles.flexboxgrid.root}>
+          {/* loop thru group of forms */}
           {form_groups.map((group, i) => {
             return (
               <FlexboxGrid.Item colspan={24} style={styles.flexboxgrid.item}>
@@ -215,6 +216,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
                   // model={customerModel}
                 >
                   <h4 key={i}>{group.group_name}</h4>
+                  {/* loop thru form fields */}
                   {group.fields &&
                     group.fields.map((field, j) => {
                       return field.type == 'radio' ? (
@@ -246,6 +248,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
                         </FormGroup>
                       )
                     })}
+                  {/* Save Changes and Cancel Changes buttons*/}
                   <FormGroup>
                     <ButtonToolbar>
                       <Button appearance="primary" size="md" href="#" color="blue" onClick={handleSubmit}>

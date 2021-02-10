@@ -10,6 +10,11 @@
       "StackName": "amplify-dvlotteryservices-dev-232805",
       "StackId": "arn:aws:cloudformation:us-east-1:476536920151:stack/amplify-dvlotteryservices-dev-232805/37170950-65d8-11eb-8de4-0e7fefd377cd",
       "AmplifyAppId": "d2gycb5jcts9j6"
+    },
+    "categories": {
+      "auth": {
+        "DVLotteryServices": {}
+      }
     }
   }
 }
