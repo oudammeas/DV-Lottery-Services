@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTodo = /* GraphQL */ `
-  query GetTodo($id: ID!) {
-    getTodo(id: $id) {
+export const getDvLotteryApp = /* GraphQL */ `
+  query GetDvLotteryApp($id: ID!) {
+    getDVLotteryApp(id: $id) {
       id
       name
       description
@@ -11,10 +11,14 @@ export const getTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
-export const listTodos = /* GraphQL */ `
-  query ListTodos($filter: ModelTodoFilterInput, $limit: Int, $nextToken: String) {
-    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+`;
+export const listDvLotteryApps = /* GraphQL */ `
+  query ListDvLotteryApps(
+    $filter: ModelDVLotteryAppFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDVLotteryApps(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
@@ -25,4 +29,4 @@ export const listTodos = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;

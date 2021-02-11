@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo {
-    onCreateTodo {
+export const onCreateDvLotteryApp = /* GraphQL */ `
+  subscription OnCreateDvLotteryApp {
+    onCreateDVLotteryApp {
       id
       name
       description
@@ -11,10 +11,10 @@ export const onCreateTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo {
-    onUpdateTodo {
+`;
+export const onUpdateDvLotteryApp = /* GraphQL */ `
+  subscription OnUpdateDvLotteryApp {
+    onUpdateDVLotteryApp {
       id
       name
       description
@@ -22,10 +22,10 @@ export const onUpdateTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo {
-    onDeleteTodo {
+`;
+export const onDeleteDvLotteryApp = /* GraphQL */ `
+  subscription OnDeleteDvLotteryApp {
+    onDeleteDVLotteryApp {
       id
       name
       description
@@ -33,4 +33,4 @@ export const onDeleteTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;

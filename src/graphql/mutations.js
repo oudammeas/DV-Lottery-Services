@@ -1,9 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo($input: CreateTodoInput!, $condition: ModelTodoConditionInput) {
-    createTodo(input: $input, condition: $condition) {
+export const createDvLotteryApp = /* GraphQL */ `
+  mutation CreateDvLotteryApp(
+    $input: CreateDVLotteryAppInput!
+    $condition: ModelDVLotteryAppConditionInput
+  ) {
+    createDVLotteryApp(input: $input, condition: $condition) {
       id
       name
       description
@@ -11,10 +14,13 @@ export const createTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo($input: UpdateTodoInput!, $condition: ModelTodoConditionInput) {
-    updateTodo(input: $input, condition: $condition) {
+`;
+export const updateDvLotteryApp = /* GraphQL */ `
+  mutation UpdateDvLotteryApp(
+    $input: UpdateDVLotteryAppInput!
+    $condition: ModelDVLotteryAppConditionInput
+  ) {
+    updateDVLotteryApp(input: $input, condition: $condition) {
       id
       name
       description
@@ -22,10 +28,13 @@ export const updateTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo($input: DeleteTodoInput!, $condition: ModelTodoConditionInput) {
-    deleteTodo(input: $input, condition: $condition) {
+`;
+export const deleteDvLotteryApp = /* GraphQL */ `
+  mutation DeleteDvLotteryApp(
+    $input: DeleteDVLotteryAppInput!
+    $condition: ModelDVLotteryAppConditionInput
+  ) {
+    deleteDVLotteryApp(input: $input, condition: $condition) {
       id
       name
       description
@@ -33,4 +42,4 @@ export const deleteTodo = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
