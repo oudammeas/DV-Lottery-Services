@@ -1,30 +1,24 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getDvLotteryApp = /* GraphQL */ `
-  query GetDvLotteryApp($id: ID!) {
-    getDVLotteryApp(id: $id) {
-      id
-      name
-      description
-      createdAt
-      updatedAt
+export const getDvlsApp = /* GraphQL */ `
+  query GetDvlsApp($PK: String!, $SK: String!) {
+    getDVLSApp(PK: $PK, SK: $SK) {
+      PK
+      SK
     }
   }
 `;
-export const listDvLotteryApps = /* GraphQL */ `
-  query ListDvLotteryApps(
-    $filter: ModelDVLotteryAppFilterInput
+export const listDvlsApps = /* GraphQL */ `
+  query ListDvlsApps(
+    $filter: TableDVLSAppFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listDVLotteryApps(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listDVLSApps(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
+        PK
+        SK
       }
       nextToken
     }
