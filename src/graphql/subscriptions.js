@@ -9,17 +9,17 @@ export const onCreateDvlsApp = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateDvlsApp = /* GraphQL */ `
-  subscription OnUpdateDvlsApp($PK: String, $SK: String) {
-    onUpdateDVLSApp(PK: $PK, SK: $SK) {
+export const onDeleteDvlsApp = /* GraphQL */ `
+  subscription OnDeleteDvlsApp($PK: String, $SK: String) {
+    onDeleteDVLSApp(PK: $PK, SK: $SK) {
       PK
       SK
     }
   }
 `;
-export const onDeleteDvlsApp = /* GraphQL */ `
-  subscription OnDeleteDvlsApp($PK: String, $SK: String) {
-    onDeleteDVLSApp(PK: $PK, SK: $SK) {
+export const onUpdateDvlsApp = /* GraphQL */ `
+  subscription OnUpdateDvlsApp($PK: String, $SK: String) {
+    onUpdateDVLSApp(PK: $PK, SK: $SK) {
       PK
       SK
     }

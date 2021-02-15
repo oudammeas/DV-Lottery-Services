@@ -9,17 +9,17 @@ export const createDvlsApp = /* GraphQL */ `
     }
   }
 `;
-export const updateDvlsApp = /* GraphQL */ `
-  mutation UpdateDvlsApp($input: UpdateDVLSAppInput!) {
-    updateDVLSApp(input: $input) {
+export const deleteDvlsApp = /* GraphQL */ `
+  mutation DeleteDvlsApp($input: DeleteDVLSAppInput!) {
+    deleteDVLSApp(input: $input) {
       PK
       SK
     }
   }
 `;
-export const deleteDvlsApp = /* GraphQL */ `
-  mutation DeleteDvlsApp($input: DeleteDVLSAppInput!) {
-    deleteDVLSApp(input: $input) {
+export const updateDvlsApp = /* GraphQL */ `
+  mutation UpdateDvlsApp($input: UpdateDVLSAppInput!) {
+    updateDVLSApp(input: $input) {
       PK
       SK
     }
