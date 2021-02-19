@@ -4,8 +4,19 @@ import { schema } from './schema';
 
 
 
-const { DVLSApp } = initSchema(schema);
+const { Service, CaseService, Case, Relationship, Payment, Education, PastEmployment, CurrentEmployment, Contact, Billing, Address, Customer } = initSchema(schema);
 
 export {
-  DVLSApp
+  Service,
+  CaseService,
+  Case,
+  Relationship,
+  Payment,
+  Education,
+  PastEmployment,
+  CurrentEmployment,
+  Contact,
+  Billing,
+  Address,
+  Customer
 };

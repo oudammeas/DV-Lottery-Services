@@ -1,27 +1,996 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createDvlsApp = /* GraphQL */ `
-  mutation CreateDvlsApp($input: CreateDVLSAppInput!) {
-    createDVLSApp(input: $input) {
-      PK
-      SK
+export const createService = /* GraphQL */ `
+  mutation CreateService(
+    $input: CreateServiceInput!
+    $condition: ModelServiceConditionInput
+  ) {
+    createService(input: $input, condition: $condition) {
+      id
+      service_name
+      service_price
+      service_description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      cases {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
-export const deleteDvlsApp = /* GraphQL */ `
-  mutation DeleteDvlsApp($input: DeleteDVLSAppInput!) {
-    deleteDVLSApp(input: $input) {
-      PK
-      SK
+export const updateService = /* GraphQL */ `
+  mutation UpdateService(
+    $input: UpdateServiceInput!
+    $condition: ModelServiceConditionInput
+  ) {
+    updateService(input: $input, condition: $condition) {
+      id
+      service_name
+      service_price
+      service_description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      cases {
+        nextToken
+        startedAt
+      }
     }
   }
 `;
-export const updateDvlsApp = /* GraphQL */ `
-  mutation UpdateDvlsApp($input: UpdateDVLSAppInput!) {
-    updateDVLSApp(input: $input) {
-      PK
-      SK
+export const deleteService = /* GraphQL */ `
+  mutation DeleteService(
+    $input: DeleteServiceInput!
+    $condition: ModelServiceConditionInput
+  ) {
+    deleteService(input: $input, condition: $condition) {
+      id
+      service_name
+      service_price
+      service_description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      cases {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const createRelationship = /* GraphQL */ `
+  mutation CreateRelationship(
+    $input: CreateRelationshipInput!
+    $condition: ModelRelationshipConditionInput
+  ) {
+    createRelationship(input: $input, condition: $condition) {
+      id
+      relationship_type
+      relationship_dependent_id
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRelationship = /* GraphQL */ `
+  mutation UpdateRelationship(
+    $input: UpdateRelationshipInput!
+    $condition: ModelRelationshipConditionInput
+  ) {
+    updateRelationship(input: $input, condition: $condition) {
+      id
+      relationship_type
+      relationship_dependent_id
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRelationship = /* GraphQL */ `
+  mutation DeleteRelationship(
+    $input: DeleteRelationshipInput!
+    $condition: ModelRelationshipConditionInput
+  ) {
+    deleteRelationship(input: $input, condition: $condition) {
+      id
+      relationship_type
+      relationship_dependent_id
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPayment = /* GraphQL */ `
+  mutation CreatePayment(
+    $input: CreatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    createPayment(input: $input, condition: $condition) {
+      id
+      payment_amount
+      payment_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Case {
+        id
+        case_type
+        case_status
+        case_priority_date
+        customerID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const updatePayment = /* GraphQL */ `
+  mutation UpdatePayment(
+    $input: UpdatePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    updatePayment(input: $input, condition: $condition) {
+      id
+      payment_amount
+      payment_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Case {
+        id
+        case_type
+        case_status
+        case_priority_date
+        customerID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const deletePayment = /* GraphQL */ `
+  mutation DeletePayment(
+    $input: DeletePaymentInput!
+    $condition: ModelPaymentConditionInput
+  ) {
+    deletePayment(input: $input, condition: $condition) {
+      id
+      payment_amount
+      payment_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Case {
+        id
+        case_type
+        case_status
+        case_priority_date
+        customerID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const createEducation = /* GraphQL */ `
+  mutation CreateEducation(
+    $input: CreateEducationInput!
+    $condition: ModelEducationConditionInput
+  ) {
+    createEducation(input: $input, condition: $condition) {
+      id
+      education_degree
+      degree_file
+      institution
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateEducation = /* GraphQL */ `
+  mutation UpdateEducation(
+    $input: UpdateEducationInput!
+    $condition: ModelEducationConditionInput
+  ) {
+    updateEducation(input: $input, condition: $condition) {
+      id
+      education_degree
+      degree_file
+      institution
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteEducation = /* GraphQL */ `
+  mutation DeleteEducation(
+    $input: DeleteEducationInput!
+    $condition: ModelEducationConditionInput
+  ) {
+    deleteEducation(input: $input, condition: $condition) {
+      id
+      education_degree
+      degree_file
+      institution
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPastEmployment = /* GraphQL */ `
+  mutation CreatePastEmployment(
+    $input: CreatePastEmploymentInput!
+    $condition: ModelPastEmploymentConditionInput
+  ) {
+    createPastEmployment(input: $input, condition: $condition) {
+      id
+      title
+      employer
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePastEmployment = /* GraphQL */ `
+  mutation UpdatePastEmployment(
+    $input: UpdatePastEmploymentInput!
+    $condition: ModelPastEmploymentConditionInput
+  ) {
+    updatePastEmployment(input: $input, condition: $condition) {
+      id
+      title
+      employer
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePastEmployment = /* GraphQL */ `
+  mutation DeletePastEmployment(
+    $input: DeletePastEmploymentInput!
+    $condition: ModelPastEmploymentConditionInput
+  ) {
+    deletePastEmployment(input: $input, condition: $condition) {
+      id
+      title
+      employer
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCurrentEmployment = /* GraphQL */ `
+  mutation CreateCurrentEmployment(
+    $input: CreateCurrentEmploymentInput!
+    $condition: ModelCurrentEmploymentConditionInput
+  ) {
+    createCurrentEmployment(input: $input, condition: $condition) {
+      id
+      title
+      employer
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCurrentEmployment = /* GraphQL */ `
+  mutation UpdateCurrentEmployment(
+    $input: UpdateCurrentEmploymentInput!
+    $condition: ModelCurrentEmploymentConditionInput
+  ) {
+    updateCurrentEmployment(input: $input, condition: $condition) {
+      id
+      title
+      employer
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCurrentEmployment = /* GraphQL */ `
+  mutation DeleteCurrentEmployment(
+    $input: DeleteCurrentEmploymentInput!
+    $condition: ModelCurrentEmploymentConditionInput
+  ) {
+    deleteCurrentEmployment(input: $input, condition: $condition) {
+      id
+      title
+      employer
+      date_start
+      date_end
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createContact = /* GraphQL */ `
+  mutation CreateContact(
+    $input: CreateContactInput!
+    $condition: ModelContactConditionInput
+  ) {
+    createContact(input: $input, condition: $condition) {
+      id
+      contact_email
+      contact_phone_num
+      contact_website
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateContact = /* GraphQL */ `
+  mutation UpdateContact(
+    $input: UpdateContactInput!
+    $condition: ModelContactConditionInput
+  ) {
+    updateContact(input: $input, condition: $condition) {
+      id
+      contact_email
+      contact_phone_num
+      contact_website
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteContact = /* GraphQL */ `
+  mutation DeleteContact(
+    $input: DeleteContactInput!
+    $condition: ModelContactConditionInput
+  ) {
+    deleteContact(input: $input, condition: $condition) {
+      id
+      contact_email
+      contact_phone_num
+      contact_website
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCase = /* GraphQL */ `
+  mutation CreateCase(
+    $input: CreateCaseInput!
+    $condition: ModelCaseConditionInput
+  ) {
+    createCase(input: $input, condition: $condition) {
+      id
+      case_type
+      case_status
+      case_priority_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      CaseServices {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const updateCase = /* GraphQL */ `
+  mutation UpdateCase(
+    $input: UpdateCaseInput!
+    $condition: ModelCaseConditionInput
+  ) {
+    updateCase(input: $input, condition: $condition) {
+      id
+      case_type
+      case_status
+      case_priority_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      CaseServices {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const deleteCase = /* GraphQL */ `
+  mutation DeleteCase(
+    $input: DeleteCaseInput!
+    $condition: ModelCaseConditionInput
+  ) {
+    deleteCase(input: $input, condition: $condition) {
+      id
+      case_type
+      case_status
+      case_priority_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      CaseServices {
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const createBilling = /* GraphQL */ `
+  mutation CreateBilling(
+    $input: CreateBillingInput!
+    $condition: ModelBillingConditionInput
+  ) {
+    createBilling(input: $input, condition: $condition) {
+      id
+      billing_current_balance
+      billing_current_due_date
+      billing_current_overdue_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateBilling = /* GraphQL */ `
+  mutation UpdateBilling(
+    $input: UpdateBillingInput!
+    $condition: ModelBillingConditionInput
+  ) {
+    updateBilling(input: $input, condition: $condition) {
+      id
+      billing_current_balance
+      billing_current_due_date
+      billing_current_overdue_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteBilling = /* GraphQL */ `
+  mutation DeleteBilling(
+    $input: DeleteBillingInput!
+    $condition: ModelBillingConditionInput
+  ) {
+    deleteBilling(input: $input, condition: $condition) {
+      id
+      billing_current_balance
+      billing_current_due_date
+      billing_current_overdue_date
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createAddress = /* GraphQL */ `
+  mutation CreateAddress(
+    $input: CreateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    createAddress(input: $input, condition: $condition) {
+      id
+      street_1
+      street_2
+      commune
+      city
+      province
+      postal_code
+      country
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAddress = /* GraphQL */ `
+  mutation UpdateAddress(
+    $input: UpdateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    updateAddress(input: $input, condition: $condition) {
+      id
+      street_1
+      street_2
+      commune
+      city
+      province
+      postal_code
+      country
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAddress = /* GraphQL */ `
+  mutation DeleteAddress(
+    $input: DeleteAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    deleteAddress(input: $input, condition: $condition) {
+      id
+      street_1
+      street_2
+      commune
+      city
+      province
+      postal_code
+      country
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createCustomer = /* GraphQL */ `
+  mutation CreateCustomer(
+    $input: CreateCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    createCustomer(input: $input, condition: $condition) {
+      id
+      firstname_kh
+      lastname_kh
+      firstname
+      lastname
+      date_of_birth
+      gender
+      driver_license_num
+      driver_license_file
+      national_identification_num
+      national_identification_file
+      passport_num
+      passport_file
+      passport_issue_date
+      passport_expiration_date
+      marital_status
+      marriage_certificate_num
+      marriage_certificate_file
+      number_of_dependent
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Relationships {
+        nextToken
+        startedAt
+      }
+      Payments {
+        nextToken
+        startedAt
+      }
+      Educations {
+        nextToken
+        startedAt
+      }
+      PastEmployments {
+        nextToken
+        startedAt
+      }
+      CurrentEmployments {
+        nextToken
+        startedAt
+      }
+      Contact {
+        id
+        contact_email
+        contact_phone_num
+        contact_website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Cases {
+        nextToken
+        startedAt
+      }
+      Billings {
+        nextToken
+        startedAt
+      }
+      Addresses {
+        nextToken
+        startedAt
+      }
+      owner
+    }
+  }
+`;
+export const updateCustomer = /* GraphQL */ `
+  mutation UpdateCustomer(
+    $input: UpdateCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    updateCustomer(input: $input, condition: $condition) {
+      id
+      firstname_kh
+      lastname_kh
+      firstname
+      lastname
+      date_of_birth
+      gender
+      driver_license_num
+      driver_license_file
+      national_identification_num
+      national_identification_file
+      passport_num
+      passport_file
+      passport_issue_date
+      passport_expiration_date
+      marital_status
+      marriage_certificate_num
+      marriage_certificate_file
+      number_of_dependent
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Relationships {
+        nextToken
+        startedAt
+      }
+      Payments {
+        nextToken
+        startedAt
+      }
+      Educations {
+        nextToken
+        startedAt
+      }
+      PastEmployments {
+        nextToken
+        startedAt
+      }
+      CurrentEmployments {
+        nextToken
+        startedAt
+      }
+      Contact {
+        id
+        contact_email
+        contact_phone_num
+        contact_website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Cases {
+        nextToken
+        startedAt
+      }
+      Billings {
+        nextToken
+        startedAt
+      }
+      Addresses {
+        nextToken
+        startedAt
+      }
+      owner
+    }
+  }
+`;
+export const deleteCustomer = /* GraphQL */ `
+  mutation DeleteCustomer(
+    $input: DeleteCustomerInput!
+    $condition: ModelCustomerConditionInput
+  ) {
+    deleteCustomer(input: $input, condition: $condition) {
+      id
+      firstname_kh
+      lastname_kh
+      firstname
+      lastname
+      date_of_birth
+      gender
+      driver_license_num
+      driver_license_file
+      national_identification_num
+      national_identification_file
+      passport_num
+      passport_file
+      passport_issue_date
+      passport_expiration_date
+      marital_status
+      marriage_certificate_num
+      marriage_certificate_file
+      number_of_dependent
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Relationships {
+        nextToken
+        startedAt
+      }
+      Payments {
+        nextToken
+        startedAt
+      }
+      Educations {
+        nextToken
+        startedAt
+      }
+      PastEmployments {
+        nextToken
+        startedAt
+      }
+      CurrentEmployments {
+        nextToken
+        startedAt
+      }
+      Contact {
+        id
+        contact_email
+        contact_phone_num
+        contact_website
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      Cases {
+        nextToken
+        startedAt
+      }
+      Billings {
+        nextToken
+        startedAt
+      }
+      Addresses {
+        nextToken
+        startedAt
+      }
+      owner
+    }
+  }
+`;
+export const createCaseService = /* GraphQL */ `
+  mutation CreateCaseService(
+    $input: CreateCaseServiceInput!
+    $condition: ModelCaseServiceConditionInput
+  ) {
+    createCaseService(input: $input, condition: $condition) {
+      id
+      caseID
+      serviceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      service {
+        id
+        service_name
+        service_price
+        service_description
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      case {
+        id
+        case_type
+        case_status
+        case_priority_date
+        customerID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const updateCaseService = /* GraphQL */ `
+  mutation UpdateCaseService(
+    $input: UpdateCaseServiceInput!
+    $condition: ModelCaseServiceConditionInput
+  ) {
+    updateCaseService(input: $input, condition: $condition) {
+      id
+      caseID
+      serviceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      service {
+        id
+        service_name
+        service_price
+        service_description
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      case {
+        id
+        case_type
+        case_status
+        case_priority_date
+        customerID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const deleteCaseService = /* GraphQL */ `
+  mutation DeleteCaseService(
+    $input: DeleteCaseServiceInput!
+    $condition: ModelCaseServiceConditionInput
+  ) {
+    deleteCaseService(input: $input, condition: $condition) {
+      id
+      caseID
+      serviceID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      service {
+        id
+        service_name
+        service_price
+        service_description
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      case {
+        id
+        case_type
+        case_status
+        case_priority_date
+        customerID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
     }
   }
 `;

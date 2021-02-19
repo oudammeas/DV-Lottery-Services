@@ -27,6 +27,16 @@ import { Redirect, withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import AuthenticatorPage from '../AuthenticatorPage'
 
+// Set up frontend
+import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify'
+import awsExports from '../../../aws-exports'
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
+import * as queries from '../../../graphql/queries'
+import * as mutations from '../../../graphql/mutations'
+
+Amplify.configure(awsExports)
+API.configure(awsExports)
+
 const form_groups = [
   {
     group_name: 'Biological Information',
@@ -163,11 +173,11 @@ const ProfilePage = ({ commonStore, authStore }) => {
   // // Auth Profile:
   const isAuthenticated = authStore.isAuthenticated
   const user = authStore.authUser
-  console.log(authStore)
-
-  const username = user ? user.username : null
+  // console.log(authStore)
+  console.log(user)
+  const username = user ? user['username'] : null
   const picture = './favicon.ico'
-  const email = user ? user.attributes.email : null
+  const email = user ? user.attributes['email'] : null
 
   const handleSubmit = e => {
     // e.preventDefault();
@@ -178,6 +188,32 @@ const ProfilePage = ({ commonStore, authStore }) => {
   }
 
   const [readOnly, setReadOnly] = useState([])
+
+  /// API TEST:
+
+  //  queries
+  const allServices = API.graphql(graphqlOperation(queries.listServices))
+  console.log(allServices)
+  //  get
+  const oneServices = API.graphql(graphqlOperation(queries.getService, { id: '7be458f2-23c1-4bbb-aa5f-642f1e121676' }))
+
+  //  create
+  const service = { service_name: 'service_03', service_price: 400, service_description: 'Service_03' }
+  // const newService = API.graphql(graphqlOperation(mutations.createService, { input: service }))
+
+  // customer data
+  const customerData = [
+    { key: 'firstname', value: '123877' },
+    { key: 'lastname', value: '124565' },
+  ]
+
+  // update customer data
+  function updateCustomer(customer, customerData) {
+    customerData.forEach(data => {
+      customer['data']['getCustomer'][data.key] = data.value
+    })
+    API.graphql(graphqlOperation(mutations.updateCustomer, { input: customer }))
+  }
 
   return isAuthenticated ? (
     <MainLayout>

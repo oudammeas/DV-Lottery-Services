@@ -19,10 +19,12 @@ import { BrowserRouter as VichySugarDaddyProvider } from 'react-router-dom'
 import { commonStore, authStore } from './stores'
 
 // Set up frontend
-import { Amplify, Auth } from 'aws-amplify'
+import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify'
 import awsExports from './aws-exports'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
+import * as queries from './graphql/queries'
 Amplify.configure(awsExports)
+API.configure(awsExports)
 
 const stores = {
   commonStore,
@@ -36,11 +38,19 @@ function App() {
     onLoad()
   }, [])
 
+  // Auth.currentAuthenticatedUser({
+  //   bypassCache: false,
+  // })
+  //   .then(function (user) {
+  //     console.log('User:' + JSON.stringify(user))
+  //   })
+  //   .catch(err => console.log(err))
+
   async function onLoad() {
     try {
       const session = await Auth.currentSession()
       const user = await Auth.currentAuthenticatedUser()
-      console.log(user)
+      // console.log(user)
       authStore.setAuth(AuthState.SignedIn, user)
       authStore.setIsAuthenticated(true)
     } catch (e) {
@@ -51,7 +61,7 @@ function App() {
     setIsAuthenticating(false)
   }
 
-  console.log(authStore)
+  // console.log(authStore)
   // console.log(authStore.authState)
   // console.log(authStore.authUser)
   // console.log(authStore.isAuthenticating)

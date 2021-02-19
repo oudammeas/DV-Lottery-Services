@@ -8,7 +8,7 @@ import { observer, inject } from 'mobx-react'
 
 const PrivateRoute = ({ component, commonStore, authStore, ...rest }) => {
   const isAuthenticated = authStore.isAuthenticated
-  console.log(isAuthenticated)
+  // console.log(isAuthenticated)
   return <Route {...rest}>{isAuthenticated ? component : <Redirect to={'/authenticator'} />}</Route>
 }
 
