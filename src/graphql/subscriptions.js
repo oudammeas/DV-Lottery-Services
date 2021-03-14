@@ -5,9 +5,9 @@ export const onCreateService = /* GraphQL */ `
   subscription OnCreateService {
     onCreateService {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -24,9 +24,9 @@ export const onUpdateService = /* GraphQL */ `
   subscription OnUpdateService {
     onUpdateService {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -43,9 +43,9 @@ export const onDeleteService = /* GraphQL */ `
   subscription OnDeleteService {
     onDeleteService {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -62,8 +62,8 @@ export const onCreateRelationship = /* GraphQL */ `
   subscription OnCreateRelationship {
     onCreateRelationship {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -77,8 +77,8 @@ export const onUpdateRelationship = /* GraphQL */ `
   subscription OnUpdateRelationship {
     onUpdateRelationship {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -92,8 +92,8 @@ export const onDeleteRelationship = /* GraphQL */ `
   subscription OnDeleteRelationship {
     onDeleteRelationship {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -107,8 +107,8 @@ export const onCreatePayment = /* GraphQL */ `
   subscription OnCreatePayment {
     onCreatePayment {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -117,9 +117,9 @@ export const onCreatePayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -134,8 +134,8 @@ export const onUpdatePayment = /* GraphQL */ `
   subscription OnUpdatePayment {
     onUpdatePayment {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -144,9 +144,9 @@ export const onUpdatePayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -161,8 +161,8 @@ export const onDeletePayment = /* GraphQL */ `
   subscription OnDeletePayment {
     onDeletePayment {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -171,9 +171,9 @@ export const onDeletePayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -188,7 +188,7 @@ export const onCreateEducation = /* GraphQL */ `
   subscription OnCreateEducation {
     onCreateEducation {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -206,7 +206,7 @@ export const onUpdateEducation = /* GraphQL */ `
   subscription OnUpdateEducation {
     onUpdateEducation {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -224,7 +224,7 @@ export const onDeleteEducation = /* GraphQL */ `
   subscription OnDeleteEducation {
     onDeleteEducation {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -238,15 +238,16 @@ export const onDeleteEducation = /* GraphQL */ `
     }
   }
 `;
-export const onCreatePastEmployment = /* GraphQL */ `
-  subscription OnCreatePastEmployment {
-    onCreatePastEmployment {
+export const onCreateEmployment = /* GraphQL */ `
+  subscription OnCreateEmployment {
+    onCreateEmployment {
       id
       title
       employer
       date_start
       date_end
       customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -255,15 +256,16 @@ export const onCreatePastEmployment = /* GraphQL */ `
     }
   }
 `;
-export const onUpdatePastEmployment = /* GraphQL */ `
-  subscription OnUpdatePastEmployment {
-    onUpdatePastEmployment {
+export const onUpdateEmployment = /* GraphQL */ `
+  subscription OnUpdateEmployment {
+    onUpdateEmployment {
       id
       title
       employer
       date_start
       date_end
       customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -272,66 +274,16 @@ export const onUpdatePastEmployment = /* GraphQL */ `
     }
   }
 `;
-export const onDeletePastEmployment = /* GraphQL */ `
-  subscription OnDeletePastEmployment {
-    onDeletePastEmployment {
+export const onDeleteEmployment = /* GraphQL */ `
+  subscription OnDeleteEmployment {
+    onDeleteEmployment {
       id
       title
       employer
       date_start
       date_end
       customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateCurrentEmployment = /* GraphQL */ `
-  subscription OnCreateCurrentEmployment {
-    onCreateCurrentEmployment {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateCurrentEmployment = /* GraphQL */ `
-  subscription OnUpdateCurrentEmployment {
-    onUpdateCurrentEmployment {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteCurrentEmployment = /* GraphQL */ `
-  subscription OnDeleteCurrentEmployment {
-    onDeleteCurrentEmployment {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -344,9 +296,9 @@ export const onCreateContact = /* GraphQL */ `
   subscription OnCreateContact {
     onCreateContact {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -359,9 +311,9 @@ export const onUpdateContact = /* GraphQL */ `
   subscription OnUpdateContact {
     onUpdateContact {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -374,9 +326,9 @@ export const onDeleteContact = /* GraphQL */ `
   subscription OnDeleteContact {
     onDeleteContact {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -389,9 +341,9 @@ export const onCreateCase = /* GraphQL */ `
   subscription OnCreateCase {
     onCreateCase {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -409,9 +361,9 @@ export const onUpdateCase = /* GraphQL */ `
   subscription OnUpdateCase {
     onUpdateCase {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -429,9 +381,9 @@ export const onDeleteCase = /* GraphQL */ `
   subscription OnDeleteCase {
     onDeleteCase {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -449,9 +401,8 @@ export const onCreateBilling = /* GraphQL */ `
   subscription OnCreateBilling {
     onCreateBilling {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -465,9 +416,8 @@ export const onUpdateBilling = /* GraphQL */ `
   subscription OnUpdateBilling {
     onUpdateBilling {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -481,9 +431,8 @@ export const onDeleteBilling = /* GraphQL */ `
   subscription OnDeleteBilling {
     onDeleteBilling {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -592,19 +541,15 @@ export const onCreateCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -666,19 +611,15 @@ export const onUpdateCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -740,19 +681,15 @@ export const onDeleteCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -788,9 +725,9 @@ export const onCreateCaseService = /* GraphQL */ `
       updatedAt
       service {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -799,9 +736,9 @@ export const onCreateCaseService = /* GraphQL */ `
       }
       case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -825,9 +762,9 @@ export const onUpdateCaseService = /* GraphQL */ `
       updatedAt
       service {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -836,9 +773,9 @@ export const onUpdateCaseService = /* GraphQL */ `
       }
       case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -862,9 +799,9 @@ export const onDeleteCaseService = /* GraphQL */ `
       updatedAt
       service {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -873,9 +810,9 @@ export const onDeleteCaseService = /* GraphQL */ `
       }
       case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted

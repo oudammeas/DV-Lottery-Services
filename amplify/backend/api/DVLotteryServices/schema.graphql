@@ -1,76 +1,67 @@
 type Service @model @auth(rules: [{allow: private}]) {
   id: ID!
-  service_name: String
-  service_price: Float
-  service_description: String
+  name: String
+  price: Float
+  description: String
   cases: [CaseService] @connection(keyName: "byService", fields: ["id"])
 }
 
 type Relationship @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
-  relationship_type: String
-  relationship_dependent_id: String
-  customerID: ID!
+  type: String
+  dependent_id: String
+  customerID: ID
 }
 
 type Payment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
-  payment_amount: Float
-  payment_date: AWSTimestamp
-  customerID: ID!
+  amount: Float
+  date: AWSDateTime
+  customerID: ID
   Case: Case @connection
 }
 
 type Education @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
-  education_degree: String
+  degree: String
   degree_file: String
   institution: String
   date_start: AWSDate
   date_end: AWSDate
-  customerID: ID!
+  customerID: ID
 }
 
-type PastEmployment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
+type Employment @model @key(name: "byCustomer", fields: ["customerID"]) @auth(rules: [{allow: private}]) {
   id: ID!
   title: String
   employer: String
   date_start: AWSDate
   date_end: AWSDate
-  customerID: ID!
-}
-
-type CurrentEmployment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
-  id: ID!
-  title: String
-  employer: String
-  date_start: AWSDate
-  date_end: AWSDate
-  customerID: ID!
+  customerID: ID
+  current: Boolean
 }
 
 type Contact @model @auth(rules: [{allow: private}]) {
   id: ID!
-  contact_email: AWSEmail
-  contact_phone_num: AWSPhone
-  contact_website: String
+  email: AWSEmail
+  phone_num: AWSPhone
+  website: String
 }
 
 type Case @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
-  case_type: String
-  case_status: String
-  case_priority_date: AWSDate
-  customerID: ID!
+  type: String
+  status: String
+  priority_date: AWSDate
+  customerID: ID
   CaseServices: [CaseService] @connection(keyName: "byCase", fields: ["id"])
 }
 
 type Billing @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
-  billing_current_balance: Float
-  billing_current_due_date: AWSDate
-  billing_current_overdue_date: AWSDate
-  customerID: ID!
+  billing_balance: Float
+  due_date: AWSDate
+  customerID: ID
 }
 
 type Address @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
@@ -82,7 +73,7 @@ type Address @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fi
   province: String
   postal_code: String
   country: String
-  customerID: ID!
+  customerID: ID
 }
 
 type Customer @model @auth(rules: [{allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: owner, operations: [read, create, update]}]) {
@@ -108,8 +99,7 @@ type Customer @model @auth(rules: [{allow: groups, groups: ["admin"], operations
   Relationships: [Relationship] @connection(keyName: "byCustomer", fields: ["id"])
   Payments: [Payment] @connection(keyName: "byCustomer", fields: ["id"])
   Educations: [Education] @connection(keyName: "byCustomer", fields: ["id"])
-  PastEmployments: [PastEmployment] @connection(keyName: "byCustomer", fields: ["id"])
-  CurrentEmployments: [CurrentEmployment] @connection(keyName: "byCustomer", fields: ["id"])
+  Employments: [Employment] @connection(keyName: "byCustomer", fields: ["id"])
   Contact: Contact @connection
   Cases: [Case] @connection(keyName: "byCustomer", fields: ["id"])
   Billings: [Billing] @connection(keyName: "byCustomer", fields: ["id"])
@@ -123,3 +113,4 @@ type CaseService @model(queries: null) @key(name: "byCase", fields: ["caseID", "
   case: Case! @connection(fields: ["caseID"])
   service: Service! @connection(fields: ["serviceID"])
 }
+ 

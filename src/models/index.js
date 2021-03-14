@@ -4,7 +4,7 @@ import { schema } from './schema';
 
 
 
-const { Service, CaseService, Case, Relationship, Payment, Education, PastEmployment, CurrentEmployment, Contact, Billing, Address, Customer } = initSchema(schema);
+const { Service, CaseService, Case, Relationship, Payment, Education, Employment, Contact, Billing, Address, Customer } = initSchema(schema);
 
 export {
   Service,
@@ -13,8 +13,7 @@ export {
   Relationship,
   Payment,
   Education,
-  PastEmployment,
-  CurrentEmployment,
+  Employment,
   Contact,
   Billing,
   Address,

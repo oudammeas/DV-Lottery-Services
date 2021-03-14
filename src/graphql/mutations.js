@@ -8,9 +8,9 @@ export const createService = /* GraphQL */ `
   ) {
     createService(input: $input, condition: $condition) {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -30,9 +30,9 @@ export const updateService = /* GraphQL */ `
   ) {
     updateService(input: $input, condition: $condition) {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -52,9 +52,9 @@ export const deleteService = /* GraphQL */ `
   ) {
     deleteService(input: $input, condition: $condition) {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -74,8 +74,8 @@ export const createRelationship = /* GraphQL */ `
   ) {
     createRelationship(input: $input, condition: $condition) {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -92,8 +92,8 @@ export const updateRelationship = /* GraphQL */ `
   ) {
     updateRelationship(input: $input, condition: $condition) {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -110,8 +110,8 @@ export const deleteRelationship = /* GraphQL */ `
   ) {
     deleteRelationship(input: $input, condition: $condition) {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -128,8 +128,8 @@ export const createPayment = /* GraphQL */ `
   ) {
     createPayment(input: $input, condition: $condition) {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -138,9 +138,9 @@ export const createPayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -158,8 +158,8 @@ export const updatePayment = /* GraphQL */ `
   ) {
     updatePayment(input: $input, condition: $condition) {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -168,9 +168,9 @@ export const updatePayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -188,8 +188,8 @@ export const deletePayment = /* GraphQL */ `
   ) {
     deletePayment(input: $input, condition: $condition) {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -198,9 +198,9 @@ export const deletePayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -218,7 +218,7 @@ export const createEducation = /* GraphQL */ `
   ) {
     createEducation(input: $input, condition: $condition) {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -239,7 +239,7 @@ export const updateEducation = /* GraphQL */ `
   ) {
     updateEducation(input: $input, condition: $condition) {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -260,7 +260,7 @@ export const deleteEducation = /* GraphQL */ `
   ) {
     deleteEducation(input: $input, condition: $condition) {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -274,18 +274,19 @@ export const deleteEducation = /* GraphQL */ `
     }
   }
 `;
-export const createPastEmployment = /* GraphQL */ `
-  mutation CreatePastEmployment(
-    $input: CreatePastEmploymentInput!
-    $condition: ModelPastEmploymentConditionInput
+export const createEmployment = /* GraphQL */ `
+  mutation CreateEmployment(
+    $input: CreateEmploymentInput!
+    $condition: ModelEmploymentConditionInput
   ) {
-    createPastEmployment(input: $input, condition: $condition) {
+    createEmployment(input: $input, condition: $condition) {
       id
       title
       employer
       date_start
       date_end
       customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -294,18 +295,19 @@ export const createPastEmployment = /* GraphQL */ `
     }
   }
 `;
-export const updatePastEmployment = /* GraphQL */ `
-  mutation UpdatePastEmployment(
-    $input: UpdatePastEmploymentInput!
-    $condition: ModelPastEmploymentConditionInput
+export const updateEmployment = /* GraphQL */ `
+  mutation UpdateEmployment(
+    $input: UpdateEmploymentInput!
+    $condition: ModelEmploymentConditionInput
   ) {
-    updatePastEmployment(input: $input, condition: $condition) {
+    updateEmployment(input: $input, condition: $condition) {
       id
       title
       employer
       date_start
       date_end
       customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -314,78 +316,19 @@ export const updatePastEmployment = /* GraphQL */ `
     }
   }
 `;
-export const deletePastEmployment = /* GraphQL */ `
-  mutation DeletePastEmployment(
-    $input: DeletePastEmploymentInput!
-    $condition: ModelPastEmploymentConditionInput
+export const deleteEmployment = /* GraphQL */ `
+  mutation DeleteEmployment(
+    $input: DeleteEmploymentInput!
+    $condition: ModelEmploymentConditionInput
   ) {
-    deletePastEmployment(input: $input, condition: $condition) {
+    deleteEmployment(input: $input, condition: $condition) {
       id
       title
       employer
       date_start
       date_end
       customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createCurrentEmployment = /* GraphQL */ `
-  mutation CreateCurrentEmployment(
-    $input: CreateCurrentEmploymentInput!
-    $condition: ModelCurrentEmploymentConditionInput
-  ) {
-    createCurrentEmployment(input: $input, condition: $condition) {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateCurrentEmployment = /* GraphQL */ `
-  mutation UpdateCurrentEmployment(
-    $input: UpdateCurrentEmploymentInput!
-    $condition: ModelCurrentEmploymentConditionInput
-  ) {
-    updateCurrentEmployment(input: $input, condition: $condition) {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteCurrentEmployment = /* GraphQL */ `
-  mutation DeleteCurrentEmployment(
-    $input: DeleteCurrentEmploymentInput!
-    $condition: ModelCurrentEmploymentConditionInput
-  ) {
-    deleteCurrentEmployment(input: $input, condition: $condition) {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -401,9 +344,9 @@ export const createContact = /* GraphQL */ `
   ) {
     createContact(input: $input, condition: $condition) {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -419,9 +362,9 @@ export const updateContact = /* GraphQL */ `
   ) {
     updateContact(input: $input, condition: $condition) {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -437,9 +380,9 @@ export const deleteContact = /* GraphQL */ `
   ) {
     deleteContact(input: $input, condition: $condition) {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -455,9 +398,9 @@ export const createCase = /* GraphQL */ `
   ) {
     createCase(input: $input, condition: $condition) {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -478,9 +421,9 @@ export const updateCase = /* GraphQL */ `
   ) {
     updateCase(input: $input, condition: $condition) {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -501,9 +444,9 @@ export const deleteCase = /* GraphQL */ `
   ) {
     deleteCase(input: $input, condition: $condition) {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -524,9 +467,8 @@ export const createBilling = /* GraphQL */ `
   ) {
     createBilling(input: $input, condition: $condition) {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -543,9 +485,8 @@ export const updateBilling = /* GraphQL */ `
   ) {
     updateBilling(input: $input, condition: $condition) {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -562,9 +503,8 @@ export const deleteBilling = /* GraphQL */ `
   ) {
     deleteBilling(input: $input, condition: $condition) {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -685,19 +625,15 @@ export const createCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -762,19 +698,15 @@ export const updateCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -839,19 +771,15 @@ export const deleteCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -890,9 +818,9 @@ export const createCaseService = /* GraphQL */ `
       updatedAt
       service {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -901,9 +829,9 @@ export const createCaseService = /* GraphQL */ `
       }
       case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -930,9 +858,9 @@ export const updateCaseService = /* GraphQL */ `
       updatedAt
       service {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -941,9 +869,9 @@ export const updateCaseService = /* GraphQL */ `
       }
       case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -970,9 +898,9 @@ export const deleteCaseService = /* GraphQL */ `
       updatedAt
       service {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -981,9 +909,9 @@ export const deleteCaseService = /* GraphQL */ `
       }
       case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted

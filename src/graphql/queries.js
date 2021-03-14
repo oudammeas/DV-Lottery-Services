@@ -10,9 +10,9 @@ export const listServices = /* GraphQL */ `
     listServices(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -28,9 +28,9 @@ export const getService = /* GraphQL */ `
   query GetService($id: ID!) {
     getService(id: $id) {
       id
-      service_name
-      service_price
-      service_description
+      name
+      price
+      description
       _version
       _deleted
       _lastChangedAt
@@ -58,9 +58,9 @@ export const syncServices = /* GraphQL */ `
     ) {
       items {
         id
-        service_name
-        service_price
-        service_description
+        name
+        price
+        description
         _version
         _deleted
         _lastChangedAt
@@ -76,8 +76,8 @@ export const getRelationship = /* GraphQL */ `
   query GetRelationship($id: ID!) {
     getRelationship(id: $id) {
       id
-      relationship_type
-      relationship_dependent_id
+      type
+      dependent_id
       customerID
       _version
       _deleted
@@ -96,8 +96,8 @@ export const listRelationships = /* GraphQL */ `
     listRelationships(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        relationship_type
-        relationship_dependent_id
+        type
+        dependent_id
         customerID
         _version
         _deleted
@@ -125,8 +125,8 @@ export const syncRelationships = /* GraphQL */ `
     ) {
       items {
         id
-        relationship_type
-        relationship_dependent_id
+        type
+        dependent_id
         customerID
         _version
         _deleted
@@ -143,8 +143,8 @@ export const getPayment = /* GraphQL */ `
   query GetPayment($id: ID!) {
     getPayment(id: $id) {
       id
-      payment_amount
-      payment_date
+      amount
+      date
       customerID
       _version
       _deleted
@@ -153,9 +153,9 @@ export const getPayment = /* GraphQL */ `
       updatedAt
       Case {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -175,8 +175,8 @@ export const listPayments = /* GraphQL */ `
     listPayments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        payment_amount
-        payment_date
+        amount
+        date
         customerID
         _version
         _deleted
@@ -204,8 +204,8 @@ export const syncPayments = /* GraphQL */ `
     ) {
       items {
         id
-        payment_amount
-        payment_date
+        amount
+        date
         customerID
         _version
         _deleted
@@ -222,7 +222,7 @@ export const getEducation = /* GraphQL */ `
   query GetEducation($id: ID!) {
     getEducation(id: $id) {
       id
-      education_degree
+      degree
       degree_file
       institution
       date_start
@@ -245,7 +245,7 @@ export const listEducations = /* GraphQL */ `
     listEducations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        education_degree
+        degree
         degree_file
         institution
         date_start
@@ -277,7 +277,7 @@ export const syncEducations = /* GraphQL */ `
     ) {
       items {
         id
-        education_degree
+        degree
         degree_file
         institution
         date_start
@@ -294,15 +294,16 @@ export const syncEducations = /* GraphQL */ `
     }
   }
 `;
-export const getPastEmployment = /* GraphQL */ `
-  query GetPastEmployment($id: ID!) {
-    getPastEmployment(id: $id) {
+export const getEmployment = /* GraphQL */ `
+  query GetEmployment($id: ID!) {
+    getEmployment(id: $id) {
       id
       title
       employer
       date_start
       date_end
       customerID
+      current
       _version
       _deleted
       _lastChangedAt
@@ -311,13 +312,13 @@ export const getPastEmployment = /* GraphQL */ `
     }
   }
 `;
-export const listPastEmployments = /* GraphQL */ `
-  query ListPastEmployments(
-    $filter: ModelPastEmploymentFilterInput
+export const listEmployments = /* GraphQL */ `
+  query ListEmployments(
+    $filter: ModelEmploymentFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPastEmployments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listEmployments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         title
@@ -325,6 +326,7 @@ export const listPastEmployments = /* GraphQL */ `
         date_start
         date_end
         customerID
+        current
         _version
         _deleted
         _lastChangedAt
@@ -336,14 +338,14 @@ export const listPastEmployments = /* GraphQL */ `
     }
   }
 `;
-export const syncPastEmployments = /* GraphQL */ `
-  query SyncPastEmployments(
-    $filter: ModelPastEmploymentFilterInput
+export const syncEmployments = /* GraphQL */ `
+  query SyncEmployments(
+    $filter: ModelEmploymentFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncPastEmployments(
+    syncEmployments(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -356,83 +358,7 @@ export const syncPastEmployments = /* GraphQL */ `
         date_start
         date_end
         customerID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getCurrentEmployment = /* GraphQL */ `
-  query GetCurrentEmployment($id: ID!) {
-    getCurrentEmployment(id: $id) {
-      id
-      title
-      employer
-      date_start
-      date_end
-      customerID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listCurrentEmployments = /* GraphQL */ `
-  query ListCurrentEmployments(
-    $filter: ModelCurrentEmploymentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCurrentEmployments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        employer
-        date_start
-        date_end
-        customerID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncCurrentEmployments = /* GraphQL */ `
-  query SyncCurrentEmployments(
-    $filter: ModelCurrentEmploymentFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncCurrentEmployments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        employer
-        date_start
-        date_end
-        customerID
+        current
         _version
         _deleted
         _lastChangedAt
@@ -453,9 +379,9 @@ export const listContacts = /* GraphQL */ `
     listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -471,9 +397,9 @@ export const getContact = /* GraphQL */ `
   query GetContact($id: ID!) {
     getContact(id: $id) {
       id
-      contact_email
-      contact_phone_num
-      contact_website
+      email
+      phone_num
+      website
       _version
       _deleted
       _lastChangedAt
@@ -497,9 +423,9 @@ export const syncContacts = /* GraphQL */ `
     ) {
       items {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt
@@ -520,9 +446,9 @@ export const listCases = /* GraphQL */ `
     listCases(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -539,9 +465,9 @@ export const getCase = /* GraphQL */ `
   query GetCase($id: ID!) {
     getCase(id: $id) {
       id
-      case_type
-      case_status
-      case_priority_date
+      type
+      status
+      priority_date
       customerID
       _version
       _deleted
@@ -570,9 +496,9 @@ export const syncCases = /* GraphQL */ `
     ) {
       items {
         id
-        case_type
-        case_status
-        case_priority_date
+        type
+        status
+        priority_date
         customerID
         _version
         _deleted
@@ -589,9 +515,8 @@ export const getBilling = /* GraphQL */ `
   query GetBilling($id: ID!) {
     getBilling(id: $id) {
       id
-      billing_current_balance
-      billing_current_due_date
-      billing_current_overdue_date
+      billing_balance
+      due_date
       customerID
       _version
       _deleted
@@ -610,9 +535,8 @@ export const listBillings = /* GraphQL */ `
     listBillings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        billing_current_balance
-        billing_current_due_date
-        billing_current_overdue_date
+        billing_balance
+        due_date
         customerID
         _version
         _deleted
@@ -640,9 +564,8 @@ export const syncBillings = /* GraphQL */ `
     ) {
       items {
         id
-        billing_current_balance
-        billing_current_due_date
-        billing_current_overdue_date
+        billing_balance
+        due_date
         customerID
         _version
         _deleted
@@ -776,19 +699,15 @@ export const getCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      PastEmployments {
-        nextToken
-        startedAt
-      }
-      CurrentEmployments {
+      Employments {
         nextToken
         startedAt
       }
       Contact {
         id
-        contact_email
-        contact_phone_num
-        contact_website
+        email
+        phone_num
+        website
         _version
         _deleted
         _lastChangedAt

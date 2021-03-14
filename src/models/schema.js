@@ -10,22 +10,22 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "service_name": {
-                    "name": "service_name",
+                "name": {
+                    "name": "name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "service_price": {
-                    "name": "service_price",
+                "price": {
+                    "name": "price",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": false,
                     "attributes": []
                 },
-                "service_description": {
-                    "name": "service_description",
+                "description": {
+                    "name": "description",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -174,22 +174,22 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "case_type": {
-                    "name": "case_type",
+                "type": {
+                    "name": "type",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "case_status": {
-                    "name": "case_status",
+                "status": {
+                    "name": "status",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "case_priority_date": {
-                    "name": "case_priority_date",
+                "priority_date": {
+                    "name": "priority_date",
                     "isArray": false,
                     "type": "AWSDate",
                     "isRequired": false,
@@ -199,7 +199,7 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "CaseServices": {
@@ -261,15 +261,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "relationship_type": {
-                    "name": "relationship_type",
+                "type": {
+                    "name": "type",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "relationship_dependent_id": {
-                    "name": "relationship_dependent_id",
+                "dependent_id": {
+                    "name": "dependent_id",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -279,7 +279,7 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -327,17 +327,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "payment_amount": {
-                    "name": "payment_amount",
+                "amount": {
+                    "name": "amount",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": false,
                     "attributes": []
                 },
-                "payment_date": {
-                    "name": "payment_date",
+                "date": {
+                    "name": "date",
                     "isArray": false,
-                    "type": "AWSTimestamp",
+                    "type": "AWSDateTime",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -345,7 +345,7 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Case": {
@@ -406,8 +406,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "education_degree": {
-                    "name": "education_degree",
+                "degree": {
+                    "name": "degree",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -445,7 +445,7 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -483,8 +483,8 @@ export const schema = {
                 }
             ]
         },
-        "PastEmployment": {
-            "name": "PastEmployment",
+        "Employment": {
+            "name": "Employment",
             "fields": {
                 "id": {
                     "name": "id",
@@ -525,92 +525,19 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "current": {
+                    "name": "current",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "PastEmployments",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCustomer",
-                        "fields": [
-                            "customerID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "CurrentEmployment": {
-            "name": "CurrentEmployment",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "title": {
-                    "name": "title",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "employer": {
-                    "name": "employer",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "date_start": {
-                    "name": "date_start",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "date_end": {
-                    "name": "date_end",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "customerID": {
-                    "name": "customerID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "CurrentEmployments",
+            "pluralName": "Employments",
             "attributes": [
                 {
                     "type": "model",
@@ -653,22 +580,22 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "contact_email": {
-                    "name": "contact_email",
+                "email": {
+                    "name": "email",
                     "isArray": false,
                     "type": "AWSEmail",
                     "isRequired": false,
                     "attributes": []
                 },
-                "contact_phone_num": {
-                    "name": "contact_phone_num",
+                "phone_num": {
+                    "name": "phone_num",
                     "isArray": false,
                     "type": "AWSPhone",
                     "isRequired": false,
                     "attributes": []
                 },
-                "contact_website": {
-                    "name": "contact_website",
+                "website": {
+                    "name": "website",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -710,22 +637,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "billing_current_balance": {
-                    "name": "billing_current_balance",
+                "billing_balance": {
+                    "name": "billing_balance",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": false,
                     "attributes": []
                 },
-                "billing_current_due_date": {
-                    "name": "billing_current_due_date",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "billing_current_overdue_date": {
-                    "name": "billing_current_overdue_date",
+                "due_date": {
+                    "name": "due_date",
                     "isArray": false,
                     "type": "AWSDate",
                     "isRequired": false,
@@ -735,7 +655,7 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -836,7 +756,7 @@ export const schema = {
                     "name": "customerID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 }
             },
@@ -1052,25 +972,11 @@ export const schema = {
                         "associatedWith": "customerID"
                     }
                 },
-                "PastEmployments": {
-                    "name": "PastEmployments",
+                "Employments": {
+                    "name": "Employments",
                     "isArray": true,
                     "type": {
-                        "model": "PastEmployment"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "customerID"
-                    }
-                },
-                "CurrentEmployments": {
-                    "name": "CurrentEmployments",
-                    "isArray": true,
-                    "type": {
-                        "model": "CurrentEmployment"
+                        "model": "Employment"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -1180,5 +1086,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "682c517ed4f639ae39a4057b6b9b9c69"
+    "version": "37e112d00eae845cc5eb2b1e15bb9d63"
 };
