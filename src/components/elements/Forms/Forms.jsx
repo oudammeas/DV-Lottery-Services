@@ -20,59 +20,44 @@ import {
   Timeline,
 } from 'rsuite'
 
-/// rsuite form stuff
+export const FieldList = {
+  customer: [
+    'id',
+    'firstname_kh',
+    'lastname_kh',
+    'firstname',
+    'lastname',
+    'date_of_birth',
+    'gender',
+    'driver_license_num',
+    'driver_license_file',
+    'national_identification_num',
+    'national_identification_file',
+    'passport_num',
+    'passport_file',
+    'passport_issue_date',
+    'passport_expiration_date',
+    'marital_status',
+    'marriage_certificate_num',
+    'marriage_certificate_file',
+    'number_of_dependent',
+    '_version',
+  ],
 
-/// form schema:
+  contact: ['id', 'email', 'phone_num', 'website', '_version'],
 
-// const { StringType, NumberType, ArrayType, DateType, ObjectType, BooleanType } = Schema.Types
-const { StringType, NumberType } = Schema.Types
+  address: ['id', 'street_1', 'street_2', 'commune', 'city', 'province', 'postal_code', 'country', '_version'],
 
-// customerModel
-const customerModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
+  education: ['id', 'degree', 'degree_file', 'institution', 'date_start', 'date_end', '_version'],
 
-// contactModel
-const contactModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
+  employment: ['id', 'title', 'employer', 'date_start', 'date_end', '_version'],
 
-// educationModel
-const educationModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
+  billing: ['id', 'billing_balance', 'due_date', '_version'],
+}
 
-// permanentAddressModel
-const permanentAddressModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
-
-// currentEmploymentModel
-const currentEmploymentModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
-
-// pastEmploymentModel
-const pastEmploymentModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
-
-// billingModel
-const billingModel = Schema.Model({
-  firstname_kh: StringType().isRequired('This field is required.'),
-  number_of_dependent: NumberType(),
-})
-
-export const form_group = [
+export const Form_Group = {
   // customer
-  {
-    model: customerModel,
+  customer: {
     name: 'customer',
     title: 'Biological Information',
     fields: [
@@ -104,11 +89,11 @@ export const form_group = [
       { name: 'driver_license_file', label: 'Upload Driver License', type: 'file' },
       { name: 'marriage_certificate_num', label: 'Marriage Certificate No.', type: 'input' },
       { name: 'marriage_certificate_file', label: 'Upload Marriage Certificate', type: 'file' },
+      { name: '_version', label: 'Version', type: 'input' },
     ],
   },
   // contact
-  {
-    model: contactModel,
+  contact: {
     name: 'contact',
     title: 'Contact Information',
     fields: [
@@ -118,8 +103,7 @@ export const form_group = [
     ],
   },
   // education
-  {
-    model: educationModel,
+  education: {
     name: 'education',
     title: 'Education Information',
     fields: [
@@ -131,8 +115,7 @@ export const form_group = [
     ],
   },
   // Permanent Address
-  {
-    model: permanentAddressModel,
+  address: {
     name: 'address',
     title: 'Address',
     fields: [
@@ -145,11 +128,10 @@ export const form_group = [
       { name: 'country', label: 'Country', type: 'input' },
     ],
   },
-  // Current Employment
-  {
-    model: currentEmploymentModel,
-    name: 'currentEmployment',
-    title: 'Current Employment',
+  // Employment
+  employment: {
+    name: 'employment',
+    title: 'Employment',
     fields: [
       { name: 'title', label: 'Position', type: 'input' },
       { name: 'employer', label: 'Employer', type: 'input' },
@@ -157,29 +139,17 @@ export const form_group = [
       { name: 'date_end', label: 'End Date', type: 'date' },
     ],
   },
-  // Past Employment
-  {
-    model: pastEmploymentModel,
-    name: 'pastEmployment',
-    title: 'Current Employment',
-    fields: [
-      { name: 'title', label: 'Position', type: 'input' },
-      { name: 'employer', label: 'Employer', type: 'input' },
-      { name: 'date_start', label: 'Start Date', type: 'date' },
-      { name: 'date_end', label: 'End Date', type: 'date' },
-    ],
-  },
+
   // Billing Information
-  {
-    model: billingModel,
+  billing: {
     name: 'billing',
     title: 'Billing Information',
     fields: [
       { name: 'billing_balance', label: 'Blance', type: 'input' },
-      { name: 'due_date', label: 'Employer', type: 'input' },
+      { name: 'due_date', label: 'Due Date', type: 'input' },
     ],
   },
-]
+}
 
 export const TextField = props => {
   const { controlId, name, label, accepter, ...rest } = props
@@ -190,3 +160,52 @@ export const TextField = props => {
     </FormGroup>
   )
 }
+
+// /// rsuite form stuff
+
+// /// form schema:
+
+// // const { StringType, NumberType, ArrayType, DateType, ObjectType, BooleanType } = Schema.Types
+// const { StringType, NumberType } = Schema.Types
+
+// // customerModel
+// const customerModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
+
+// // contactModel
+// const contactModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
+
+// // educationModel
+// const educationModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
+
+// // permanentAddressModel
+// const addressModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
+
+// // currentEmploymentModel
+// const employmentModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
+
+// // pastEmploymentModel
+// const pastEmploymentModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
+
+// // billingModel
+// const billingModel = Schema.Model({
+//   firstname_kh: StringType().isRequired('This field is required.'),
+//   number_of_dependent: NumberType(),
+// })
