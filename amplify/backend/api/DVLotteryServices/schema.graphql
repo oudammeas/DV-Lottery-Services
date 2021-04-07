@@ -76,7 +76,7 @@ type Address @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fi
   customerID: ID
 }
 
-type Customer @model @auth(rules: [{allow: groups, groups: ["admin"], operations: [read, create, update, delete]}, {allow: owner, operations: [read, create, update]}]) {
+type Customer @model @auth(rules: [{allow: private}]) {
   id: ID!
   firstname_kh: String
   lastname_kh: String

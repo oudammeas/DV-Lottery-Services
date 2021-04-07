@@ -652,7 +652,6 @@ export const createCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
 `;
@@ -725,7 +724,6 @@ export const updateCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
 `;
@@ -798,7 +796,6 @@ export const deleteCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
 `;

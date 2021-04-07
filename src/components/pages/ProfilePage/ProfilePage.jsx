@@ -75,9 +75,9 @@ const ProfilePage = ({ commonStore, authStore }) => {
   // const username = user ? user['username'] : null
   const picture = './favicon.ico'
   const email = user ? user.attributes['email'] : null
-  const username = '3d834b52-09c1-4bb8-9e86-01fe10fcc38d'
+  const username = user ? user.attributes['sub'] : null
 
-  // console.log(username)
+  // console.log(user)
   /// Connect frontend to API:
 
   // define local states
@@ -176,7 +176,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
   // when the component loads, the useEffect hook is called and it invokes the fectCustomer() function:
   useEffect(() => {
     fetchFormData()
-    console.log('1')
+    // console.log('1')
   }, [])
 
   // fectCustomer() function uses the Amplify API category to call the AppSync GraphQL API with the getCustomer query.
@@ -184,7 +184,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
   async function fetchFormData() {
     try {
       const customer = await API.graphql(graphqlOperation(queries.getCustomer, { id: username })).then(function (output) {
-        // console.log(output)
+        console.log(output)
         setCustomer(output.data.getCustomer)
         // contact
         // alert(output.data.getCustomer.Contact)
@@ -340,7 +340,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
   //   }
   // }
 
-  console.log(customer)
+  // console.log(customer)
   // // console.log(customerFormError)
 
   return isAuthenticated ? (

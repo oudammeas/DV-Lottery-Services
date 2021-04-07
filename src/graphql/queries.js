@@ -2,7 +2,11 @@
 // this is an auto generated file. This will be overwritten
 
 export const listServices = /* GraphQL */ `
-  query ListServices($filter: ModelServiceFilterInput, $limit: Int, $nextToken: String) {
+  query ListServices(
+    $filter: ModelServiceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listServices(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -19,7 +23,7 @@ export const listServices = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getService = /* GraphQL */ `
   query GetService($id: ID!) {
     getService(id: $id) {
@@ -38,10 +42,20 @@ export const getService = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const syncServices = /* GraphQL */ `
-  query SyncServices($filter: ModelServiceFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncServices(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncServices(
+    $filter: ModelServiceFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncServices(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         name
@@ -57,7 +71,7 @@ export const syncServices = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getRelationship = /* GraphQL */ `
   query GetRelationship($id: ID!) {
     getRelationship(id: $id) {
@@ -72,9 +86,13 @@ export const getRelationship = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listRelationships = /* GraphQL */ `
-  query ListRelationships($filter: ModelRelationshipFilterInput, $limit: Int, $nextToken: String) {
+  query ListRelationships(
+    $filter: ModelRelationshipFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listRelationships(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -91,10 +109,20 @@ export const listRelationships = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const syncRelationships = /* GraphQL */ `
-  query SyncRelationships($filter: ModelRelationshipFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncRelationships(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncRelationships(
+    $filter: ModelRelationshipFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncRelationships(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         type
@@ -110,7 +138,7 @@ export const syncRelationships = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getPayment = /* GraphQL */ `
   query GetPayment($id: ID!) {
     getPayment(id: $id) {
@@ -137,9 +165,13 @@ export const getPayment = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const listPayments = /* GraphQL */ `
-  query ListPayments($filter: ModelPaymentFilterInput, $limit: Int, $nextToken: String) {
+  query ListPayments(
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listPayments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -156,10 +188,20 @@ export const listPayments = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const syncPayments = /* GraphQL */ `
-  query SyncPayments($filter: ModelPaymentFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncPayments(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncPayments(
+    $filter: ModelPaymentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPayments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         amount
@@ -175,7 +217,7 @@ export const syncPayments = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getEducation = /* GraphQL */ `
   query GetEducation($id: ID!) {
     getEducation(id: $id) {
@@ -193,9 +235,13 @@ export const getEducation = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listEducations = /* GraphQL */ `
-  query ListEducations($filter: ModelEducationFilterInput, $limit: Int, $nextToken: String) {
+  query ListEducations(
+    $filter: ModelEducationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listEducations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -215,10 +261,20 @@ export const listEducations = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const syncEducations = /* GraphQL */ `
-  query SyncEducations($filter: ModelEducationFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncEducations(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncEducations(
+    $filter: ModelEducationFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEducations(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         degree
@@ -237,7 +293,7 @@ export const syncEducations = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getEmployment = /* GraphQL */ `
   query GetEmployment($id: ID!) {
     getEmployment(id: $id) {
@@ -255,9 +311,13 @@ export const getEmployment = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listEmployments = /* GraphQL */ `
-  query ListEmployments($filter: ModelEmploymentFilterInput, $limit: Int, $nextToken: String) {
+  query ListEmployments(
+    $filter: ModelEmploymentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listEmployments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -277,10 +337,20 @@ export const listEmployments = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const syncEmployments = /* GraphQL */ `
-  query SyncEmployments($filter: ModelEmploymentFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncEmployments(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncEmployments(
+    $filter: ModelEmploymentFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEmployments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         title
@@ -299,9 +369,13 @@ export const syncEmployments = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const listContacts = /* GraphQL */ `
-  query ListContacts($filter: ModelContactFilterInput, $limit: Int, $nextToken: String) {
+  query ListContacts(
+    $filter: ModelContactFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listContacts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -318,7 +392,7 @@ export const listContacts = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getContact = /* GraphQL */ `
   query GetContact($id: ID!) {
     getContact(id: $id) {
@@ -333,10 +407,20 @@ export const getContact = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const syncContacts = /* GraphQL */ `
-  query SyncContacts($filter: ModelContactFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncContacts(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncContacts(
+    $filter: ModelContactFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncContacts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         email
@@ -352,9 +436,13 @@ export const syncContacts = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const listCases = /* GraphQL */ `
-  query ListCases($filter: ModelCaseFilterInput, $limit: Int, $nextToken: String) {
+  query ListCases(
+    $filter: ModelCaseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listCases(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -372,7 +460,7 @@ export const listCases = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getCase = /* GraphQL */ `
   query GetCase($id: ID!) {
     getCase(id: $id) {
@@ -392,10 +480,20 @@ export const getCase = /* GraphQL */ `
       }
     }
   }
-`
+`;
 export const syncCases = /* GraphQL */ `
-  query SyncCases($filter: ModelCaseFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncCases(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncCases(
+    $filter: ModelCaseFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCases(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         type
@@ -412,7 +510,7 @@ export const syncCases = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getBilling = /* GraphQL */ `
   query GetBilling($id: ID!) {
     getBilling(id: $id) {
@@ -427,9 +525,13 @@ export const getBilling = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listBillings = /* GraphQL */ `
-  query ListBillings($filter: ModelBillingFilterInput, $limit: Int, $nextToken: String) {
+  query ListBillings(
+    $filter: ModelBillingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listBillings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -446,10 +548,20 @@ export const listBillings = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const syncBillings = /* GraphQL */ `
-  query SyncBillings($filter: ModelBillingFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncBillings(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncBillings(
+    $filter: ModelBillingFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBillings(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         billing_balance
@@ -465,7 +577,7 @@ export const syncBillings = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getAddress = /* GraphQL */ `
   query GetAddress($id: ID!) {
     getAddress(id: $id) {
@@ -485,9 +597,13 @@ export const getAddress = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listAddresss = /* GraphQL */ `
-  query ListAddresss($filter: ModelAddressFilterInput, $limit: Int, $nextToken: String) {
+  query ListAddresss(
+    $filter: ModelAddressFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listAddresss(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -509,10 +625,20 @@ export const listAddresss = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const syncAddresses = /* GraphQL */ `
-  query SyncAddresses($filter: ModelAddressFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncAddresses(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncAddresses(
+    $filter: ModelAddressFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncAddresses(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         street_1
@@ -533,7 +659,7 @@ export const syncAddresses = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;
 export const getCustomer = /* GraphQL */ `
   query GetCustomer($id: ID!) {
     getCustomer(id: $id) {
@@ -600,12 +726,15 @@ export const getCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
-`
+`;
 export const listCustomers = /* GraphQL */ `
-  query ListCustomers($filter: ModelCustomerFilterInput, $limit: Int, $nextToken: String) {
+  query ListCustomers(
+    $filter: ModelCustomerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
     listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
@@ -632,16 +761,25 @@ export const listCustomers = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
       }
       nextToken
       startedAt
     }
   }
-`
+`;
 export const syncCustomers = /* GraphQL */ `
-  query SyncCustomers($filter: ModelCustomerFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncCustomers(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncCustomers(
+    $filter: ModelCustomerFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCustomers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         firstname_kh
@@ -667,16 +805,25 @@ export const syncCustomers = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
       }
       nextToken
       startedAt
     }
   }
-`
+`;
 export const syncCaseServices = /* GraphQL */ `
-  query SyncCaseServices($filter: ModelCaseServiceFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
-    syncCaseServices(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+  query SyncCaseServices(
+    $filter: ModelCaseServiceFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCaseServices(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
         caseID
@@ -691,4 +838,4 @@ export const syncCaseServices = /* GraphQL */ `
       startedAt
     }
   }
-`
+`;

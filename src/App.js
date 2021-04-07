@@ -19,12 +19,13 @@ import { BrowserRouter as VichySugarDaddyProvider } from 'react-router-dom'
 import { commonStore, authStore } from './stores'
 
 // Set up frontend
-import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify'
+import { Amplify, Auth, API } from 'aws-amplify'
 import awsExports from './aws-exports'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 import * as queries from './graphql/queries'
 Amplify.configure(awsExports)
 API.configure(awsExports)
+Auth.configure(awsExports)
 
 const stores = {
   commonStore,

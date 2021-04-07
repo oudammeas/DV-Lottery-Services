@@ -503,8 +503,8 @@ export const onDeleteAddress = /* GraphQL */ `
   }
 `;
 export const onCreateCustomer = /* GraphQL */ `
-  subscription OnCreateCustomer($owner: String) {
-    onCreateCustomer(owner: $owner) {
+  subscription OnCreateCustomer {
+    onCreateCustomer {
       id
       firstname_kh
       lastname_kh
@@ -568,13 +568,12 @@ export const onCreateCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
 `;
 export const onUpdateCustomer = /* GraphQL */ `
-  subscription OnUpdateCustomer($owner: String) {
-    onUpdateCustomer(owner: $owner) {
+  subscription OnUpdateCustomer {
+    onUpdateCustomer {
       id
       firstname_kh
       lastname_kh
@@ -638,13 +637,12 @@ export const onUpdateCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
 `;
 export const onDeleteCustomer = /* GraphQL */ `
-  subscription OnDeleteCustomer($owner: String) {
-    onDeleteCustomer(owner: $owner) {
+  subscription OnDeleteCustomer {
+    onDeleteCustomer {
       id
       firstname_kh
       lastname_kh
@@ -708,7 +706,6 @@ export const onDeleteCustomer = /* GraphQL */ `
         nextToken
         startedAt
       }
-      owner
     }
   }
 `;

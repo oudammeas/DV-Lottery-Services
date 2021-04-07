@@ -1054,29 +1054,13 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "admin"
-                                ],
+                                "allow": "private",
                                 "operations": [
-                                    "read",
                                     "create",
                                     "update",
-                                    "delete"
+                                    "delete",
+                                    "read"
                                 ]
-                            },
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update"
-                                ],
-                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -1086,5 +1070,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "37e112d00eae845cc5eb2b1e15bb9d63"
+    "version": "cceaa118a6bbf9ef77a39b09ba0c094d"
 };
