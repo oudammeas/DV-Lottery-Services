@@ -1,4 +1,4 @@
-export { FieldList, Form_Group, TextField } from './Forms.jsx'
+export { FieldList, FieldListInitial, Form_Group, TextField } from './Forms.jsx'
 export { CustomerForm } from './CustomerForm.jsx'
 export { ContactForm } from './ContactForm.jsx'
 export { EducationForm } from './EducationForm.jsx'

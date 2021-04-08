@@ -36,6 +36,7 @@ class MyForm extends React.Component {
           <FieldTextInput label="Lastname" name="lastname" type="text" placeholder="" />
           <FieldTextInput label="DOB" name="date_of_birth" type="text" placeholder="" />
           <FieldSelect label="Gender" name="gender" placeholder="0">
+            <option value="">--</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </FieldSelect>

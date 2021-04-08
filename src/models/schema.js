@@ -600,6 +600,13 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "customerID": {
+                    "name": "customerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -608,6 +615,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCustomer",
+                        "fields": [
+                            "customerID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -988,15 +1004,16 @@ export const schema = {
                 },
                 "Contact": {
                     "name": "Contact",
-                    "isArray": false,
+                    "isArray": true,
                     "type": {
                         "model": "Contact"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "customerContactId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
                     }
                 },
                 "Cases": {
@@ -1070,5 +1087,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "cceaa118a6bbf9ef77a39b09ba0c094d"
+    "version": "522bd26056cd8d9b61f83f162203703f"
 };

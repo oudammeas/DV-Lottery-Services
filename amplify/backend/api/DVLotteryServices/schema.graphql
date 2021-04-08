@@ -41,11 +41,12 @@ type Employment @model @key(name: "byCustomer", fields: ["customerID"]) @auth(ru
   current: Boolean
 }
 
-type Contact @model @auth(rules: [{allow: private}]) {
+type Contact @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
   email: AWSEmail
   phone_num: AWSPhone
   website: String
+  customerID: ID
 }
 
 type Case @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
@@ -100,7 +101,7 @@ type Customer @model @auth(rules: [{allow: private}]) {
   Payments: [Payment] @connection(keyName: "byCustomer", fields: ["id"])
   Educations: [Education] @connection(keyName: "byCustomer", fields: ["id"])
   Employments: [Employment] @connection(keyName: "byCustomer", fields: ["id"])
-  Contact: Contact @connection
+  Contact: [Contact] @connection(keyName: "byCustomer", fields: ["id"])
   Cases: [Case] @connection(keyName: "byCustomer", fields: ["id"])
   Billings: [Billing] @connection(keyName: "byCustomer", fields: ["id"])
   Addresses: [Address] @connection(keyName: "byCustomer", fields: ["id"])

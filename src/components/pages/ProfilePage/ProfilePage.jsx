@@ -35,6 +35,7 @@ import {
   TextField,
   Form_Group,
   FieldList,
+  FieldListInitial,
 } from '../../elements/Forms'
 
 Amplify.configure(awsExports)
@@ -102,65 +103,110 @@ const ProfilePage = ({ commonStore, authStore }) => {
 
   const [addresses, setAddresses] = useState({})
   async function updateAddress(address) {
-    try {
-      const data = {}
-      const form = FieldList['address']
-      form.forEach(field => {
-        data[field] = address[field]
-      })
-      console.log(data)
-      await API.graphql(graphqlOperation(mutations.updateAddress, { input: data }))
-      setAddresses(address)
-    } catch (err) {
-      console.log('error updating address:', err)
+    console.log(address)
+    if (!address.hasOwnProperty('id')) {
+      address['customerID'] = username
+      // create address
+      try {
+        await API.graphql(graphqlOperation(mutations.createAddress, { input: address }))
+      } catch (err) {
+        console.log('error creating address:', err)
+      }
+    } else {
+      // update address
+      try {
+        const data = {}
+        const form = FieldList['address']
+        form.forEach(field => {
+          data[field] = address[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateAddress, { input: data }))
+        setAddresses(address)
+      } catch (err) {
+        console.log('error updating address:', err)
+      }
     }
   }
 
   const [contact, setContact] = useState({})
   async function updateContact(contact) {
-    try {
-      const data = {}
-      const form = FieldList['contact']
-      form.forEach(field => {
-        data[field] = contact[field]
-      })
-      console.log(data)
-      await API.graphql(graphqlOperation(mutations.updateContact, { input: data }))
-      setContact(contact)
-    } catch (err) {
-      console.log('error updating contact:', err)
+    if (!contact.hasOwnProperty('id')) {
+      contact['customerID'] = username
+      // create contact
+      try {
+        await API.graphql(graphqlOperation(mutations.createContact, { input: contact }))
+      } catch (err) {
+        console.log('error creating contact:', err)
+      }
+    } else {
+      // update contact
+      try {
+        const data = {}
+        const form = FieldList['contact']
+        form.forEach(field => {
+          data[field] = contact[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateContact, { input: data }))
+        setContact(contact)
+      } catch (err) {
+        console.log('error updating contact:', err)
+      }
     }
   }
 
   const [education, setEducation] = useState({})
   async function updateEducation(education) {
-    try {
-      const data = {}
-      const form = FieldList['education']
-      form.forEach(field => {
-        data[field] = education[field]
-      })
-      console.log(data)
-      await API.graphql(graphqlOperation(mutations.updateEducation, { input: data }))
-      setEducation(education)
-    } catch (err) {
-      console.log('error updating customer:', err)
+    if (!education.hasOwnProperty('id')) {
+      education['customerID'] = username
+      // create education
+      try {
+        await API.graphql(graphqlOperation(mutations.createEducation, { input: education }))
+      } catch (err) {
+        console.log('error creating education:', err)
+      }
+    } else {
+      // update education
+      try {
+        const data = {}
+        const form = FieldList['education']
+        form.forEach(field => {
+          data[field] = education[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateEducation, { input: data }))
+        setEducation(education)
+      } catch (err) {
+        console.log('error updating education:', err)
+      }
     }
   }
 
   const [employment, setEmployment] = useState({})
   async function updateEmployment(employment) {
-    try {
-      const data = {}
-      const form = FieldList['employment']
-      form.forEach(field => {
-        data[field] = employment[field]
-      })
-      console.log(data)
-      await API.graphql(graphqlOperation(mutations.updateEmployment, { input: data }))
-      setEmployment(employment)
-    } catch (err) {
-      console.log('error updating customer:', err)
+    if (!employment.hasOwnProperty('id')) {
+      employment['customerID'] = username
+      // create education
+      try {
+        await API.graphql(graphqlOperation(mutations.createEmployment, { input: employment }))
+      } catch (err) {
+        console.log('error creating employment:', err)
+      }
+    } else {
+      // update education
+      try {
+        const data = {}
+        const form = FieldList['employment']
+        form.forEach(field => {
+          data[field] = employment[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateEmployment, { input: data }))
+        setEmployment(employment)
+      } catch (err) {
+        console.log('error updating employment:', err)
+      }
     }
   }
 
@@ -182,54 +228,92 @@ const ProfilePage = ({ commonStore, authStore }) => {
   // fectCustomer() function uses the Amplify API category to call the AppSync GraphQL API with the getCustomer query.
   // Once the data is returned, the data is passed into the setCustomerData() function to update the local state.
   async function fetchFormData() {
+    // fetch customer data
     try {
-      const customer = await API.graphql(graphqlOperation(queries.getCustomer, { id: username })).then(function (output) {
+      await API.graphql(graphqlOperation(queries.getCustomer, { id: username })).then(function (output) {
         console.log(output)
         setCustomer(output.data.getCustomer)
-        // contact
-        // alert(output.data.getCustomer.Contact)
-        // setContact(output.data.getCustomer.Contact)
       })
-      // updateCustomer({ firstname: 'Oudam', lastname: 'Meas' })
     } catch (err) {
       console.log('error fetching customer data', err)
     }
+
+    // fetch contact data
     try {
-      const addresses = await API.graphql(
-        graphqlOperation(queries.listAddresss, { filter: { customerID: { eq: username } } }),
-      ).then(function (output) {
-        // console.log(addresses.data.listAddresss.items[0])
-        setAddresses(output.data.listAddresss.items[0])
+      await API.graphql(graphqlOperation(queries.listContacts, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        console.log(output)
+        if (output.data.listContacts.items.length == 0) {
+          setContact(FieldListInitial['contact'])
+          console.log(FieldListInitial['contact'])
+        } else {
+          setContact(output.data.listContacts.items[0])
+        }
+      })
+    } catch (err) {
+      console.log('error fetching contact data', err)
+    }
+
+    // fetch address data
+    try {
+      await API.graphql(graphqlOperation(queries.listAddresss, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        console.log(output)
+        if (output.data.listAddresss.items.length == 0) {
+          setAddresses(FieldListInitial['address'])
+        } else {
+          setAddresses(output.data.listAddresss.items[0])
+        }
       })
     } catch (err) {
       console.log('error fetching address data', err)
     }
+
+    // fetch education data
     try {
-      const education = await API.graphql(
-        graphqlOperation(queries.listEducations, { filter: { customerID: { eq: username } } }),
-      ).then(function (output) {
+      await API.graphql(graphqlOperation(queries.listEducations, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
         console.log(output)
-        setEducation(output.data.listEducations.items[0])
+        if (output.data.listEducations.items.length == 0) {
+          setEducation(FieldListInitial['education'])
+        } else {
+          setEducation(output.data.listEducations.items[0])
+        }
       })
     } catch (err) {
       console.log('error fetching education data', err)
     }
+
+    // fetch employments data
     try {
-      const employment = await API.graphql(
-        graphqlOperation(queries.listEmployments, { filter: { customerID: { eq: username } } }),
-      ).then(function (output) {
-        // Employments
-        setEmployment(output.data.listEmployments.items[0])
+      await API.graphql(graphqlOperation(queries.listEmployments, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        console.log(output)
+        if (output.data.listEmployments.items.length == 0) {
+          setEmployment(FieldListInitial['employment'])
+        } else {
+          setEmployment(output.data.listEmployments.items[0])
+        }
       })
     } catch (err) {
       console.log('error fetching employment data', err)
     }
+
+    // fetch billing data
     try {
-      const billing = await API.graphql(
-        graphqlOperation(queries.listBillings, { filter: { customerID: { eq: username } } }),
-      ).then(function (output) {
-        // console.log(output)
-        setBilling(output.data.listBillings.items[0])
+      await API.graphql(graphqlOperation(queries.listBillings, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        console.log(output)
+        if (output.data.listBillings.items.length == 0) {
+          setBilling(FieldListInitial['billing'])
+        } else {
+          setBilling(output.data.listBillings.items[0])
+        }
       })
     } catch (err) {
       console.log('error fetching billing data', err)

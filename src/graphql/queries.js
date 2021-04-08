@@ -370,6 +370,22 @@ export const syncEmployments = /* GraphQL */ `
     }
   }
 `;
+export const getContact = /* GraphQL */ `
+  query GetContact($id: ID!) {
+    getContact(id: $id) {
+      id
+      email
+      phone_num
+      website
+      customerID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const listContacts = /* GraphQL */ `
   query ListContacts(
     $filter: ModelContactFilterInput
@@ -382,6 +398,7 @@ export const listContacts = /* GraphQL */ `
         email
         phone_num
         website
+        customerID
         _version
         _deleted
         _lastChangedAt
@@ -390,21 +407,6 @@ export const listContacts = /* GraphQL */ `
       }
       nextToken
       startedAt
-    }
-  }
-`;
-export const getContact = /* GraphQL */ `
-  query GetContact($id: ID!) {
-    getContact(id: $id) {
-      id
-      email
-      phone_num
-      website
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -426,6 +428,7 @@ export const syncContacts = /* GraphQL */ `
         email
         phone_num
         website
+        customerID
         _version
         _deleted
         _lastChangedAt
@@ -704,15 +707,8 @@ export const getCustomer = /* GraphQL */ `
         startedAt
       }
       Contact {
-        id
-        email
-        phone_num
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
+        nextToken
+        startedAt
       }
       Cases {
         nextToken

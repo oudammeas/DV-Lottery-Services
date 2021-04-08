@@ -299,6 +299,7 @@ export const onCreateContact = /* GraphQL */ `
       email
       phone_num
       website
+      customerID
       _version
       _deleted
       _lastChangedAt
@@ -314,6 +315,7 @@ export const onUpdateContact = /* GraphQL */ `
       email
       phone_num
       website
+      customerID
       _version
       _deleted
       _lastChangedAt
@@ -329,6 +331,7 @@ export const onDeleteContact = /* GraphQL */ `
       email
       phone_num
       website
+      customerID
       _version
       _deleted
       _lastChangedAt
@@ -546,15 +549,8 @@ export const onCreateCustomer = /* GraphQL */ `
         startedAt
       }
       Contact {
-        id
-        email
-        phone_num
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
+        nextToken
+        startedAt
       }
       Cases {
         nextToken
@@ -615,15 +611,8 @@ export const onUpdateCustomer = /* GraphQL */ `
         startedAt
       }
       Contact {
-        id
-        email
-        phone_num
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
+        nextToken
+        startedAt
       }
       Cases {
         nextToken
@@ -684,15 +673,8 @@ export const onDeleteCustomer = /* GraphQL */ `
         startedAt
       }
       Contact {
-        id
-        email
-        phone_num
-        website
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
+        nextToken
+        startedAt
       }
       Cases {
         nextToken

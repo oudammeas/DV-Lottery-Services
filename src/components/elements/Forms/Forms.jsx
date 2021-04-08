@@ -55,6 +55,39 @@ export const FieldList = {
   billing: ['id', 'billing_balance', 'due_date', '_version'],
 }
 
+export const FieldListInitial = {
+  customer: {
+    firstname_kh: null,
+    lastname_kh: null,
+    firstname: null,
+    lastname: null,
+    date_of_birth: null,
+    gender: null,
+    driver_license_num: null,
+    driver_license_file: null,
+    national_identification_num: null,
+    national_identification_file: null,
+    passport_num: null,
+    passport_file: null,
+    passport_issue_date: null,
+    passport_expiration_date: null,
+    marital_status: null,
+    marriage_certificate_num: null,
+    marriage_certificate_file: null,
+    number_of_dependent: null,
+  },
+
+  contact: { email: null, phone_num: null, website: null },
+
+  address: { street_1: null, street_2: null, commune: null, city: null, province: null, postal_code: null, country: null },
+
+  education: { degree: null, degree_file: null, institution: null, date_start: null, date_end: null },
+
+  employment: { title: null, employer: null, date_start: null, date_end: null },
+
+  billing: { billing_balance: null, due_date: null },
+}
+
 export const Form_Group = {
   // customer
   customer: {

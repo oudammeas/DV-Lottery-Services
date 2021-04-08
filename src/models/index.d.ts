@@ -81,6 +81,7 @@ export declare class Contact {
   readonly email?: string;
   readonly phone_num?: string;
   readonly website?: string;
+  readonly customerID?: string;
   constructor(init: ModelInit<Contact>);
   static copyOf(source: Contact, mutator: (draft: MutableModel<Contact>) => MutableModel<Contact> | void): Contact;
 }
@@ -132,7 +133,7 @@ export declare class Customer {
   readonly Payments?: (Payment | null)[];
   readonly Educations?: (Education | null)[];
   readonly Employments?: (Employment | null)[];
-  readonly Contact?: Contact;
+  readonly Contact?: (Contact | null)[];
   readonly Cases?: (Case | null)[];
   readonly Billings?: (Billing | null)[];
   readonly Addresses?: (Address | null)[];
