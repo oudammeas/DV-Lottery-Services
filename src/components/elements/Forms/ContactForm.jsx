@@ -29,7 +29,7 @@ class MyForm extends React.Component {
     // console.log(this.props.touched)
     return (
       <div>
-        <h2>Contact Information</h2>
+        <h3>Contact</h3>
         <Form>
           <FieldTextInput label="Email" name="email" type="email" placeholder="" />
           <FieldTextInput label="Phone No." name="phone_num" type="phone" placeholder="" />

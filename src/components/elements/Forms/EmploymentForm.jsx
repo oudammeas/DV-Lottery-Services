@@ -29,12 +29,12 @@ class MyForm extends React.Component {
     // console.log(this.props.touched)
     return (
       <div>
-        <h2>Employment Information</h2>
+        <h3>Employment</h3>
         <Form>
           <FieldTextInput label="Title" name="title" type="text" placeholder="" />
           <FieldTextInput label="Employer" name="employer" type="text" placeholder="" />
-          <FieldTextInput label="Start Date" name="date_start" type="text" placeholder="" />
-          <FieldTextInput label="End Date" name="date_end" type="text" placeholder="" />
+          <FieldTextInput label="Start Date" name="date_start" type="date" placeholder="" />
+          <FieldTextInput label="End Date" name="date_end" type="date" placeholder="" />
           <br />
           <Button type="reset" appearance="ghost">
             Reset

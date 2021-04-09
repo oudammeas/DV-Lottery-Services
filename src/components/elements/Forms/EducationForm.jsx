@@ -26,7 +26,7 @@ class MyForm extends React.Component {
     // console.log(this.props.touched)
     return (
       <div>
-        <h2>Education Information</h2>
+        <h3>Education</h3>
         <Form>
           <FieldTextInput label="Degree" name="degree" type="text" placeholder="" />
           <FieldTextInput label="Institution" name="institution" type="text" placeholder="" />

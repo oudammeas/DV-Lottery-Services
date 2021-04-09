@@ -29,7 +29,7 @@ class MyForm extends React.Component {
     // console.log(this.props.touched)
     return (
       <div>
-        <h2>Billing Information</h2>
+        <h3>Billing</h3>
         <Form>
           <FieldTextInput label="Blance" name="billing_balance" type="text" placeholder="" />
           <FieldTextInput label="Due Date" name="due_date" type="text" placeholder="" />

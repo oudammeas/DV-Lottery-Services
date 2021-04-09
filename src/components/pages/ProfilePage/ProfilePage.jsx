@@ -11,6 +11,7 @@ import {
   Radio,
   FormControl,
   FormGroup,
+  Divider,
 } from 'rsuite'
 import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
@@ -62,9 +63,10 @@ const ProfilePage = ({ commonStore, authStore }) => {
     flexboxgrid: {
       root: {
         padding: '1em 1em 1em 1em',
+        justify: 'center',
       },
 
-      item: {},
+      item: { colspan: 4 },
     },
   }
 
@@ -77,6 +79,8 @@ const ProfilePage = ({ commonStore, authStore }) => {
   const picture = './favicon.ico'
   const email = user ? user.attributes['email'] : null
   const username = user ? user.attributes['sub'] : null
+  const given_name = user ? user.attributes['given_name'] : null
+  const family_name = user ? user.attributes['family_name'] : null
 
   // console.log(user)
   /// Connect frontend to API:
@@ -320,110 +324,6 @@ const ProfilePage = ({ commonStore, authStore }) => {
     }
   }
 
-  // // console.log(customer)
-  // // const customerData = [
-  // //   { key: 'firstname', value: '123877' },
-  // //   { key: 'lastname', value: '124565' },
-  // // ]
-
-  // const handleAppSync = event => {
-  //   event.preventDefault()
-  // }
-
-  // // form switch helper
-  // // callbackType: {setFormValue, setFormError, resetFormValue, setFormInput}
-
-  // async function switchFormHandler(formName, value, callbackType) {
-  //   switch (formName) {
-  //     case 'customer':
-  //       if (callbackType == 'setFormError') {
-  //         setCustomerFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setCustomerFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setCustomerFormValue(customer)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setCustomerFormValue({ ...customerFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     case 'contact':
-  //       if (callbackType == 'setFormError') {
-  //         setContactFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setContactFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setContactFormValue(contact)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setContactFormValue({ ...contactFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     case 'education':
-  //       if (callbackType == 'setFormError') {
-  //         setEducationFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setEducationFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setEducationFormValue(education)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setEducationFormValue({ ...educationFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     case 'address':
-  //       if (callbackType == 'setFormError') {
-  //         setAddressFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setAddressFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setAddressFormValue(addresses)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setAddressFormValue({ ...addressFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     case 'currentEmployment':
-  //       if (callbackType == 'setFormError') {
-  //         setCurrentEmploymentFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setCurrentEmploymentFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setCurrentEmploymentFormValue(currentEmployment)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setCurrentEmploymentFormValue({ ...currentEmploymentFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     case 'pastEmployment':
-  //       if (callbackType == 'setFormError') {
-  //         setPastEmploymentFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setPastEmploymentFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setPastEmploymentFormValue(pastEmployment)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setPastEmploymentFormValue({ ...pastEmploymentFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     case 'billing':
-  //       if (callbackType == 'setFormError') {
-  //         setBillingFormError(value)
-  //       } else if (callbackType == 'setFormValue') {
-  //         setBillingFormValue(value)
-  //       } else if (callbackType == 'resetFormValue') {
-  //         setBillingFormValue(billing)
-  //       } else if (callbackType == 'setFormInput') {
-  //         let key = value[0]
-  //         setBillingFormValue({ ...billingFormValue, [key]: value[1] })
-  //       }
-  //       break
-  //     default:
-  //       break
-  //   }
-  // }
-
   // console.log(customer)
   // // console.log(customerFormError)
 
@@ -431,29 +331,45 @@ const ProfilePage = ({ commonStore, authStore }) => {
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.pagetitle}>{t('common.profile-page.page-title')}</div>
+        <Divider></Divider>
         <div className="align-items-center profile-header mb-5 text-center text-md-left">
           <div md={2}>
             <img src={picture} alt="Profile" className="rounded-circle img-fluid profile-picture mb-3 mb-md-0" />
           </div>
           <div md>
-            <h4>{username}</h4>
+            <h4>
+              {given_name} {family_name}
+            </h4>
             <p className="lead text-muted">{email}</p>
           </div>
         </div>
         <div>{/* <p>{JSON.stringify(user, null, 2)}</p> */}</div>
         {/* <JSONView formValue={customer} /> */}
-        <FlexboxGrid style={styles.flexboxgrid.root}>
-          <CustomerForm model={customer} updateModel={updateCustomer} />
-          <br />
-          <ContactForm model={contact} updateModel={updateContact} />
-          <br />
-          <EducationForm model={education} updateModel={updateEducation} />
-          <br />
-          <AddressForm model={addresses} updateModel={updateAddress} />
-          <br />
-          <EmploymentForm model={employment} updateModel={updateEmployment} />
-          <br />
-          <BillingForm model={billing} updateModel={updateBilling} />
+        <Divider></Divider>
+        <FlexboxGrid justify="space-between">
+          <FlexboxGrid.Item colspan={7}>
+            <CustomerForm model={customer} updateModel={updateCustomer} />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <AddressForm model={addresses} updateModel={updateAddress} />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <EducationForm model={education} updateModel={updateEducation} />
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+        <br />
+        <Divider></Divider>
+        <FlexboxGrid justify="space-between">
+          <FlexboxGrid.Item colspan={7}>
+            <EmploymentForm model={employment} updateModel={updateEmployment} />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <ContactForm model={contact} updateModel={updateContact} />
+          </FlexboxGrid.Item>
+
+          <FlexboxGrid.Item colspan={7}>
+            <BillingForm model={billing} updateModel={updateBilling} />
+          </FlexboxGrid.Item>
         </FlexboxGrid>
       </Content>
     </MainLayout>
