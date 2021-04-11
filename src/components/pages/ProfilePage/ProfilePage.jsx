@@ -12,6 +12,7 @@ import {
   FormControl,
   FormGroup,
   Divider,
+  Avatar,
 } from 'rsuite'
 import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
@@ -334,7 +335,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
         <Divider></Divider>
         <div className="align-items-center profile-header mb-5 text-center text-md-left">
           <div md={2}>
-            <img src={picture} alt="Profile" className="rounded-circle img-fluid profile-picture mb-3 mb-md-0" />
+            <Avatar src={picture} alt="Profile" size="lg" />
           </div>
           <div md>
             <h4>
@@ -348,27 +349,26 @@ const ProfilePage = ({ commonStore, authStore }) => {
         <Divider></Divider>
         <FlexboxGrid justify="space-between">
           <FlexboxGrid.Item colspan={7}>
-            <CustomerForm model={customer} updateModel={updateCustomer} />
+            <CustomerForm model={customer} updateModel={updateCustomer} form_id="customer" />
           </FlexboxGrid.Item>
           <FlexboxGrid.Item colspan={7}>
-            <AddressForm model={addresses} updateModel={updateAddress} />
+            <AddressForm model={addresses} updateModel={updateAddress} form_id="address" />
           </FlexboxGrid.Item>
           <FlexboxGrid.Item colspan={7}>
-            <EducationForm model={education} updateModel={updateEducation} />
+            <EducationForm model={education} updateModel={updateEducation} form_id="education" />
           </FlexboxGrid.Item>
         </FlexboxGrid>
         <br />
         <Divider></Divider>
         <FlexboxGrid justify="space-between">
           <FlexboxGrid.Item colspan={7}>
-            <EmploymentForm model={employment} updateModel={updateEmployment} />
+            <EmploymentForm model={employment} updateModel={updateEmployment} form_id="employment" />
           </FlexboxGrid.Item>
           <FlexboxGrid.Item colspan={7}>
-            <ContactForm model={contact} updateModel={updateContact} />
+            <ContactForm model={contact} updateModel={updateContact} form_id="contact" />
           </FlexboxGrid.Item>
-
           <FlexboxGrid.Item colspan={7}>
-            <BillingForm model={billing} updateModel={updateBilling} />
+            <BillingForm model={billing} updateModel={updateBilling} form_id="billing" />
           </FlexboxGrid.Item>
         </FlexboxGrid>
       </Content>

@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Formik, Form, useField } from 'formik'
+import { Formik, Field, Form, FieldArray, ErrorMessage, withFormik, useField } from 'formik'
 import * as Yup from 'yup'
 import './styles-custom.css'
 import {
   Content,
   Button,
   ButtonToolbar,
-  Form as RsuiteForm,
+  // Form as RsuiteForm,
   FormGroup,
   FlexboxGrid,
   ControlLabel,
@@ -15,6 +15,25 @@ import {
   RadioGroup,
   Radio,
 } from 'rsuite'
+
+export const FieldView = ({ label, ...props }) => {
+  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+  // which we can spread on <input>. We can use field meta to show an error
+  // message if the field is invalid and it has been touched (i.e. visited)
+
+  const [field, meta] = useField(props)
+  if (field.value == null) {
+    field.value = ''
+  } // set fiedl to empty string if null is provided
+  return (
+    <div className="form-group row">
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <div className="col-sm-10">
+        <input disabled className="text-input" {...field} {...props} />
+      </div>
+    </div>
+  )
+}
 
 export const FieldTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -27,7 +46,7 @@ export const FieldTextInput = ({ label, ...props }) => {
   } // set fiedl to empty string if null is provided
   return (
     <div>
-      <ControlLabel htmlFor={props.id || props.name}>{label}</ControlLabel>
+      <label htmlFor={props.id || props.name}>{label}</label>
       <input className="text-input" {...field} {...props} />
       {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
     </div>

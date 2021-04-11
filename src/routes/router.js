@@ -22,6 +22,7 @@ import AuthenticatorPage from '../components/pages/AuthenticatorPage'
 import ProfilePage from '../components/pages/ProfilePage'
 import StatusPage from '../components/pages/StatusPage'
 import AppointmentPage from '../components/pages/AppointmentPage'
+import AccountSettingsPage from '../components/pages/AccountSettingsPage'
 
 // history to move from page to page
 // import { createBrowserHistory } from 'history'
@@ -38,6 +39,8 @@ export const route = [
   { path: '/profile', Component: ProfilePage, name: 'common.routes.profile', private: 1 },
   { path: '/status', Component: StatusPage, name: 'common.routes.status', private: 1 },
   { path: '/appointment', Component: AppointmentPage, name: 'common.routes.appointment', private: 0 },
+  { path: '/account-settings', Component: AccountSettingsPage, name: 'common.routes.account-settings', private: 1 },
+
   // { path: '/logout', Component: LogoutPage, name: 'common.routes.logout', private: 0 },
 ]
 
@@ -49,6 +52,7 @@ export const menu = [
   { path: '/contact-us', Component: ContactUsPage, name: 'common.routes.contact-us', private: 0 },
   { path: '/profile', Component: ProfilePage, name: 'common.routes.profile', private: 1 },
   { path: '/status', Component: StatusPage, name: 'common.routes.status', private: 1 },
+  { path: '/account-settings', Component: AccountSettingsPage, name: 'common.routes.account-settings', private: 1 },
 ]
 
 // const history = createBrowserHistory()
