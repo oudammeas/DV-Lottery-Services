@@ -15,7 +15,9 @@
     "selected-candidates": "Selected Candidates",
     "status": "Status",
     "account-settings": "Account Settings",
-    "change-password": "Change Password"
+    "change-password": "Change Password",
+    "change-email": "Change Email",
+    "change-account-info": "Change Account Info"
   },
   "external-link": {
     "us-embassy": "U.S. Embassy in Cambodia",
@@ -75,5 +77,11 @@
   },
   "change-password-page": {
     "page-title": "Change Password"
+  },
+  "change-email-page": {
+    "page-title": "Change Email"
+  },
+  "change-account-info-page": {
+    "page-title": "Change Account Info"
   }
 }

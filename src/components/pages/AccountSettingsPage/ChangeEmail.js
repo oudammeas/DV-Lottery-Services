@@ -85,7 +85,7 @@ const ChangeEmail = ({ commonStore, authStore }) => {
   // Auth Status:
   const isAuthenticated = authStore.isAuthenticated
   const user = authStore.authUser
-  console.log(authStore)
+  // console.log(authStore)
 
   const history = useHistory()
   const [codeSent, setCodeSent] = useState(false)
@@ -127,7 +127,7 @@ const ChangeEmail = ({ commonStore, authStore }) => {
     try {
       await Auth.verifyCurrentUserAttributeSubmit('email', fields.code)
 
-      history.push('/settings')
+      history.push('/account-settings')
     } catch (error) {
       onError(error)
       setIsConfirming(false)
@@ -136,37 +136,49 @@ const ChangeEmail = ({ commonStore, authStore }) => {
 
   function renderUpdateForm() {
     return (
-      <form onSubmit={handleUpdateClick}>
-        <FormGroup bsSize="large" controlId="email">
+      <Form formValue={fields} onChange={handleFieldChange}>
+        <FormGroup>
           <ControlLabel>Email</ControlLabel>
-          <FormControl autoFocus type="email" value={fields.email} onChange={handleFieldChange} />
+          <FormControl name="email" type="email" autoFocus />
         </FormGroup>
-        <LoaderButton block type="submit" bsSize="large" isLoading={isSendingCode} disabled={!validateEmailForm()}>
+        <LoaderButton
+          block
+          type="submit"
+          bsSize="large"
+          onClick={handleUpdateClick}
+          isLoading={isSendingCode}
+          disabled={!validateEmailForm()}>
           Update Email
         </LoaderButton>
-      </form>
+      </Form>
     )
   }
 
   function renderConfirmationForm() {
     return (
-      <form onSubmit={handleConfirmClick}>
+      <Form formValue={fields} onChange={handleFieldChange}>
         <FormGroup bsSize="large" controlId="code">
           <ControlLabel>Confirmation Code</ControlLabel>
-          <FormControl autoFocus type="tel" value={fields.code} onChange={handleFieldChange} />
+          <FormControl name={fields.code} type="tel" autoFocus />
           <HelpBlock>Please check your email ({fields.email}) for the confirmation code.</HelpBlock>
         </FormGroup>
-        <LoaderButton block type="submit" bsSize="large" isLoading={isConfirming} disabled={!validateConfirmForm()}>
+        <LoaderButton
+          block
+          type="submit"
+          bsSize="large"
+          onClick={handleConfirmClick}
+          disabled={!validateConfirmForm()}
+          isLoading={isConfirming}>
           Confirm
         </LoaderButton>
-      </form>
+      </Form>
     )
   }
 
   return isAuthenticated ? (
     <MainLayout>
       <Content style={styles.content}>
-        <div style={styles.pagetitle}>{t('common.change-password-page.page-title')}</div>
+        <div style={styles.pagetitle}>{t('common.change-email-page.page-title')}</div>
         <div className="ChangeEmail">{!codeSent ? renderUpdateForm() : renderConfirmationForm()}</div>
       </Content>
     </MainLayout>

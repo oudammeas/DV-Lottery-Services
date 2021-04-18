@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import LoaderButton from '../../elements/Libs/LoaderButton'
 import { useFormFields } from '../../elements/Libs/hooksLib'
 import { onError } from '../../elements/Libs/errorLib'
-import './ChangePassword.css'
+import './ChangeAccountInfo.css'
 
 import {
   Content,
@@ -32,7 +32,7 @@ import { Redirect, withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import AuthenticatorPage from '../AuthenticatorPage'
 
-const ChangePassword = ({ commonStore, authStore }) => {
+const ChangeAccountInfo = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
 
   const styles = {
@@ -85,30 +85,27 @@ const ChangePassword = ({ commonStore, authStore }) => {
   // Auth Status:
   const isAuthenticated = authStore.isAuthenticated
   const user = authStore.authUser
-  // console.log(isAuthenticated)
+  console.log(user)
 
   const history = useHistory()
   const [fields, handleFieldChange] = useFormFields({
-    password: '',
-    oldPassword: '',
-    confirmPassword: '',
+    given_name: user.attributes.given_name,
+    family_name: user.attributes.family_name,
   })
   const [isChanging, setIsChanging] = useState(false)
 
-  function validateForm() {
-    return fields.oldPassword.length > 0 && fields.password.length > 0 && fields.password === fields.confirmPassword
+  function validateEmailForm() {
+    return fields.family_name.length > 0 && fields.given_name.length
   }
 
-  async function handleChangeClick(event) {
+  async function handleUpdateClick(event) {
     event.preventDefault()
 
     setIsChanging(true)
 
     try {
-      const currentUser = await Auth.currentAuthenticatedUser()
-      await Auth.changePassword(currentUser, fields.oldPassword, fields.password)
-
-      history.push('/account-settings')
+      const user = await Auth.currentAuthenticatedUser()
+      await Auth.updateUserAttributes(user, { given_name: fields.given_name, family_name: fields.family_name })
     } catch (error) {
       onError(error)
       setIsChanging(false)
@@ -118,33 +115,26 @@ const ChangePassword = ({ commonStore, authStore }) => {
   return isAuthenticated ? (
     <MainLayout>
       <Content style={styles.content}>
-        <div style={styles.pagetitle}>{t('common.change-password-page.page-title')}</div>
-        <div className="ChangePassword">
-          <Form formValue={fields} onChange={handleFieldChange}>
-            <FormGroup>
-              <ControlLabel>Old Password</ControlLabel>
-              <FormControl name="oldPassword" type="text" />
-            </FormGroup>
-            <hr />
-            <FormGroup>
-              <ControlLabel>New Password</ControlLabel>
-              <FormControl name="password" type="password" />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Confirm Password</ControlLabel>
-              <FormControl name="confirmPassword" type="password" />
-            </FormGroup>
-            <LoaderButton
-              block
-              type="submit"
-              bsSize="large"
-              onClick={handleChangeClick}
-              disabled={!validateForm()}
-              isLoading={isChanging}>
-              Change Password
-            </LoaderButton>
-          </Form>
-        </div>
+        <div style={styles.pagetitle}>{t('common.change-account-info-page.page-title')}</div>
+        <Form formValue={fields} onChange={handleFieldChange}>
+          <FormGroup>
+            <ControlLabel>First Name</ControlLabel>
+            <FormControl name="given_name" type="text" autoFocus />
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Family Name</ControlLabel>
+            <FormControl name="family_name" type="text" autoFocus />
+          </FormGroup>
+          <LoaderButton
+            block
+            type="submit"
+            bsSize="large"
+            onClick={handleUpdateClick}
+            disabled={!validateEmailForm()}
+            isLoading={isChanging}>
+            Update Info
+          </LoaderButton>
+        </Form>
       </Content>
     </MainLayout>
   ) : (
@@ -152,6 +142,6 @@ const ChangePassword = ({ commonStore, authStore }) => {
   )
 }
 
-ChangePassword.propTypes = {}
+ChangeAccountInfo.propTypes = {}
 
-export default withRouter(inject('authStore')(observer(ChangePassword)))
+export default withRouter(inject('authStore')(observer(ChangeAccountInfo)))

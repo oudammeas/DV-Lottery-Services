@@ -25,6 +25,7 @@ import AppointmentPage from '../components/pages/AppointmentPage'
 import AccountSettingsPage from '../components/pages/AccountSettingsPage'
 import ChangePassword from '../components/pages/AccountSettingsPage/ChangePassword'
 import ChangeEmail from '../components/pages/AccountSettingsPage/ChangeEmail'
+import ChangeAccountInfo from '../components/pages/AccountSettingsPage/ChangeAccountInfo'
 
 // history to move from page to page
 // import { createBrowserHistory } from 'history'
@@ -44,6 +45,7 @@ export const route = [
   { path: '/account-settings', Component: AccountSettingsPage, name: 'common.routes.account-settings', private: 1 },
   { path: '/account-settings/password', Component: ChangePassword, name: 'common.routes.change-password', private: 1 },
   { path: '/account-settings/email', Component: ChangeEmail, name: 'common.routes.change-email', private: 1 },
+  { path: '/account-settings/account-info', Component: ChangeAccountInfo, name: 'common.routes.change-account-info', private: 1 },
 
   // { path: '/logout', Component: LogoutPage, name: 'common.routes.logout', private: 0 },
 ]

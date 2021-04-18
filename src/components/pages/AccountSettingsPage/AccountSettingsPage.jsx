@@ -37,6 +37,7 @@ import './AccountSettingsPage.css'
 import LoaderButton from '../../elements/Libs/LoaderButton'
 import ChagePassword from './ChangePassword'
 import ChageEmail from './ChangeEmail'
+import ChageAccountInfo from './ChangeAccountInfo'
 
 const AccountSettingsPage = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
@@ -142,17 +143,41 @@ const AccountSettingsPage = ({ commonStore, authStore }) => {
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.pagetitle}>{t('common.account-settings-page.page-title')}</div>
+        <Form layout="horizontal">
+          <FormGroup>
+            <ControlLabel>Firstame</ControlLabel>
+            <FormControl value={user.attributes.given_name} readOnly />
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Lastname</ControlLabel>
+            <FormControl value={user.attributes.family_name} readOnly />
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Email</ControlLabel>
+            <FormControl value={user.attributes.email} readOnly />
+          </FormGroup>
+        </Form>
+        <br />
+        <Link to="/account-settings/account-info">
+          <LoaderButton block bsSize="large">
+            Change Account Info
+          </LoaderButton>
+        </Link>
+        <br />
         <Link to="/account-settings/email">
           <LoaderButton block bsSize="large">
             Change Email
           </LoaderButton>
         </Link>
+        <br />
         <Link to="/account-settings/password">
           <LoaderButton block bsSize="large">
             Change Password
           </LoaderButton>
         </Link>
         <hr />
+
+        <h3>Payment</h3>
         <StripeProvider stripe={stripe}>
           <Elements
             fonts={[
