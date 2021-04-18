@@ -30,6 +30,7 @@
     "react-json-view": "^1.21.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-stripe-elements": "^6.1.2",
     "rsuite": "^4.8.0",
     "stripe": "^8.142.0",
     "styled-components": "^5.1.1",
