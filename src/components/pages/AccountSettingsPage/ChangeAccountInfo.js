@@ -31,6 +31,7 @@ import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import { Redirect, withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import AuthenticatorPage from '../AuthenticatorPage'
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 
 const ChangeAccountInfo = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
@@ -85,7 +86,7 @@ const ChangeAccountInfo = ({ commonStore, authStore }) => {
   // Auth Status:
   const isAuthenticated = authStore.isAuthenticated
   const user = authStore.authUser
-  console.log(user)
+  // console.log(user)
 
   const history = useHistory()
   const [fields, handleFieldChange] = useFormFields({
@@ -104,8 +105,14 @@ const ChangeAccountInfo = ({ commonStore, authStore }) => {
     setIsChanging(true)
 
     try {
-      const user = await Auth.currentAuthenticatedUser()
-      await Auth.updateUserAttributes(user, { given_name: fields.given_name, family_name: fields.family_name })
+      // const user = await Auth.currentAuthenticatedUser()
+      await Auth.updateUserAttributes(user, { given_name: fields.given_name, family_name: fields.family_name }).then(
+        async function (output) {
+          let user = await Auth.currentAuthenticatedUser()
+          authStore.setAuth(AuthState.SignedIn, user)
+        },
+      )
+      history.push('/account-settings')
     } catch (error) {
       onError(error)
       setIsChanging(false)

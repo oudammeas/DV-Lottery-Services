@@ -31,6 +31,7 @@ import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import { Redirect, withRouter } from 'react-router'
 import { observer, inject } from 'mobx-react'
 import AuthenticatorPage from '../AuthenticatorPage'
+import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 
 const ChangeEmail = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
@@ -84,7 +85,7 @@ const ChangeEmail = ({ commonStore, authStore }) => {
 
   // Auth Status:
   const isAuthenticated = authStore.isAuthenticated
-  const user = authStore.authUser
+  // const user = authStore.authUser
   // console.log(authStore)
 
   const history = useHistory()
@@ -125,7 +126,10 @@ const ChangeEmail = ({ commonStore, authStore }) => {
     setIsConfirming(true)
 
     try {
-      await Auth.verifyCurrentUserAttributeSubmit('email', fields.code)
+      await Auth.verifyCurrentUserAttributeSubmit('email', fields.code).then(async function (output) {
+        let user = await Auth.currentAuthenticatedUser()
+        authStore.setAuth(AuthState.SignedIn, user)
+      })
 
       history.push('/account-settings')
     } catch (error) {
@@ -159,7 +163,7 @@ const ChangeEmail = ({ commonStore, authStore }) => {
       <Form formValue={fields} onChange={handleFieldChange}>
         <FormGroup bsSize="large" controlId="code">
           <ControlLabel>Confirmation Code</ControlLabel>
-          <FormControl name={fields.code} type="tel" autoFocus />
+          <FormControl name="code" type="tel" autoFocus />
           <HelpBlock>Please check your email ({fields.email}) for the confirmation code.</HelpBlock>
         </FormGroup>
         <LoaderButton
