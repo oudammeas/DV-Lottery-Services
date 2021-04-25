@@ -4,7 +4,7 @@ import { schema } from './schema';
 
 
 
-const { Service, CaseService, Case, Relationship, Payment, Education, Employment, Contact, Billing, Address, Customer } = initSchema(schema);
+const { Service, CaseService, Case, Relationship, Payment, Education, Employment, Contact, Billing, Address, Customer, S3Object } = initSchema(schema);
 
 export {
   Service,
@@ -17,5 +17,6 @@ export {
   Contact,
   Billing,
   Address,
-  Customer
+  Customer,
+  S3Object
 };

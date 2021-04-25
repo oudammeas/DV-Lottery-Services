@@ -24,7 +24,7 @@ type Payment @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fi
 type Education @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
   degree: String
-  degree_file: String
+  degree_file: S3Object
   institution: String
   date_start: AWSDate
   date_end: AWSDate
@@ -60,7 +60,7 @@ type Case @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", field
 
 type Billing @model @auth(rules: [{allow: private}]) @key(name: "byCustomer", fields: ["customerID"]) {
   id: ID!
-  billing_balance: Float
+  total: Float
   due_date: AWSDate
   customerID: ID
 }
@@ -86,16 +86,16 @@ type Customer @model @auth(rules: [{allow: private}]) {
   date_of_birth: AWSDate
   gender: String
   driver_license_num: String
-  driver_license_file: String
+  driver_license_file: S3Object
   national_identification_num: String
-  national_identification_file: String
+  national_identification_file: S3Object
   passport_num: String
-  passport_file: String
+  passport_file: S3Object
   passport_issue_date: AWSDate
   passport_expiration_date: AWSDate
   marital_status: String
   marriage_certificate_num: String
-  marriage_certificate_file: String
+  marriage_certificate_file: S3Object
   number_of_dependent: Int
   Relationships: [Relationship] @connection(keyName: "byCustomer", fields: ["id"])
   Payments: [Payment] @connection(keyName: "byCustomer", fields: ["id"])
@@ -115,3 +115,8 @@ type CaseService @model(queries: null) @key(name: "byCase", fields: ["caseID", "
   service: Service! @connection(fields: ["serviceID"])
 }
  
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}

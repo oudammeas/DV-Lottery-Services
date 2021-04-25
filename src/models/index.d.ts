@@ -2,7 +2,12 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-
+export declare class S3Object {
+  readonly bucket: string;
+  readonly region: string;
+  readonly key: string;
+  constructor(init: ModelInit<S3Object>);
+}
 
 export declare class Service {
   readonly id: string;
@@ -55,7 +60,7 @@ export declare class Payment {
 export declare class Education {
   readonly id: string;
   readonly degree?: string;
-  readonly degree_file?: string;
+  readonly degree_file?: S3Object;
   readonly institution?: string;
   readonly date_start?: string;
   readonly date_end?: string;
@@ -88,7 +93,7 @@ export declare class Contact {
 
 export declare class Billing {
   readonly id: string;
-  readonly billing_balance?: number;
+  readonly total?: number;
   readonly due_date?: string;
   readonly customerID?: string;
   constructor(init: ModelInit<Billing>);
@@ -118,16 +123,16 @@ export declare class Customer {
   readonly date_of_birth?: string;
   readonly gender?: string;
   readonly driver_license_num?: string;
-  readonly driver_license_file?: string;
+  readonly driver_license_file?: S3Object;
   readonly national_identification_num?: string;
-  readonly national_identification_file?: string;
+  readonly national_identification_file?: S3Object;
   readonly passport_num?: string;
-  readonly passport_file?: string;
+  readonly passport_file?: S3Object;
   readonly passport_issue_date?: string;
   readonly passport_expiration_date?: string;
   readonly marital_status?: string;
   readonly marriage_certificate_num?: string;
-  readonly marriage_certificate_file?: string;
+  readonly marriage_certificate_file?: S3Object;
   readonly number_of_dependent?: number;
   readonly Relationships?: (Relationship | null)[];
   readonly Payments?: (Payment | null)[];

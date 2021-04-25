@@ -219,7 +219,11 @@ export const createEducation = /* GraphQL */ `
     createEducation(input: $input, condition: $condition) {
       id
       degree
-      degree_file
+      degree_file {
+        bucket
+        region
+        key
+      }
       institution
       date_start
       date_end
@@ -240,7 +244,11 @@ export const updateEducation = /* GraphQL */ `
     updateEducation(input: $input, condition: $condition) {
       id
       degree
-      degree_file
+      degree_file {
+        bucket
+        region
+        key
+      }
       institution
       date_start
       date_end
@@ -261,7 +269,11 @@ export const deleteEducation = /* GraphQL */ `
     deleteEducation(input: $input, condition: $condition) {
       id
       degree
-      degree_file
+      degree_file {
+        bucket
+        region
+        key
+      }
       institution
       date_start
       date_end
@@ -470,7 +482,7 @@ export const createBilling = /* GraphQL */ `
   ) {
     createBilling(input: $input, condition: $condition) {
       id
-      billing_balance
+      total
       due_date
       customerID
       _version
@@ -488,7 +500,7 @@ export const updateBilling = /* GraphQL */ `
   ) {
     updateBilling(input: $input, condition: $condition) {
       id
-      billing_balance
+      total
       due_date
       customerID
       _version
@@ -506,7 +518,7 @@ export const deleteBilling = /* GraphQL */ `
   ) {
     deleteBilling(input: $input, condition: $condition) {
       id
-      billing_balance
+      total
       due_date
       customerID
       _version
@@ -600,16 +612,32 @@ export const createCustomer = /* GraphQL */ `
       date_of_birth
       gender
       driver_license_num
-      driver_license_file
+      driver_license_file {
+        bucket
+        region
+        key
+      }
       national_identification_num
-      national_identification_file
+      national_identification_file {
+        bucket
+        region
+        key
+      }
       passport_num
-      passport_file
+      passport_file {
+        bucket
+        region
+        key
+      }
       passport_issue_date
       passport_expiration_date
       marital_status
       marriage_certificate_num
-      marriage_certificate_file
+      marriage_certificate_file {
+        bucket
+        region
+        key
+      }
       number_of_dependent
       _version
       _deleted
@@ -665,16 +693,32 @@ export const updateCustomer = /* GraphQL */ `
       date_of_birth
       gender
       driver_license_num
-      driver_license_file
+      driver_license_file {
+        bucket
+        region
+        key
+      }
       national_identification_num
-      national_identification_file
+      national_identification_file {
+        bucket
+        region
+        key
+      }
       passport_num
-      passport_file
+      passport_file {
+        bucket
+        region
+        key
+      }
       passport_issue_date
       passport_expiration_date
       marital_status
       marriage_certificate_num
-      marriage_certificate_file
+      marriage_certificate_file {
+        bucket
+        region
+        key
+      }
       number_of_dependent
       _version
       _deleted
@@ -730,16 +774,32 @@ export const deleteCustomer = /* GraphQL */ `
       date_of_birth
       gender
       driver_license_num
-      driver_license_file
+      driver_license_file {
+        bucket
+        region
+        key
+      }
       national_identification_num
-      national_identification_file
+      national_identification_file {
+        bucket
+        region
+        key
+      }
       passport_num
-      passport_file
+      passport_file {
+        bucket
+        region
+        key
+      }
       passport_issue_date
       passport_expiration_date
       marital_status
       marriage_certificate_num
-      marriage_certificate_file
+      marriage_certificate_file {
+        bucket
+        region
+        key
+      }
       number_of_dependent
       _version
       _deleted

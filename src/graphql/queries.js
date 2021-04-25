@@ -223,7 +223,11 @@ export const getEducation = /* GraphQL */ `
     getEducation(id: $id) {
       id
       degree
-      degree_file
+      degree_file {
+        bucket
+        region
+        key
+      }
       institution
       date_start
       date_end
@@ -246,7 +250,6 @@ export const listEducations = /* GraphQL */ `
       items {
         id
         degree
-        degree_file
         institution
         date_start
         date_end
@@ -278,7 +281,6 @@ export const syncEducations = /* GraphQL */ `
       items {
         id
         degree
-        degree_file
         institution
         date_start
         date_end
@@ -518,7 +520,7 @@ export const getBilling = /* GraphQL */ `
   query GetBilling($id: ID!) {
     getBilling(id: $id) {
       id
-      billing_balance
+      total
       due_date
       customerID
       _version
@@ -538,7 +540,7 @@ export const listBillings = /* GraphQL */ `
     listBillings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        billing_balance
+        total
         due_date
         customerID
         _version
@@ -567,7 +569,7 @@ export const syncBillings = /* GraphQL */ `
     ) {
       items {
         id
-        billing_balance
+        total
         due_date
         customerID
         _version
@@ -674,16 +676,32 @@ export const getCustomer = /* GraphQL */ `
       date_of_birth
       gender
       driver_license_num
-      driver_license_file
+      driver_license_file {
+        bucket
+        region
+        key
+      }
       national_identification_num
-      national_identification_file
+      national_identification_file {
+        bucket
+        region
+        key
+      }
       passport_num
-      passport_file
+      passport_file {
+        bucket
+        region
+        key
+      }
       passport_issue_date
       passport_expiration_date
       marital_status
       marriage_certificate_num
-      marriage_certificate_file
+      marriage_certificate_file {
+        bucket
+        region
+        key
+      }
       number_of_dependent
       _version
       _deleted
@@ -741,16 +759,12 @@ export const listCustomers = /* GraphQL */ `
         date_of_birth
         gender
         driver_license_num
-        driver_license_file
         national_identification_num
-        national_identification_file
         passport_num
-        passport_file
         passport_issue_date
         passport_expiration_date
         marital_status
         marriage_certificate_num
-        marriage_certificate_file
         number_of_dependent
         _version
         _deleted
@@ -785,16 +799,12 @@ export const syncCustomers = /* GraphQL */ `
         date_of_birth
         gender
         driver_license_num
-        driver_license_file
         national_identification_num
-        national_identification_file
         passport_num
-        passport_file
         passport_issue_date
         passport_expiration_date
         marital_status
         marriage_certificate_num
-        marriage_certificate_file
         number_of_dependent
         _version
         _deleted

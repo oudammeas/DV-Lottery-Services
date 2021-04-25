@@ -416,7 +416,9 @@ export const schema = {
                 "degree_file": {
                     "name": "degree_file",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -653,8 +655,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "billing_balance": {
-                    "name": "billing_balance",
+                "total": {
+                    "name": "total",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": false,
@@ -872,7 +874,9 @@ export const schema = {
                 "driver_license_file": {
                     "name": "driver_license_file",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -886,7 +890,9 @@ export const schema = {
                 "national_identification_file": {
                     "name": "national_identification_file",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -900,7 +906,9 @@ export const schema = {
                 "passport_file": {
                     "name": "passport_file",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -935,7 +943,9 @@ export const schema = {
                 "marriage_certificate_file": {
                     "name": "marriage_certificate_file",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1086,6 +1096,33 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "522bd26056cd8d9b61f83f162203703f"
+    "nonModels": {
+        "S3Object": {
+            "name": "S3Object",
+            "fields": {
+                "bucket": {
+                    "name": "bucket",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "region": {
+                    "name": "region",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "key": {
+                    "name": "key",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "ff4302cdf170b368841a1b93fb3f667a"
 };
