@@ -555,6 +555,11 @@ export const onCreateCustomer = /* GraphQL */ `
         key
       }
       number_of_dependent
+      portrait_file {
+        bucket
+        region
+        key
+      }
       _version
       _deleted
       _lastChangedAt
@@ -633,6 +638,11 @@ export const onUpdateCustomer = /* GraphQL */ `
         key
       }
       number_of_dependent
+      portrait_file {
+        bucket
+        region
+        key
+      }
       _version
       _deleted
       _lastChangedAt
@@ -711,6 +721,11 @@ export const onDeleteCustomer = /* GraphQL */ `
         key
       }
       number_of_dependent
+      portrait_file {
+        bucket
+        region
+        key
+      }
       _version
       _deleted
       _lastChangedAt

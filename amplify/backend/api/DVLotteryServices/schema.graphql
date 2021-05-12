@@ -105,6 +105,7 @@ type Customer @model @auth(rules: [{allow: private}]) {
   Cases: [Case] @connection(keyName: "byCustomer", fields: ["id"])
   Billings: [Billing] @connection(keyName: "byCustomer", fields: ["id"])
   Addresses: [Address] @connection(keyName: "byCustomer", fields: ["id"])
+  portrait_file: S3Object
 }
 
 type CaseService @model(queries: null) @key(name: "byCase", fields: ["caseID", "serviceID"]) @key(name: "byService", fields: ["serviceID", "caseID"]) @auth(rules: [{allow: private}, {allow: private}]) {
@@ -114,9 +115,10 @@ type CaseService @model(queries: null) @key(name: "byCase", fields: ["caseID", "
   case: Case! @connection(fields: ["caseID"])
   service: Service! @connection(fields: ["serviceID"])
 }
- 
+
 type S3Object {
   bucket: String!
   region: String!
   key: String!
 }
+ 

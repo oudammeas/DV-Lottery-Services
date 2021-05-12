@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Formik, Field, Form, FieldArray, ErrorMessage, withFormik, useField } from 'formik'
+import { Formik, Field, Form, FieldArray, ErrorMessage, withFormik, useField, FormikProps, setNestedObjectValues } from 'formik'
 import * as Yup from 'yup'
 import './styles-custom.css'
 import {
@@ -14,7 +14,71 @@ import {
   FormControl,
   RadioGroup,
   Radio,
+  Thumb,
 } from 'rsuite'
+import { v4 as uuid } from 'uuid'
+
+export const FileUpload = props => {
+  const { field, form } = props
+
+  const handleChange = e => {
+    const file = e.currentTarget.files[0]
+    // const reader = new FileReader()
+    // const imgTag = document.getElementById('myfile')
+    // imgTag.title = file.name
+    // reader.onload = function (event) {
+    //   imgTag.src = event.target.result
+    // }
+    // reader.readAsDataURL(file)
+    // alert(field.name)
+    form.setFieldValue(field.name, file)
+  }
+
+  // console.log(form)
+  const value = field.value
+  return (
+    <div>
+      <input type={'file'} onChange={o => handleChange(o)} className={'form-control'} />
+      {/* <img src={''} alt="" id={'myfile'} /> */}
+    </div>
+  )
+}
+
+export const FieldFileView = ({ label, ...props }) => {
+  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+  // which we can spread on <input>. We can use field meta to show an error
+  // message if the field is invalid and it has been touched (i.e. visited)
+  const [field, meta] = useField(props)
+  console.log(field.name)
+
+  return (
+    <div>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <Field {...field} {...props} type="file" component={FileUpload} />
+    </div>
+  )
+}
+
+export const FieldFileInput = ({ label, ...props }) => {
+  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+  // which we can spread on <input>. We can use field meta to show an error
+  // message if the field is invalid and it has been touched (i.e. visited)
+  const [field, meta] = useField(props)
+  // if (field.value == null) {
+  //   field.value = ''
+  // } // set field to empty string if null is provided
+
+  // console.log(field)
+  // console.log(props)
+
+  return (
+    <div>
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <Field {...field} {...props} type="file" component={FileUpload} />
+      {meta.touched && meta.error ? <div className="error">{meta.error}</div> : null}
+    </div>
+  )
+}
 
 export const FieldView = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -25,6 +89,7 @@ export const FieldView = ({ label, ...props }) => {
   if (field.value == null) {
     field.value = ''
   } // set fiedl to empty string if null is provided
+
   return (
     <div className="form-group row">
       <label htmlFor={props.id || props.name}>{label}</label>
@@ -39,11 +104,14 @@ export const FieldTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input>. We can use field meta to show an error
   // message if the field is invalid and it has been touched (i.e. visited)
-
-  const [field, meta] = useField(props)
+  const [field, meta, helpers] = useField(props)
   if (field.value == null) {
     field.value = ''
-  } // set fiedl to empty string if null is provided
+  } // set fieLD to empty string if null is provided
+
+  // console.log(meta)
+  // console.log(helpers)
+
   return (
     <div>
       <label htmlFor={props.id || props.name}>{label}</label>

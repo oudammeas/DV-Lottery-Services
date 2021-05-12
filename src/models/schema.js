@@ -1067,6 +1067,15 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "customerID"
                     }
+                },
+                "portrait_file": {
+                    "name": "portrait_file",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -1124,5 +1133,5 @@ export const schema = {
             }
         }
     },
-    "version": "ff4302cdf170b368841a1b93fb3f667a"
+    "version": "1ad4ec3170e9795033759a25df5aaacc"
 };

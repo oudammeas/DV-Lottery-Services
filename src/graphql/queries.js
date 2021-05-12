@@ -703,6 +703,11 @@ export const getCustomer = /* GraphQL */ `
         key
       }
       number_of_dependent
+      portrait_file {
+        bucket
+        region
+        key
+      }
       _version
       _deleted
       _lastChangedAt

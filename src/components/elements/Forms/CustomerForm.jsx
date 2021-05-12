@@ -26,7 +26,7 @@ const FormView = () => {
       <FieldView label="Gender" name="gender" placeholder="0" />
       <FieldView label="Marital Status" name="marital_status" type="text" placeholder="" />
       <FieldView label="Number of Dependent" name="number_of_dependent" type="number" placeholder="" />
-      <FieldView label="Portrait File" name="portrait_file" type="file" placeholder="" />
+      {/* <FieldView label="Portrait File" name="portrait_file" type="file" placeholder="" /> */}
       <FieldView label="Passport No." name="passport_num" type="text" placeholder="" />
       <FieldView label="Passport File" name="passport_file" type="file" placeholder="" />
       <FieldView label="Passport Issue Date" name="passport_issue_date" type="date" placeholder="" />
@@ -153,7 +153,7 @@ class MyForm extends React.Component {
     return (
       <div>
         <h3>Personal Info</h3>
-        <Form id={this.props.form_id}>
+        <Form id={this.props.form_id} setFieldValue>
           {this._renderAction()}
           {this?.props?.status?.edit ? this._renderFormInput() : this._renderFormView()}
         </Form>

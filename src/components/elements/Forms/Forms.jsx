@@ -41,6 +41,7 @@ export const FieldList = {
     'marriage_certificate_num',
     'marriage_certificate_file',
     'number_of_dependent',
+    'portrait_file',
     '_version',
   ],
 
@@ -75,6 +76,7 @@ export const FieldListInitial = {
     marriage_certificate_num: null,
     marriage_certificate_file: null,
     number_of_dependent: null,
+    portrait_file: null,
   },
 
   contact: { email: null, phone_num: null, website: null },

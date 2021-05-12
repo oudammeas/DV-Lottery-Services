@@ -142,6 +142,7 @@ export declare class Customer {
   readonly Cases?: (Case | null)[];
   readonly Billings?: (Billing | null)[];
   readonly Addresses?: (Address | null)[];
+  readonly portrait_file?: S3Object;
   constructor(init: ModelInit<Customer>);
   static copyOf(source: Customer, mutator: (draft: MutableModel<Customer>) => MutableModel<Customer> | void): Customer;
 }

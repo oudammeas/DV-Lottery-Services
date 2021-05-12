@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import {
   Content,
@@ -13,6 +13,11 @@ import {
   FormGroup,
   Divider,
   Avatar,
+  FileType,
+  Uploader,
+  Alert,
+  Loader,
+  Icon,
 } from 'rsuite'
 import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
 import MainLayout from '../../layouts/MainLayout.js/MainLayout'
@@ -23,10 +28,12 @@ import { observer, inject } from 'mobx-react'
 import AuthenticatorPage from '../AuthenticatorPage'
 import JSONView from 'react-json-view'
 // Set up frontend
-import { Amplify, Auth, API, graphqlOperation } from 'aws-amplify'
+import { Amplify, Auth, API, graphqlOperation, Storage } from 'aws-amplify'
+import { v4 as uuid } from 'uuid'
 import awsExports from '../../../aws-exports'
 import * as queries from '../../../graphql/queries'
 import * as mutations from '../../../graphql/mutations'
+import * as subscriptions from '../../../graphql/subscriptions'
 import {
   CustomerForm,
   ContactForm,
@@ -42,6 +49,10 @@ import {
 
 Amplify.configure(awsExports)
 API.configure(awsExports)
+Storage.configure(awsExports)
+
+// load bucket
+const { aws_user_files_s3_bucket_region: region, aws_user_files_s3_bucket: bucket } = awsExports
 
 const ProfilePage = ({ commonStore, authStore }) => {
   const { t } = useTranslation()
@@ -69,19 +80,130 @@ const ProfilePage = ({ commonStore, authStore }) => {
 
       item: { colspan: 4 },
     },
+
+    container: {
+      width: 300,
+      margin: '0 auto',
+    },
+    username: {
+      cursor: 'pointer',
+      border: '1px solid #ddd',
+      padding: '5px 25px',
+    },
+    button: {
+      width: 200,
+      backgroundColor: '#ddd',
+      cursor: 'pointer',
+      height: 30,
+      margin: '0px 0px 8px',
+    },
   }
 
-  /// Auth Profile:
+  // fetch user:
   const isAuthenticated = authStore.isAuthenticated
   const user = authStore.authUser
   // console.log(authStore)
   // console.log(user)
-  // const username = user ? user['username'] : null
   const picture = './favicon.ico'
   const email = user ? user.attributes['email'] : null
   const username = user ? user.attributes['sub'] : null
   const given_name = user ? user.attributes['given_name'] : null
   const family_name = user ? user.attributes['family_name'] : null
+
+  // when the component loads, the useEffect hook is called and it invokes the fectCustomer() function:
+  useEffect(() => {
+    fetchFormData()
+    // console.log('1')
+
+    // Subscribe to update customer
+    const subscriptionOnUpdateCustomer = API.graphql(graphqlOperation(subscriptions.onUpdateCustomer)).subscribe({
+      next: async customer => {
+        // Do something with the data
+        setCustomer(customer)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateCustomer.unsubscribe()
+
+    // Subscribe to update address
+    const subscriptionOnUpdateAddresses = API.graphql(graphqlOperation(subscriptions.onUpdateAddress)).subscribe({
+      next: async addresses => {
+        // Do something with the data
+        setAddresses(addresses)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateAddresses.unsubscribe()
+
+    // Subscribe to update address
+    const subscriptionOnUpdateEducation = API.graphql(graphqlOperation(subscriptions.onUpdateEducation)).subscribe({
+      next: async education => {
+        // Do something with the data
+        setEducation(education)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateEducation.unsubscribe()
+
+    // Subscribe to update address
+    const subscriptionOnUpdateEmployment = API.graphql(graphqlOperation(subscriptions.onUpdateEmployment)).subscribe({
+      next: async employment => {
+        // Do something with the data
+        setEmployment(employment)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateEmployment.unsubscribe()
+  }, [])
+
+  // fetch avatar
+  const [file, updateFile] = useState(null)
+  // const [username, updateUsername] = useState('')
+  // const [state, dispatch] = useReducer(reducer, initialState)
+  const [avatarUrl, updateAvatarUrl] = useState('./favicon.ico')
+  async function fetchImage(key) {
+    try {
+      const imageData = await Storage.get(key)
+      updateAvatarUrl(imageData)
+      console.log('Image:', imageData)
+    } catch (err) {
+      console.log('error', err)
+    }
+  }
+
+  // handle change
+  function handleChange(event) {
+    const {
+      target: { value, files },
+    } = event
+    const [image] = files || []
+    updateFile(image || value)
+  }
+
+  async function createAvatar() {
+    if (file) {
+      const { name: fileName, type: mimeType } = file
+      const key = `${uuid()}${fileName}`
+      const fileForUpload = {
+        bucket,
+        key,
+        region,
+      }
+      const inputData = { id: username, portrait_file: fileForUpload }
+
+      console.log(inputData)
+
+      try {
+        await Storage.put(key, file, {
+          contentType: mimeType,
+        })
+        await API.graphql(graphqlOperation(mutations.updateCustomer, { input: inputData }))
+        console.log('successfully stored user data!')
+      } catch (err) {
+        console.log('error: ', err)
+      }
+    }
+  }
 
   // console.log(user)
   /// Connect frontend to API:
@@ -163,6 +285,37 @@ const ProfilePage = ({ commonStore, authStore }) => {
 
   const [education, setEducation] = useState({})
   async function updateEducation(education) {
+    // console.log(education)
+
+    // handle file type fields
+    const entries = Object.entries(education)
+    const file_field = ['degree_file']
+    for (const [fieldName, value] of entries) {
+      if (file_field.includes(fieldName)) {
+        // prep file for upload to S3 bucket
+        const file = value
+        const { name: fileName, type: mimeType } = file
+        const key = `${uuid()}${fileName}`
+        const fileForUpload = {
+          bucket,
+          key,
+          region,
+        }
+        education[fieldName] = fileForUpload
+
+        // upload file to S3 bucket
+        try {
+          await Storage.put(key, file, {
+            contentType: mimeType,
+          })
+        } catch (err) {
+          console.log('error: ', err)
+        }
+      }
+    }
+
+    // mutation
+    // console.log(education)
     if (!education.hasOwnProperty('id')) {
       education['customerID'] = username
       // create education
@@ -179,7 +332,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
         form.forEach(field => {
           data[field] = education[field]
         })
-        console.log(data)
+        // console.log(data)
         await API.graphql(graphqlOperation(mutations.updateEducation, { input: data }))
         setEducation(education)
       } catch (err) {
@@ -224,19 +377,13 @@ const ProfilePage = ({ commonStore, authStore }) => {
   // const [visibility, setVisibility] = useState('visible')
   // const hidden = visibility === 'hidden'
 
-  // when the component loads, the useEffect hook is called and it invokes the fectCustomer() function:
-  useEffect(() => {
-    fetchFormData()
-    // console.log('1')
-  }, [])
-
   // fectCustomer() function uses the Amplify API category to call the AppSync GraphQL API with the getCustomer query.
   // Once the data is returned, the data is passed into the setCustomerData() function to update the local state.
   async function fetchFormData() {
     // fetch customer data
     try {
       await API.graphql(graphqlOperation(queries.getCustomer, { id: username })).then(function (output) {
-        console.log(output)
+        // console.log(output)
         setCustomer(output.data.getCustomer)
       })
     } catch (err) {
@@ -248,10 +395,10 @@ const ProfilePage = ({ commonStore, authStore }) => {
       await API.graphql(graphqlOperation(queries.listContacts, { filter: { customerID: { eq: username } } })).then(function (
         output,
       ) {
-        console.log(output)
+        // console.log(output)
         if (output.data.listContacts.items.length == 0) {
           setContact(FieldListInitial['contact'])
-          console.log(FieldListInitial['contact'])
+          // console.log(FieldListInitial['contact'])
         } else {
           setContact(output.data.listContacts.items[0])
         }
@@ -265,7 +412,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
       await API.graphql(graphqlOperation(queries.listAddresss, { filter: { customerID: { eq: username } } })).then(function (
         output,
       ) {
-        console.log(output)
+        // console.log(output)
         if (output.data.listAddresss.items.length == 0) {
           setAddresses(FieldListInitial['address'])
         } else {
@@ -297,7 +444,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
       await API.graphql(graphqlOperation(queries.listEmployments, { filter: { customerID: { eq: username } } })).then(function (
         output,
       ) {
-        console.log(output)
+        // console.log(output)
         if (output.data.listEmployments.items.length == 0) {
           setEmployment(FieldListInitial['employment'])
         } else {
@@ -313,7 +460,7 @@ const ProfilePage = ({ commonStore, authStore }) => {
       await API.graphql(graphqlOperation(queries.listBillings, { filter: { customerID: { eq: username } } })).then(function (
         output,
       ) {
-        console.log(output)
+        // console.log(output)
         if (output.data.listBillings.items.length == 0) {
           setBilling(FieldListInitial['billing'])
         } else {
@@ -325,28 +472,25 @@ const ProfilePage = ({ commonStore, authStore }) => {
     }
   }
 
-  // console.log(customer)
+  // console.log('Customer:', customer)
   // // console.log(customerFormError)
+  // console.log('Education:', education)
 
   return isAuthenticated ? (
     <MainLayout>
       <Content style={styles.content}>
         <div style={styles.pagetitle}>{t('common.profile-page.page-title')}</div>
-        <Divider></Divider>
-        <div className="align-items-center profile-header mb-5 text-center text-md-left">
-          <div md={2}>
-            <Avatar src={picture} alt="Profile" size="lg" />
-          </div>
-          <div md>
-            <h4>
-              {given_name} {family_name}
-            </h4>
-            <p className="lead text-muted">{email}</p>
-          </div>
-        </div>
-        <div>{/* <p>{JSON.stringify(user, null, 2)}</p> */}</div>
-        {/* <JSONView formValue={customer} /> */}
-        <Divider></Divider>
+        <input label="File to upload" type="file" onChange={handleChange} style={{ margin: '10px 0px' }} />
+        <button style={styles.button} onClick={createAvatar}>
+          Save Image
+        </button>
+
+        <p style={styles.username} onClick={() => fetchImage(customer.portrait_file.key)}>
+          {' '}
+          {given_name} {family_name}
+        </p>
+        <img src={avatarUrl} style={{ width: 300 }} />
+
         <FlexboxGrid justify="space-between">
           <FlexboxGrid.Item colspan={7}>
             <CustomerForm model={customer} updateModel={updateCustomer} form_id="customer" />
