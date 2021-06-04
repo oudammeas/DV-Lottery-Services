@@ -21,7 +21,7 @@ const FormView = () => {
       <FieldView label="Institution" name="institution" type="text" placeholder="" />
       <FieldView label="Start Date" name="date_start" type="date" placeholder="" />
       <FieldView label="Finish Date" name="date_end" type="date" placeholder="" />
-      <FieldFileInput label="Upload Degree" name="degree_file" type="file" placeholder="" />
+      <FieldFileView label="Upload Degree" name="degree_file" type="file" placeholder="" />
     </div>
   )
 }

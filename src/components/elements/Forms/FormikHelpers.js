@@ -15,6 +15,7 @@ import {
   RadioGroup,
   Radio,
   Thumb,
+  Uploader,
 } from 'rsuite'
 import { v4 as uuid } from 'uuid'
 
@@ -44,17 +45,51 @@ export const FileUpload = props => {
   )
 }
 
+export const FileView = props => {
+  const { field, form } = props
+
+  const handleChange = e => {
+    const file = e.currentTarget.files[0]
+    // const reader = new FileReader()
+    // const imgTag = document.getElementById('myfile')
+    // imgTag.title = file.name
+    // reader.onload = function (event) {
+    //   imgTag.src = event.target.result
+    // }
+    // reader.readAsDataURL(file)
+    // alert(field.name)
+    form.setFieldValue(field.name, file)
+  }
+
+  // console.log(form)
+  const file = field.value
+
+  console.log(file)
+  return (
+    <div>
+      <span>File Name: {file.name}</span>
+      <p>File URL: {file.url}</p>
+    </div>
+  )
+}
+
 export const FieldFileView = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input>. We can use field meta to show an error
   // message if the field is invalid and it has been touched (i.e. visited)
   const [field, meta] = useField(props)
-  console.log(field.name)
-
+  console.log(field.value)
+  const fileList = [
+    {
+      name: field.name,
+      fileKey: 1,
+    },
+  ]
   return (
     <div>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <Field {...field} {...props} type="file" component={FileUpload} />
+      {/* <label htmlFor={props.id || props.name}>{label}</label> */}
+      {/* <Field {...field} {...props} type="file" component={FileView} /> */}
+      <Uploader defaultFileList={fileList} action={field.value} />
     </div>
   )
 }

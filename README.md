@@ -73,9 +73,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ---
 
-- [AWS](https://aws.amazon.com/) - Hosts the website front-end.
-- [Auth0](https://auth0.com/) - Used for all authentication and authorization.
-- [MySQL](https://www.mysql.com/) - Used as the database management.
+- [AWS Amplify](https://aws.amazon.com/) - Hosts both frontend and backend.
+- [Amazon Cognito](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js) - Used for all authentication and
+  authorization.
+- [AWS Dynamodb](https://aws.amazon.com/dynamodb) - Used as the database management.
 
 # Libraries Used
 
@@ -83,7 +84,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 - [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) - Used for front-end and back-end interface
   development.
-- [Express.js](https://expressjs.com/) - Used for server development.
 - [RSUITEJS](https://rsuitejs.com/guide/introduction/) - Used as a React components library for middle platform and back-end
   products.
 - [Mobx-react.js](https://mobx-react.js.org/) - Used for handling reactivity to the components and whole application state.

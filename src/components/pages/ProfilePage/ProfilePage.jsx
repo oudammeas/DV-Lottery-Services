@@ -211,6 +211,54 @@ const ProfilePage = ({ commonStore, authStore }) => {
   // define local states
   // const initialState = { firstname_kh: '', lastname_kh: '', gender: '', date_of_birth: '' }
 
+  async function handleFileUpload(data, fileFieldArray) {
+    const entries = Object.entries(data)
+    for (const [fieldName, fieldValue] of entries) {
+      if (fileFieldArray.includes(fieldName)) {
+        // prep file for upload to S3 bucket
+        const file = fieldValue
+        const { name: fileName, type: mimeType } = file
+        const key = `${uuid()}${fileName}`
+        const fileForUpload = {
+          bucket,
+          key,
+          region,
+        }
+        data[fieldName] = fileForUpload
+
+        // upload file to S3 bucket
+        try {
+          await Storage.put(key, file, {
+            contentType: mimeType,
+          })
+        } catch (err) {
+          console.log('error: ', err)
+        }
+      }
+    }
+  }
+
+  async function handleFileFetch(data, fileFieldArray) {
+    const entries = Object.entries(data)
+    for (const [fieldName, fieldValue] of entries) {
+      if (fileFieldArray.includes(fieldName)) {
+        // prep file for fetch from S3 bucket
+        const fileForFetch = fieldValue
+        const key = fileForFetch.key
+
+        // fetch file from S3 bucket
+        try {
+          const file = await Storage.get(key)
+          data[fieldName] = file
+        } catch (err) {
+          console.log('error', err)
+        }
+      }
+    }
+
+    return data
+  }
+
   const [customer, setCustomer] = useState({})
   async function updateCustomer(customer) {
     // updateCustomer function uses the Amplify API category to call the APpSync GRaphQL API with the updateCustomer mutation.
@@ -288,31 +336,8 @@ const ProfilePage = ({ commonStore, authStore }) => {
     // console.log(education)
 
     // handle file type fields
-    const entries = Object.entries(education)
-    const file_field = ['degree_file']
-    for (const [fieldName, value] of entries) {
-      if (file_field.includes(fieldName)) {
-        // prep file for upload to S3 bucket
-        const file = value
-        const { name: fileName, type: mimeType } = file
-        const key = `${uuid()}${fileName}`
-        const fileForUpload = {
-          bucket,
-          key,
-          region,
-        }
-        education[fieldName] = fileForUpload
-
-        // upload file to S3 bucket
-        try {
-          await Storage.put(key, file, {
-            contentType: mimeType,
-          })
-        } catch (err) {
-          console.log('error: ', err)
-        }
-      }
-    }
+    const fileFieldArray = ['degree_file']
+    handleFileUpload(education, fileFieldArray)
 
     // mutation
     // console.log(education)
@@ -432,7 +457,12 @@ const ProfilePage = ({ commonStore, authStore }) => {
         if (output.data.listEducations.items.length == 0) {
           setEducation(FieldListInitial['education'])
         } else {
-          setEducation(output.data.listEducations.items[0])
+          // handle file type fields
+          const fileFieldArray = ['degree_file']
+          const data = output.data.listEducations.items[0]
+          handleFileFetch(data, fileFieldArray).then(function (output) {
+            setEducation(output)
+          })
         }
       })
     } catch (err) {
