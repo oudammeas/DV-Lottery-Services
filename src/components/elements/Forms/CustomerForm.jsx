@@ -8,6 +8,7 @@ import {
   FieldSelect,
   FieldTextInput,
   FieldView,
+  FieldFileView,
 } from './FormikHelpers'
 import { Form_Group } from './Forms'
 import * as Yup from 'yup'
@@ -28,15 +29,15 @@ const FormView = () => {
       <FieldView label="Number of Dependent" name="number_of_dependent" type="number" placeholder="" />
       {/* <FieldView label="Portrait File" name="portrait_file" type="file" placeholder="" /> */}
       <FieldView label="Passport No." name="passport_num" type="text" placeholder="" />
-      <FieldView label="Passport File" name="passport_file" type="file" placeholder="" />
+      <FieldFileView label="Passport File" name="passport_file" type="file" placeholder="" />
       <FieldView label="Passport Issue Date" name="passport_issue_date" type="date" placeholder="" />
       <FieldView label="Passport Expiration Date" name="passport_expiration_date" type="date" placeholder="" />
       <FieldView label="National ID No." name="national_identification_num" type="text" placeholder="" />
-      <FieldView label="National File" name="national_identification_file" type="file" placeholder="" />
+      <FieldFileView label="National File" name="national_identification_file" type="file" placeholder="" />
       <FieldView label="Driver Licesne No." name="driver_license_num" type="text" placeholder="" />
-      <FieldView label="Driver Licesne File" name="driver_license_file" type="file" placeholder="" />
+      <FieldFileView label="Driver Licesne File" name="driver_license_file" type="file" placeholder="" />
       <FieldView label="Marriage Certificate No." name="marriage_certificate_num" type="text" placeholder="" />
-      <FieldView label="Marriage Certificate File" name="marriage_certificate_file" type="file" placeholder="" />
+      <FieldFileView label="Marriage Certificate File" name="marriage_certificate_file" type="file" placeholder="" />
     </div>
   )
 }

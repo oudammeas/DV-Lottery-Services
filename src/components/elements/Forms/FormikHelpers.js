@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { Formik, Field, Form, FieldArray, ErrorMessage, withFormik, useField, FormikProps, setNestedObjectValues } from 'formik'
 import * as Yup from 'yup'
 import './styles-custom.css'
@@ -16,6 +18,7 @@ import {
   Radio,
   Thumb,
   Uploader,
+  List,
 } from 'rsuite'
 import { v4 as uuid } from 'uuid'
 
@@ -48,50 +51,38 @@ export const FileUpload = props => {
 export const FileView = props => {
   const { field, form } = props
 
-  const handleChange = e => {
-    const file = e.currentTarget.files[0]
-    // const reader = new FileReader()
-    // const imgTag = document.getElementById('myfile')
-    // imgTag.title = file.name
-    // reader.onload = function (event) {
-    //   imgTag.src = event.target.result
-    // }
-    // reader.readAsDataURL(file)
-    // alert(field.name)
-    form.setFieldValue(field.name, file)
-  }
+  console.log(field)
 
-  // console.log(form)
-  const file = field.value
-
-  console.log(file)
   return (
     <div>
-      <span>File Name: {file.name}</span>
-      <p>File URL: {file.url}</p>
+      {field.value ? (
+        <a href={field.value} target="_blank">
+          {field.name}
+        </a>
+      ) : (
+        'No File'
+      )}
     </div>
   )
 }
 
-export const FieldFileView = ({ label, ...props }) => {
+export const FieldFileView = ({ label, fileList, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input>. We can use field meta to show an error
   // message if the field is invalid and it has been touched (i.e. visited)
   const [field, meta] = useField(props)
-  console.log(field.value)
-  const fileList = [
-    {
-      name: field.name,
-      fileKey: 1,
-    },
-  ]
+
   return (
     <div>
-      {/* <label htmlFor={props.id || props.name}>{label}</label> */}
-      {/* <Field {...field} {...props} type="file" component={FileView} /> */}
-      <Uploader defaultFileList={fileList} action={field.value} />
+      <label htmlFor={props.id || props.name}>{label}</label>
+      <Field {...field} {...props} type="file" component={FileView} />
     </div>
   )
+
+  // FieldFileView.propTypes = {
+  //   label: PropTypes.string.isRequired,
+  //   fileList: PropTypes.array.isRequired,
+  // }
 }
 
 export const FieldFileInput = ({ label, ...props }) => {
