@@ -9,22 +9,69 @@ export declare class S3Object {
   constructor(init: ModelInit<S3Object>);
 }
 
+type ServiceMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type CaseServiceMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type CaseMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type RelationshipMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type PaymentMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EducationMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type EmploymentMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type ContactMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type BillingMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type AddressMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type CustomerMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 export declare class Service {
   readonly id: string;
   readonly name?: string | null;
   readonly price?: number | null;
   readonly description?: string | null;
-  readonly cases?: (CaseService | null)[] | null;
-  constructor(init: ModelInit<Service>);
-  static copyOf(source: Service, mutator: (draft: MutableModel<Service>) => MutableModel<Service> | void): Service;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Service, ServiceMetaData>);
+  static copyOf(source: Service, mutator: (draft: MutableModel<Service, ServiceMetaData>) => MutableModel<Service, ServiceMetaData> | void): Service;
 }
 
 export declare class CaseService {
   readonly id: string;
-  readonly case: Case;
-  readonly service: Service;
-  constructor(init: ModelInit<CaseService>);
-  static copyOf(source: CaseService, mutator: (draft: MutableModel<CaseService>) => MutableModel<CaseService> | void): CaseService;
+  readonly caseID: string;
+  readonly serviceID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<CaseService, CaseServiceMetaData>);
+  static copyOf(source: CaseService, mutator: (draft: MutableModel<CaseService, CaseServiceMetaData>) => MutableModel<CaseService, CaseServiceMetaData> | void): CaseService;
 }
 
 export declare class Case {
@@ -33,9 +80,10 @@ export declare class Case {
   readonly status?: string | null;
   readonly priority_date?: string | null;
   readonly customerID?: string | null;
-  readonly CaseServices?: (CaseService | null)[] | null;
-  constructor(init: ModelInit<Case>);
-  static copyOf(source: Case, mutator: (draft: MutableModel<Case>) => MutableModel<Case> | void): Case;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Case, CaseMetaData>);
+  static copyOf(source: Case, mutator: (draft: MutableModel<Case, CaseMetaData>) => MutableModel<Case, CaseMetaData> | void): Case;
 }
 
 export declare class Relationship {
@@ -43,8 +91,10 @@ export declare class Relationship {
   readonly type?: string | null;
   readonly dependent_id?: string | null;
   readonly customerID?: string | null;
-  constructor(init: ModelInit<Relationship>);
-  static copyOf(source: Relationship, mutator: (draft: MutableModel<Relationship>) => MutableModel<Relationship> | void): Relationship;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Relationship, RelationshipMetaData>);
+  static copyOf(source: Relationship, mutator: (draft: MutableModel<Relationship, RelationshipMetaData>) => MutableModel<Relationship, RelationshipMetaData> | void): Relationship;
 }
 
 export declare class Payment {
@@ -52,9 +102,10 @@ export declare class Payment {
   readonly amount?: number | null;
   readonly date?: string | null;
   readonly customerID?: string | null;
-  readonly Case?: Case | null;
-  constructor(init: ModelInit<Payment>);
-  static copyOf(source: Payment, mutator: (draft: MutableModel<Payment>) => MutableModel<Payment> | void): Payment;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Payment, PaymentMetaData>);
+  static copyOf(source: Payment, mutator: (draft: MutableModel<Payment, PaymentMetaData>) => MutableModel<Payment, PaymentMetaData> | void): Payment;
 }
 
 export declare class Education {
@@ -65,8 +116,10 @@ export declare class Education {
   readonly date_start?: string | null;
   readonly date_end?: string | null;
   readonly customerID?: string | null;
-  constructor(init: ModelInit<Education>);
-  static copyOf(source: Education, mutator: (draft: MutableModel<Education>) => MutableModel<Education> | void): Education;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Education, EducationMetaData>);
+  static copyOf(source: Education, mutator: (draft: MutableModel<Education, EducationMetaData>) => MutableModel<Education, EducationMetaData> | void): Education;
 }
 
 export declare class Employment {
@@ -77,8 +130,10 @@ export declare class Employment {
   readonly date_end?: string | null;
   readonly customerID?: string | null;
   readonly current?: boolean | null;
-  constructor(init: ModelInit<Employment>);
-  static copyOf(source: Employment, mutator: (draft: MutableModel<Employment>) => MutableModel<Employment> | void): Employment;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Employment, EmploymentMetaData>);
+  static copyOf(source: Employment, mutator: (draft: MutableModel<Employment, EmploymentMetaData>) => MutableModel<Employment, EmploymentMetaData> | void): Employment;
 }
 
 export declare class Contact {
@@ -87,8 +142,10 @@ export declare class Contact {
   readonly phone_num?: string | null;
   readonly website?: string | null;
   readonly customerID?: string | null;
-  constructor(init: ModelInit<Contact>);
-  static copyOf(source: Contact, mutator: (draft: MutableModel<Contact>) => MutableModel<Contact> | void): Contact;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Contact, ContactMetaData>);
+  static copyOf(source: Contact, mutator: (draft: MutableModel<Contact, ContactMetaData>) => MutableModel<Contact, ContactMetaData> | void): Contact;
 }
 
 export declare class Billing {
@@ -96,8 +153,10 @@ export declare class Billing {
   readonly total?: number | null;
   readonly due_date?: string | null;
   readonly customerID?: string | null;
-  constructor(init: ModelInit<Billing>);
-  static copyOf(source: Billing, mutator: (draft: MutableModel<Billing>) => MutableModel<Billing> | void): Billing;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Billing, BillingMetaData>);
+  static copyOf(source: Billing, mutator: (draft: MutableModel<Billing, BillingMetaData>) => MutableModel<Billing, BillingMetaData> | void): Billing;
 }
 
 export declare class Address {
@@ -110,8 +169,10 @@ export declare class Address {
   readonly postal_code?: string | null;
   readonly country?: string | null;
   readonly customerID?: string | null;
-  constructor(init: ModelInit<Address>);
-  static copyOf(source: Address, mutator: (draft: MutableModel<Address>) => MutableModel<Address> | void): Address;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Address, AddressMetaData>);
+  static copyOf(source: Address, mutator: (draft: MutableModel<Address, AddressMetaData>) => MutableModel<Address, AddressMetaData> | void): Address;
 }
 
 export declare class Customer {
@@ -134,15 +195,9 @@ export declare class Customer {
   readonly marriage_certificate_num?: string | null;
   readonly marriage_certificate_file?: S3Object | null;
   readonly number_of_dependent?: number | null;
-  readonly Relationships?: (Relationship | null)[] | null;
-  readonly Payments?: (Payment | null)[] | null;
-  readonly Educations?: (Education | null)[] | null;
-  readonly Employments?: (Employment | null)[] | null;
-  readonly Contact?: (Contact | null)[] | null;
-  readonly Cases?: (Case | null)[] | null;
-  readonly Billings?: (Billing | null)[] | null;
-  readonly Addresses?: (Address | null)[] | null;
   readonly portrait_file?: S3Object | null;
-  constructor(init: ModelInit<Customer>);
-  static copyOf(source: Customer, mutator: (draft: MutableModel<Customer>) => MutableModel<Customer> | void): Customer;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Customer, CustomerMetaData>);
+  static copyOf(source: Customer, mutator: (draft: MutableModel<Customer, CustomerMetaData>) => MutableModel<Customer, CustomerMetaData> | void): Customer;
 }
