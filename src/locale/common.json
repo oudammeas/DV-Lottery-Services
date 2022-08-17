@@ -1,6 +1,6 @@
 {
   "global": {},
-  "navigation": {
+  "routes": {
     "home": "Home",
     "register": "Register",
     "process": "Procedure",
@@ -9,7 +9,15 @@
     "brand-name": "U.S. Diversity Lottery Services",
     "login": "Login | Signup",
     "logout": "Logout",
-    "appointment": "Book an Appointment"
+    "appointment": "Book an Appointment",
+    "profile": "Profile",
+    "new-candidates": "Selected Candidates",
+    "selected-candidates": "Selected Candidates",
+    "status": "Status",
+    "account-settings": "Account Settings",
+    "change-password": "Change Password",
+    "change-email": "Change Email",
+    "change-account-info": "Change Account Info"
   },
   "external-link": {
     "us-embassy": "U.S. Embassy in Cambodia",
@@ -63,5 +71,17 @@
   },
   "faqs-page": {
     "page-title": "Frequently Asked Questions"
+  },
+  "account-settings-page": {
+    "page-title": "Account Settings"
+  },
+  "change-password-page": {
+    "page-title": "Change Password"
+  },
+  "change-email-page": {
+    "page-title": "Change Email"
+  },
+  "change-account-info-page": {
+    "page-title": "Change Account Info"
   }
 }

@@ -1,273 +1,557 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { Content, Panel, Button, ButtonToolbar, Form, FormGroup, FormControl, ControlLabel, HelpBlock, Radio, RadioGroup, FlexboxGrid, Col, Divider, Icon, Timeline } from "rsuite";
-import MainLayout from "../../layouts/MainLayout.js/MainLayout";
-import { useTranslation } from "react-i18next";
-import FlexboxGridItem from "rsuite/lib/FlexboxGrid/FlexboxGridItem";
-import { Schema } from 'rsuite';
-import { useAuth0 } from "@auth0/auth0-react";
+import React, { useState, useEffect, useRef, useReducer } from 'react'
+import PropTypes from 'prop-types'
+import {
+  Content,
+  Button,
+  ButtonToolbar,
+  Form,
+  FlexboxGrid,
+  ControlLabel,
+  RadioGroup,
+  Radio,
+  FormControl,
+  FormGroup,
+  Divider,
+  Avatar,
+  FileType,
+  Uploader,
+  Alert,
+  Loader,
+  Icon,
+} from 'rsuite'
+import FlexboxGridItem from 'rsuite/lib/FlexboxGrid/FlexboxGridItem'
+import MainLayout from '../../layouts/MainLayout.js/MainLayout'
+import { useTranslation } from 'react-i18next'
+// import { useAuth0 } from '@auth0/auth0-react'
+import { Redirect, withRouter } from 'react-router'
+import { observer, inject } from 'mobx-react'
+import AuthenticatorPage from '../AuthenticatorPage'
+import JSONView from 'react-json-view'
+// Set up frontend
+import { Amplify, Auth, API, graphqlOperation, Storage } from 'aws-amplify'
+import { v4 as uuid } from 'uuid'
+import awsExports from '../../../aws-exports'
+import * as queries from '../../../graphql/queries'
+import * as mutations from '../../../graphql/mutations'
+import * as subscriptions from '../../../graphql/subscriptions'
+import {
+  CustomerForm,
+  ContactForm,
+  EducationForm,
+  EmploymentForm,
+  AddressForm,
+  BillingForm,
+  TextField,
+  Form_Group,
+  FieldList,
+  FieldListInitial,
+} from '../../elements/Forms'
 
+Amplify.configure(awsExports)
+API.configure(awsExports)
+Storage.configure(awsExports)
 
-const form_groups = [
+// load bucket
+const { aws_user_files_s3_bucket_region: region, aws_user_files_s3_bucket: bucket } = awsExports
 
-  {
-    "group_name": "Biological Information",
-    "fields": [
-      { "name": "firstname_kh", "label": "First Name (Khmer)", "type": "input" },
-      { "name": "lastname_kh", "label": "Last Name (Khmer)", "type": "input" },
-      { "name": "firstname", "label": "First Name (English)", "type": "input" },
-      { "name": "lastname", "label": "Last Name (English)", "type": "input" },
-      { "name": "date_of_birth", "label": "Date of Birth", "type": "date" },
-      { "name": "gender", "label": "Gender", "type": "radio", "select": [{ "value": "male", "label": "Male" }, { "value": "female", "label": "Female" }] },
-      { "name": "marital_status", "label": "Marital Status", "type": "input" },
-      { "name": "number_of_dependent", "label": "Number of Dependent", "type": "number" },
-      { "name": "portrait", "label": "Photo Portrait", "type": "image", "prop": "width=48px height=48px" },
-      { "name": "upload_portrait", "label": "Upload Photo Portrait", "type": "file" },
-      { "name": "passport_id", "label": "Passport No.", "type": "input" },
-      { "name": "upload_passport", "label": "Upload Passport", "type": "file" },
-      { "name": "passport_issue_date", "label": "Issue Date", "type": "input" },
-      { "name": "passport_expiration_date", "label": "Expiration Date", "type": "input" },
-      { "name": "national_id", "label": "National ID No.", "type": "input" },
-      { "name": "upload_national_id", "label": "Upload National ID", "type": "file" },
-      { "name": "driver_license_id", "label": "Driver License No.", "type": "input" },
-      { "name": "upload_driver_license", "label": "Upload Driver License", "type": "file" },
-      { "name": "marriage_certificate_id", "label": "Marriage Certificate No.", "type": "input" },
-      { "name": "upload_marriage_certificate", "label": "Upload Marriage Certificate", "type": "file" }
-    ]
-  },
-
-  {
-    "group_name": "Contact Information", "fields": [
-      { "name": "email", "label": "Email", "type": "email" },
-      { "name": "phone_id", "label": "Phone No.", "type": "tel" },
-      { "name": "portrait", "label": "Photo Portrait", "type": "image" },
-
-    ]
-  }
-
-  , {
-    "group_name": "Spouse Information", "fields": [
-      { "name": "firstname_spouse_kh", "label": "First Name (Khmer)", "type": "input" },
-      { "name": "lastname_spouse_kh", "label": "Last Name (Khmer)", "type": "input" },
-      { "name": "firstname_spouse", "label": "First Name (English)", "type": "input" },
-      { "name": "lastname_spouse", "label": "Last Name (English)", "type": "input" },
-      { "name": "national_id_spouse", "label": "National ID No.", "type": "input" }
-    ]
-  },
-  {
-    "group_name": "Dependent Information", "fields": [
-      { "name": "firstname_depend_kh", "label": "First Name (Khmer)", "type": "input" },
-      { "name": "lastname_depend_kh", "label": "Last Name (Khmer)", "type": "input" },
-      { "name": "firstname_depend", "label": "First Name (English)", "type": "input" },
-      { "name": "lastname_depend", "label": "Last Name (English)", "type": "input" },
-      { "name": "national_id_depend", "label": "National ID No.", "type": "input" }
-    ]
-  },
-
-  {
-    "group_name": "Permanent Address", "fields": [
-      { "name": "street", "label": "Street Address", "type": "input" },
-      { "name": "province", "label": "Province", "type": "input" },
-      { "name": "city", "label": "City", "type": "input" },
-      { "name": "commune", "label": "Commune", "type": "input" },
-      { "name": "village", "label": "Village", "type": "input" }
-    ]
-  },
-
-  {
-    "group_name": "Education Information", "fields": [
-      { "name": "degree", "label": "Highest Educational Level", "type": "input" },
-      { "name": "institute", "label": "Institution Name", "type": "input" },
-      { "name": "date_start", "label": "Start Date", "type": "date" },
-      { "name": "date_finish", "label": "Graduation Date", "type": "date" },
-      { "name": "upload_diploma", "label": "Upload Diploma", "type": "file" }
-    ]
-  },
-
-  {
-    "group_name": "Current Employment Information", "fields": [
-      { "name": "current_job_title", "label": "Position", "type": "input" },
-      { "name": "current_job_employer", "label": "Employer", "type": "input" },
-      { "name": "current_job_start_date", "label": "Start Date", "type": "date" }
-    ]
-  },
-  {
-    "group_name": "Previous Employment Information", "fields": [
-      { "name": "previous_job_title", "label": "Position", "type": "input" },
-      { "name": "previous_job_employer", "label": "Employer", "type": "input" },
-      { "name": "previous_job_start_date", "label": "Start Date", "type": "date" },
-      { "name": "previous_job_end_date", "label": "End Date", "type": "date" }
-    ]
-  }
-];
-
-const ProfilePage = ({ commonStore }) => {
-  const { t } = useTranslation();
+const ProfilePage = ({ commonStore, authStore }) => {
+  const { t } = useTranslation()
 
   const styles = {
     content: {
-      padding: "1em",
-      minHeight: "40em",
-      margin: "0 auto",
-      textAlign: "start",
-      justifyContent: "center",
-
+      padding: '1em',
+      minHeight: '40em',
+      margin: '0 auto',
+      textAlign: 'start',
+      justifyContent: 'center',
     },
 
     pagetitle: {
-      fontSize: "24px",
-      fontWeight: "bold",
-      marginBottom: "1em",
+      fontSize: '24px',
+      fontWeight: 'bold',
+      marginBottom: '1em',
     },
 
     flexboxgrid: {
       root: {
-        padding: "1em 1em 1em 1em",
+        padding: '1em 1em 1em 1em',
+        justify: 'center',
       },
 
-      item: {
-
-      },
+      item: { colspan: 4 },
     },
-  };
 
-  // Auth0 Profile:
-
-  const { user } = useAuth0();
-  
-  console.log(user);
-
-  const { name, picture, email } = user;
-
-  const handleSubmit = (e) => {
-    // e.preventDefault();
+    container: {
+      width: 300,
+      margin: '0 auto',
+    },
+    username: {
+      cursor: 'pointer',
+      border: '1px solid #ddd',
+      padding: '5px 25px',
+    },
+    button: {
+      width: 200,
+      backgroundColor: '#ddd',
+      cursor: 'pointer',
+      height: 30,
+      margin: '0px 0px 8px',
+    },
   }
 
+  // fetch user:
+  const isAuthenticated = authStore.isAuthenticated
+  const user = authStore.authUser
+  // console.log(authStore)
+  // console.log(user)
+  const picture = './favicon.ico'
+  const email = user ? user.attributes['email'] : null
+  const username = user ? user.attributes['sub'] : null
+  const given_name = user ? user.attributes['given_name'] : null
+  const family_name = user ? user.attributes['family_name'] : null
 
-  const fieldEditHandler = (form_id, field_id) => {
-    // setReadOnly([...readOnly, `${form_id}${field_id}`]);
-  };
+  // when the component loads, the useEffect hook is called and it invokes the fectCustomer() function:
+  useEffect(() => {
+    fetchFormData()
+    // console.log('1')
 
-  const [readOnly, setReadOnly] = useState([]);
+    // Subscribe to update customer
+    const subscriptionOnUpdateCustomer = API.graphql(graphqlOperation(subscriptions.onUpdateCustomer)).subscribe({
+      next: async customer => {
+        // Do something with the data
+        setCustomer(customer)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateCustomer.unsubscribe()
 
-  // const { StringType, NumberType, ArrayType, DateType, ObjectType, BooleanType } = Schema.Types;
+    // Subscribe to update address
+    const subscriptionOnUpdateAddresses = API.graphql(graphqlOperation(subscriptions.onUpdateAddress)).subscribe({
+      next: async addresses => {
+        // Do something with the data
+        setAddresses(addresses)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateAddresses.unsubscribe()
 
-  // const customerModel = Schema.Model({
-  //   email: StringType().isEmail('Please enter a valid email address.'),
-  //   password: StringType().isRequired('Please enter the correct password')
+    // Subscribe to update address
+    const subscriptionOnUpdateEducation = API.graphql(graphqlOperation(subscriptions.onUpdateEducation)).subscribe({
+      next: async education => {
+        // Do something with the data
+        setEducation(education)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateEducation.unsubscribe()
 
-  // });
+    // Subscribe to update address
+    const subscriptionOnUpdateEmployment = API.graphql(graphqlOperation(subscriptions.onUpdateEmployment)).subscribe({
+      next: async employment => {
+        // Do something with the data
+        setEmployment(employment)
+      },
+    })
+    // Stop receiving data updates from the subscription
+    subscriptionOnUpdateEmployment.unsubscribe()
+  }, [])
 
-  // customerModel.checkAsync({
-  //   email: 'oudam.meas@gmail.com',
-  //   password: 'abc'
-  // }).then(result => {
-  //   console.log(result);
-  // });
+  // fetch avatar
+  const [file, updateFile] = useState(null)
+  // const [username, updateUsername] = useState('')
+  // const [state, dispatch] = useReducer(reducer, initialState)
+  const [avatarUrl, updateAvatarUrl] = useState('./favicon.ico')
+  async function fetchImage(key) {
+    try {
+      const imageData = await Storage.get(key)
+      updateAvatarUrl(imageData)
+      console.log('Image:', imageData)
+    } catch (err) {
+      console.log('error', err)
+    }
+  }
 
-  // const [formValue, setFormValue] = useState({
-  //   name: '',
-  //   email: '',
-  //   age: '',
-  //   password: '',
-  //   verifyPassword: ''
-  // });
+  // handle change
+  function handleChange(event) {
+    const {
+      target: { value, files },
+    } = event
+    const [image] = files || []
+    updateFile(image || value)
+  }
 
-  // const [formError, setFormError] = useState({});
+  async function createAvatar() {
+    if (file) {
+      const { name: fileName, type: mimeType } = file
+      const key = `${uuid()}${fileName}`
+      const fileForUpload = {
+        bucket,
+        key,
+        region,
+      }
+      const inputData = { id: username, portrait_file: fileForUpload }
 
-  // const handleSubmit = () => {
-  //   // const { formValue } = useState();
-  //   // if (!form.check()) {
-  //   //   console.error('Form Error');
-  //   //   return;
-  //   // }
-  //   // console.log(formValue, 'Form Value');
-  // };
+      console.log(inputData)
 
+      try {
+        await Storage.put(key, file, {
+          contentType: mimeType,
+        })
+        await API.graphql(graphqlOperation(mutations.updateCustomer, { input: inputData }))
+        console.log('successfully stored user data!')
+      } catch (err) {
+        console.log('error: ', err)
+      }
+    }
+  }
 
-  return (
+  // console.log(user)
+  /// Connect frontend to API:
+
+  // define local states
+  // const initialState = { firstname_kh: '', lastname_kh: '', gender: '', date_of_birth: '' }
+
+  async function handleFileUpload(data, fileFieldArray) {
+    const entries = Object.entries(data)
+    for (const [fieldName, fieldValue] of entries) {
+      if (fileFieldArray.includes(fieldName)) {
+        // prep file for upload to S3 bucket
+        const file = fieldValue
+        const { name: fileName, type: mimeType } = file
+        const key = `${uuid()}${fileName}`
+        const fileForUpload = {
+          bucket,
+          key,
+          region,
+        }
+        data[fieldName] = fileForUpload
+
+        // upload file to S3 bucket
+        try {
+          await Storage.put(key, file, {
+            contentType: mimeType,
+          })
+        } catch (err) {
+          console.log('error: ', err)
+        }
+      }
+    }
+  }
+
+  async function handleFileFetch(data, fileFieldArray) {
+    const entries = Object.entries(data)
+    for (const [fieldName, fieldValue] of entries) {
+      if (fileFieldArray.includes(fieldName)) {
+        // prep file for fetch from S3 bucket
+        const fileForFetch = fieldValue
+        const key = fileForFetch.key
+
+        // fetch file from S3 bucket
+        try {
+          const file = await Storage.get(key)
+          data[fieldName] = file
+        } catch (err) {
+          console.log('error', err)
+        }
+      }
+    }
+
+    return data
+  }
+
+  const [customer, setCustomer] = useState({})
+  async function updateCustomer(customer) {
+    // updateCustomer function uses the Amplify API category to call the APpSync GRaphQL API with the updateCustomer mutation.
+    try {
+      const data = {}
+      const form = FieldList['customer']
+      form.forEach(field => {
+        data[field] = customer[field]
+      })
+      console.log(data)
+      await API.graphql(graphqlOperation(mutations.updateCustomer, { input: data }))
+      setCustomer(customer)
+    } catch (err) {
+      console.log('error updating customer:', err)
+    }
+  }
+
+  const [addresses, setAddresses] = useState({})
+  async function updateAddress(address) {
+    console.log(address)
+    if (!address.hasOwnProperty('id')) {
+      address['customerID'] = username
+      // create address
+      try {
+        await API.graphql(graphqlOperation(mutations.createAddress, { input: address }))
+      } catch (err) {
+        console.log('error creating address:', err)
+      }
+    } else {
+      // update address
+      try {
+        const data = {}
+        const form = FieldList['address']
+        form.forEach(field => {
+          data[field] = address[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateAddress, { input: data }))
+        setAddresses(address)
+      } catch (err) {
+        console.log('error updating address:', err)
+      }
+    }
+  }
+
+  const [contact, setContact] = useState({})
+  async function updateContact(contact) {
+    if (!contact.hasOwnProperty('id')) {
+      contact['customerID'] = username
+      // create contact
+      try {
+        await API.graphql(graphqlOperation(mutations.createContact, { input: contact }))
+      } catch (err) {
+        console.log('error creating contact:', err)
+      }
+    } else {
+      // update contact
+      try {
+        const data = {}
+        const form = FieldList['contact']
+        form.forEach(field => {
+          data[field] = contact[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateContact, { input: data }))
+        setContact(contact)
+      } catch (err) {
+        console.log('error updating contact:', err)
+      }
+    }
+  }
+
+  const [education, setEducation] = useState({})
+  async function updateEducation(education) {
+    // console.log(education)
+
+    // handle file type fields
+    const fileFieldArray = ['degree_file']
+    handleFileUpload(education, fileFieldArray)
+
+    // mutation
+    // console.log(education)
+    if (!education.hasOwnProperty('id')) {
+      education['customerID'] = username
+      // create education
+      try {
+        await API.graphql(graphqlOperation(mutations.createEducation, { input: education }))
+      } catch (err) {
+        console.log('error creating education:', err)
+      }
+    } else {
+      // update education
+      try {
+        const data = {}
+        const form = FieldList['education']
+        form.forEach(field => {
+          data[field] = education[field]
+        })
+        // console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateEducation, { input: data }))
+        setEducation(education)
+      } catch (err) {
+        console.log('error updating education:', err)
+      }
+    }
+  }
+
+  const [employment, setEmployment] = useState({})
+  async function updateEmployment(employment) {
+    if (!employment.hasOwnProperty('id')) {
+      employment['customerID'] = username
+      // create education
+      try {
+        await API.graphql(graphqlOperation(mutations.createEmployment, { input: employment }))
+      } catch (err) {
+        console.log('error creating employment:', err)
+      }
+    } else {
+      // update education
+      try {
+        const data = {}
+        const form = FieldList['employment']
+        form.forEach(field => {
+          data[field] = employment[field]
+        })
+        console.log(data)
+        await API.graphql(graphqlOperation(mutations.updateEmployment, { input: data }))
+        setEmployment(employment)
+      } catch (err) {
+        console.log('error updating employment:', err)
+      }
+    }
+  }
+
+  const [billing, setBilling] = useState({})
+  const updateBilling = billing => {
+    setBilling(billing)
+  }
+
+  // // visiblity
+  // const [visibility, setVisibility] = useState('visible')
+  // const hidden = visibility === 'hidden'
+
+  // fectCustomer() function uses the Amplify API category to call the AppSync GraphQL API with the getCustomer query.
+  // Once the data is returned, the data is passed into the setCustomerData() function to update the local state.
+  async function fetchFormData() {
+    // fetch customer data
+    try {
+      await API.graphql(graphqlOperation(queries.getCustomer, { id: username })).then(function (output) {
+        // console.log(output)
+        setCustomer(output.data.getCustomer)
+      })
+    } catch (err) {
+      console.log('error fetching customer data', err)
+    }
+
+    // fetch contact data
+    try {
+      await API.graphql(graphqlOperation(queries.listContacts, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        // console.log(output)
+        if (output.data.listContacts.items.length == 0) {
+          setContact(FieldListInitial['contact'])
+          // console.log(FieldListInitial['contact'])
+        } else {
+          setContact(output.data.listContacts.items[0])
+        }
+      })
+    } catch (err) {
+      console.log('error fetching contact data', err)
+    }
+
+    // fetch address data
+    try {
+      await API.graphql(graphqlOperation(queries.listAddresss, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        // console.log(output)
+        if (output.data.listAddresss.items.length == 0) {
+          setAddresses(FieldListInitial['address'])
+        } else {
+          setAddresses(output.data.listAddresss.items[0])
+        }
+      })
+    } catch (err) {
+      console.log('error fetching address data', err)
+    }
+
+    // fetch education data
+    try {
+      await API.graphql(graphqlOperation(queries.listEducations, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        console.log(output)
+        if (output.data.listEducations.items.length == 0) {
+          setEducation(FieldListInitial['education'])
+        } else {
+          // handle file type fields
+          const fileFieldArray = ['degree_file']
+          const data = output.data.listEducations.items[0]
+          handleFileFetch(data, fileFieldArray).then(function (output) {
+            setEducation(output)
+          })
+        }
+      })
+    } catch (err) {
+      console.log('error fetching education data', err)
+    }
+
+    // fetch employments data
+    try {
+      await API.graphql(graphqlOperation(queries.listEmployments, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        // console.log(output)
+        if (output.data.listEmployments.items.length == 0) {
+          setEmployment(FieldListInitial['employment'])
+        } else {
+          setEmployment(output.data.listEmployments.items[0])
+        }
+      })
+    } catch (err) {
+      console.log('error fetching employment data', err)
+    }
+
+    // fetch billing data
+    try {
+      await API.graphql(graphqlOperation(queries.listBillings, { filter: { customerID: { eq: username } } })).then(function (
+        output,
+      ) {
+        // console.log(output)
+        if (output.data.listBillings.items.length == 0) {
+          setBilling(FieldListInitial['billing'])
+        } else {
+          setBilling(output.data.listBillings.items[0])
+        }
+      })
+    } catch (err) {
+      console.log('error fetching billing data', err)
+    }
+  }
+
+  // console.log('Customer:', customer)
+  // // console.log(customerFormError)
+  // console.log('Education:', education)
+
+  return isAuthenticated ? (
     <MainLayout>
       <Content style={styles.content}>
-        <div className="align-items-center profile-header mb-5 text-center text-md-left">
-          <div md={2}>
-            <img src={picture} alt="Profile" className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-            />
-          </div>
-          <div md>
-            <h2>{name}</h2>
-            <p className="lead text-muted">{email}</p>
-          </div>
-        </div>
-        <div>
-          <p>{JSON.stringify(user, null, 2)}</p>
-        </div>
+        <div style={styles.pagetitle}>{t('common.profile-page.page-title')}</div>
+        <input label="File to upload" type="file" onChange={handleChange} style={{ margin: '10px 0px' }} />
+        <button style={styles.button} onClick={createAvatar}>
+          Save Image
+        </button>
 
-        <div style={styles.pagetitle}>{t("common.profile-page.page-title")}</div>
+        <p style={styles.username} onClick={() => fetchImage(customer.portrait_file.key)}>
+          {' '}
+          {given_name} {family_name}
+        </p>
+        <img src={avatarUrl} style={{ width: 300 }} />
 
-        <FlexboxGrid style={styles.flexboxgrid.root}>
-
-          {form_groups.map((group, i) => {
-
-            return (
-
-              <FlexboxGrid.Item colspan={24} style={styles.flexboxgrid.item}>
-                <Form
-                  layout="horizontal"
-                  id={i}
-                  onSubmit={handleSubmit}
-
-                  layout="horizontal"
-                  style={styles.form}
-
-                // ref={ref => (form = ref)}
-                // onChange={formValue => {
-                //   setFormValue({ formValue });
-                // }}
-                // onCheck={formError => {
-                //   setFormError({ formError });
-                // }}
-                // formValue={formValue}
-                // model={customerModel}
-                >
-                  <h4 key={i}>{group.group_name}</h4>
-                  {group.fields && group.fields.map((field, j) => {
-
-                    return (
-                      field.type == 'radio' ?
-                        <div><ControlLabel>{field.label}</ControlLabel>
-                          <RadioGroup inline>
-                            {field.select && field.select.map((s, k) => {
-
-                              return (
-                                <Radio value={s.value} id={j} readOnly={readOnly.includes(`${i}${j}`)}>{s.label}</Radio>
-                              )
-                            })}
-                          </RadioGroup>
-                          <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}> Edit</a></ControlLabel> <Divider vertical /> <a onClick={fieldEditHandler(i, j)}>Save</a></div> :
-                        < FormGroup >
-                          <ControlLabel>{field.label} </ControlLabel>
-                          <FormControl type={field.type} name={field.name} id={j} readOnly={readOnly.includes(`${i}${j}`)} />
-                          {/* <HelpBlock tooltip>This field is required</HelpBlock> */}
-                          <ControlLabel><a onClick={(i, j) => fieldEditHandler(i, j)}>Edit</a></ControlLabel>
-                        </FormGroup>
-                    )
-                  })}
-                  <FormGroup>
-                    <ButtonToolbar>
-                      <Button appearance="primary" size="md" href="#" color="blue" onClick={handleSubmit}>Save Changes</Button>
-                      <Button appearance="ghost" size="md" href="#">Cancel Changes</Button>
-                    </ButtonToolbar>
-                  </FormGroup>
-                </Form>
-              </FlexboxGrid.Item>
-            )
-          })};
-          </FlexboxGrid>
+        <FlexboxGrid justify="space-between">
+          <FlexboxGrid.Item colspan={7}>
+            <CustomerForm model={customer} updateModel={updateCustomer} form_id="customer" />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <AddressForm model={addresses} updateModel={updateAddress} form_id="address" />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <EducationForm model={education} updateModel={updateEducation} form_id="education" />
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
+        <br />
+        <Divider></Divider>
+        <FlexboxGrid justify="space-between">
+          <FlexboxGrid.Item colspan={7}>
+            <EmploymentForm model={employment} updateModel={updateEmployment} form_id="employment" />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <ContactForm model={contact} updateModel={updateContact} form_id="contact" />
+          </FlexboxGrid.Item>
+          <FlexboxGrid.Item colspan={7}>
+            <BillingForm model={billing} updateModel={updateBilling} form_id="billing" />
+          </FlexboxGrid.Item>
+        </FlexboxGrid>
       </Content>
-    </MainLayout >
-  );
-};
+    </MainLayout>
+  ) : (
+    <Redirect to={<AuthenticatorPage />} />
+  )
+}
 
-ProfilePage.propTypes = {};
+ProfilePage.propTypes = {}
 
-export default ProfilePage;
+export default withRouter(inject('authStore')(observer(ProfilePage)))

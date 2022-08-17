@@ -1,24 +1,21 @@
 import React from 'react'
 import { Button } from 'rsuite'
 import { useTranslation } from 'react-i18next'
-import { useAuth0 } from '@auth0/auth0-react'
-
+import { Link } from 'react-router-dom'
 const LoginButton = () => {
   const { t } = useTranslation()
-
-  const { loginWithPopup, isLoading } = useAuth0()
   return (
-    <Button
-      onClick={() => loginWithPopup()}
-      variant="primary"
-      className="btn-margin"
-      appearance="primary"
-      size="lg"
-      loading={isLoading}
-      color="blue"
-      style={{ marginRight: '0.5em', minWidth: '130px' }}>
-      {t('common.navigation.login')}
-    </Button>
+    <Link to="/authenticator">
+      <Button
+        variant="primary"
+        className="btn-margin"
+        appearance="primary"
+        size="lg"
+        color="blue"
+        style={{ marginRight: '0.5em', minWidth: '130px' }}>
+        {t('common.routes.login')}
+      </Button>
+    </Link>
   )
 }
 
