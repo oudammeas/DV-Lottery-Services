@@ -27,21 +27,26 @@ const PageHeader = ({ commonStore, authStore }) => {
   const styles = {
     navbar: {
       header: {
-        padding: '2em',
         minHeight: '150px',
         width: '100%',
+        background: '#003875',
+        alignContent: 'left',
+        paddingLeft: '25px'
+      },
+      nav: {
         alignContent: 'center',
-        padding: '2em',
-        backgroundColor: '#003875',
-        justifyContent: 'left',
-        color: '#E5E5E5',
       },
       body: {
-        minHeight: '50px',
         paddingLeft: '3em',
+        maxHeight: '250px'
       },
-
       logo: {
+        color: 'white',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        textDecoration: 'none',
+      },
+      title: {
         color: 'white',
         fontSize: '24px',
         fontWeight: 'bold',
@@ -67,9 +72,11 @@ const PageHeader = ({ commonStore, authStore }) => {
         <Navbar appearance="default">
           <Navbar.Header style={styles.navbar.header}>
             <Nav>
+              <Logo style={styles.navbar.logo}/>
+            </Nav>
+            <Nav>
               <Link to="/">
-                <Logo />
-                <span style={styles.navbar.logo}>{t('common.routes.brand-name')}</span>
+                <span style={styles.navbar.title}>{t('common.routes.brand-name')}</span>
               </Link>
             </Nav>
           </Navbar.Header>

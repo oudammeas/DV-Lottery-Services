@@ -31,21 +31,19 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
+                "cases": {
+                    "name": "cases",
+                    "isArray": true,
+                    "type": {
+                        "model": "CaseService"
+                    },
                     "isRequired": false,
                     "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "service"
+                    }
                 }
             },
             "syncable": true,
@@ -83,35 +81,31 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "caseID": {
-                    "name": "caseID",
+                "case": {
+                    "name": "case",
                     "isArray": false,
-                    "type": "ID",
+                    "type": {
+                        "model": "Case"
+                    },
                     "isRequired": true,
-                    "attributes": []
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "caseID"
+                    }
                 },
-                "serviceID": {
-                    "name": "serviceID",
+                "service": {
+                    "name": "service",
                     "isArray": false,
-                    "type": "ID",
+                    "type": {
+                        "model": "Service"
+                    },
                     "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
                     "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "serviceID"
+                    }
                 }
             },
             "syncable": true,
@@ -208,21 +202,19 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
+                "CaseServices": {
+                    "name": "CaseServices",
+                    "isArray": true,
+                    "type": {
+                        "model": "CaseService"
+                    },
                     "isRequired": false,
                     "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "case"
+                    }
                 }
             },
             "syncable": true,
@@ -289,22 +281,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -372,21 +348,18 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "createdAt": {
-                    "name": "createdAt",
+                "Case": {
+                    "name": "Case",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": {
+                        "model": "Case"
+                    },
                     "isRequired": false,
                     "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "paymentCaseId"
+                    }
                 }
             },
             "syncable": true,
@@ -476,22 +449,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -579,22 +536,6 @@ export const schema = {
                     "type": "Boolean",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -668,22 +609,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -750,22 +675,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -867,22 +776,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -1063,6 +956,118 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "Relationships": {
+                    "name": "Relationships",
+                    "isArray": true,
+                    "type": {
+                        "model": "Relationship"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Payments": {
+                    "name": "Payments",
+                    "isArray": true,
+                    "type": {
+                        "model": "Payment"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Educations": {
+                    "name": "Educations",
+                    "isArray": true,
+                    "type": {
+                        "model": "Education"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Employments": {
+                    "name": "Employments",
+                    "isArray": true,
+                    "type": {
+                        "model": "Employment"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Contact": {
+                    "name": "Contact",
+                    "isArray": true,
+                    "type": {
+                        "model": "Contact"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Cases": {
+                    "name": "Cases",
+                    "isArray": true,
+                    "type": {
+                        "model": "Case"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Billings": {
+                    "name": "Billings",
+                    "isArray": true,
+                    "type": {
+                        "model": "Billing"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
+                "Addresses": {
+                    "name": "Addresses",
+                    "isArray": true,
+                    "type": {
+                        "model": "Address"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "customerID"
+                    }
+                },
                 "portrait_file": {
                     "name": "portrait_file",
                     "isArray": false,
@@ -1071,22 +1076,6 @@ export const schema = {
                     },
                     "isRequired": false,
                     "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
                 }
             },
             "syncable": true,
@@ -1144,5 +1133,5 @@ export const schema = {
             }
         }
     },
-    "version": "27ff3e11086fe81b93167b6421bb3d07"
+    "version": "1ad4ec3170e9795033759a25df5aaacc"
 };

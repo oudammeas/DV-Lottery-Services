@@ -383,3 +383,5 @@ Outputs:
       Fn::GetAtt:
         - UserPoolClientInputs
         - appSecret
+Description: >-
+  {"createdOn":"Windows","createdBy":"Amplify","createdWith":"9.2.1","stackType":"auth-Cognito","metadata":{}}
