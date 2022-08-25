@@ -73,7 +73,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ---
 
-- [AWS Amplify](https://aws.amazon.com/) - Hosts both frontend and backend.
+- [AWS Amplify](https://aws.amazon.com/) - Backend development and hosts both frontend and backend.
 - [Amazon Cognito](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js) - Used for all authentication and
   authorization.
 - [AWS Dynamodb](https://aws.amazon.com/dynamodb) - Used as the database management.
